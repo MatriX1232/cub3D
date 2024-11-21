@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 14:23:00 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/11/21 14:03:43 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/11/21 15:09:34 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef COLORS_H
+# define COLORS_H
 
-# include <mlx.h>
-# include <mlx_int.h>
-# include "structs.h"
-# include <stdio.h>
-
-# define KEY_ESC 65307
-# define ON_DESTROY 17
-
-//	MAIN.C
-void	ft_cprint(char *color, char *str);
-
-//	FT_IMAGES.C
-void	ft_print_img_info(t_sprite *img);
-t_sprite	**ft_load_sprites(void *mlx);
-
-//	FT_LOGS.C
-void	ft_log(char *str, int level);
+// minimal color codes
+# define END "\x1b[0m"
+# define BOLD "\x1b[1m"
+# define UNDER "\x1b[4m"
+# define REV '\x1b[7m'
+# define GREY '\x1b[30m'
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define PURPLE "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define WHITE '\x1b[37m'
 
 #endif

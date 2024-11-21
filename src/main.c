@@ -6,14 +6,12 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 13:49:27 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:17:50 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mlx.h"
-#include "../include/mlx_int.h"
 #include "../include/cub3d.h"
-#include <stdio.h>
+#include "../include/libs.h"
 
 int ft_exit(t_cub3d *cub3d)
 {
@@ -43,9 +41,13 @@ int	main(int argc, char **argv)
 
 	cub3d.mlx = mlx;
 	cub3d.win = win;
+	cub3d.sprites = ft_load_sprites(mlx);
 
-	mlx_hook(cub3d.win, 17, 0, ft_exit, &cub3d);
+	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
 	mlx_key_hook(cub3d.win, ft_key_hook, &cub3d);
+
+	mlx_put_image_to_window(mlx, win, cub3d.sprites[0]->img, 0, 0);
+
 	mlx_loop(mlx);
 
 	return (0);

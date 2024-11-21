@@ -1,5 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
+MLXFLAGSO = -I/usr/include -Imlx_linux -O3
+MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
 
 THREADS = $(shell nproc)
 THREADS := $(shell expr $(THREADS))
@@ -34,7 +36,7 @@ all: $(NAME)
 
 %.o: %.c
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
-	@$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
+	@$(CC) $(CFLAGS) $(MLXFLAGSO) -c $< -o ${<:.c=.o}
 
 
 compile_dep: $(MLX) $(LIBFT)
@@ -47,7 +49,7 @@ compile_dep: $(MLX) $(LIBFT)
 $(NAME): compile_dep $(OBJS)
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s$(_END)\n" "Libft"
 	@+make -C $(LIBFT) --no-print-directory
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(LFLAGS) $(LIBFT)/libft.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LIBFT)/libft.a
 	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
 
 clean:

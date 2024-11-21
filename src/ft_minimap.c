@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:25:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 00:03:56 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 00:15:31 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	ft_draw_minimap(t_cub3d *cub3d, int px, int py)
 		while (y < cub3d->map->height)
 		{
 			if (cub3d->map->grid[y][x] == '0')
-				ft_draw_scale(cub3d, x, y, 0x00FF00);
+				ft_draw_scale(cub3d, x, y, MINIMAP_BG);
+			else if (cub3d->map->grid[y][x] == '1')
+				ft_draw_scale(cub3d, x, y, MINIMAP_FG);
 			if (x == px && y == py)
 				ft_draw_scale(cub3d, x, y, 0xFF0000);
 			y++;

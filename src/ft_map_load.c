@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 22:32:54 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 00:04:36 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ static void	ft_extract_info(t_map *map, char *line, int *i)
 {
 	char	**split;
 
-	if (*i < 4)
+	if (*i < 6)
 		split = ft_split(line, ' ');
+	if (*i == 4 || *i == 5)
+		split = ft_split(line + 1, ',');
 	if (*i == 0)
 		map->pathNO = split[1];
 	else if (*i == 1)
@@ -58,13 +60,17 @@ static void	ft_extract_info(t_map *map, char *line, int *i)
 		map->pathWE = split[1];
 	else if (*i == 3)
 		map->pathEA = split[1];
+	else if (*i == 4)
+		map->floor = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+	else if (*i == 5)
+		map->ceiling = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
 	else
 	{
-		map->grid[*i - 4] = line;
+		map->grid[*i - 6] = line;
 		if ((int)ft_strlen(line) > map->width)
 			map->width = ft_strlen(line);
 	}
-	if (*i < 4)
+	if (*i < 6)
 		ft_free_2d_array(split);
 	*i += 1;
 }
@@ -86,9 +92,10 @@ t_map	*ft_load_map(char *path)
 	if (!map)
 		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
 	i = 0;
+	map->width = 0;
 	while ((line = get_next_line(fd)) != NULL)
 		ft_extract_info(map, line, &i);
-	map->height = i - 4;
+	map->height = i - 6;
 	close(fd);
 	ft_log("Map loaded sucessfully", path, 0);
 	return (map);

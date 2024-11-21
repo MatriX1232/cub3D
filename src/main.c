@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:31:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 23:41:42 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
 	if (!cub3d.buffer)
 		return (ft_log("Failed to allocate memory for sprite buffer", NULL, 3), 1);
-	cub3d.buffer->img = mlx_new_image(mlx, 800, 600);
+	cub3d.buffer->img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!cub3d.buffer->img)
 		return (ft_log("Failed to create new image", NULL, 3), 1);
 	cub3d.buffer->addr = mlx_get_data_addr(cub3d.buffer->img, &cub3d.buffer->bits_per_pixel, &cub3d.buffer->line_length, &cub3d.buffer->endian);
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 		put_img_to_img(cub3d.buffer, cub3d.sprites[i], i * 70, 0);
 		i++;
 	}
-	ft_draw_minimap(&cub3d);
+	ft_draw_minimap(&cub3d, 5, 3);
 	mlx_put_image_to_window(mlx, win, cub3d.buffer->img, 0, 0);
 
 	mlx_loop(mlx);

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 14:14:36 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 20:07:15 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,23 @@ typedef struct s_sprite
 	int		endian;
 }	t_sprite;
 
+typedef struct s_map
+{
+	char	**grid;
+	int		width;
+	int		height;
+	char 	*pathNO;
+	char 	*pathSO;
+	char 	*pathWE;
+	char 	*pathEA;
+}	t_map;
+
 typedef struct s_cub3d
 {
 	void		*mlx;
 	void		*win;
 	t_sprite	**sprites;
+	t_map		*map;
 }	t_cub3d;
 
 #endif

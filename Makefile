@@ -15,6 +15,8 @@ DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 
 FILES = \
 	src/main.c \
+	src/ft_images.c \
+	src/ft_logs.c
 
 
 OBJS = ${FILES:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 22:15:57 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 23:13:50 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	ft_free_sprites(t_cub3d *cub3d);
 
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);
+void put_pixel_to_img(t_sprite *img, int x, int y, int color);
+
+//	FT_MINIMAP.C
+void	ft_draw_minimap(t_cub3d *cub3d);
 
 //	FT_LOGS.C
 void	ft_log(char *str, char *str_optional, int level);
@@ -44,6 +48,7 @@ char	*get_next_line(int fd);
 
 //	UTILS.C
 unsigned long	rgb_to_hex(int r, int g, int b);
+int	ft_2d_len(char **array);
 
 //	FT_FREE.C
 void	ft_free_2d_array(char **array);

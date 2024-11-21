@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 20:07:15 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:41:38 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef struct s_cub3d
 {
 	void		*mlx;
 	void		*win;
+	int			win_width;
+	int			win_height;
 	t_sprite	**sprites;
+	t_sprite	*buffer;
 	t_map		*map;
 }	t_cub3d;
 

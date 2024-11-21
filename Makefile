@@ -14,6 +14,7 @@ FILES = \
 	src/main.c \
 	src/ft_images.c \
 	src/ft_draw.c \
+	src/ft_minimap.c \
 	src/ft_logs.c \
 	src/ft_map_load.c \
 	src/gnl.c \

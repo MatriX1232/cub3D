@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 21:54:15 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:32:54 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_map	*ft_load_map(char *path)
 	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 		ft_extract_info(map, line, &i);
+	map->height = i - 4;
 	close(fd);
 	ft_log("Map loaded sucessfully", path, 0);
 	return (map);

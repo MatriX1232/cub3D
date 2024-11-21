@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 14:23:00 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:10:32 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_print_img_info(t_sprite *img);
 t_sprite	**ft_load_sprites(void *mlx);
 
 //	FT_LOGS.C
-void	ft_log(char *str, int level);
+void	ft_log(char *str, char *str_optional, int level);
 
 typedef struct s_player
 {

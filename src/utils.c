@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libs.h                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 14:17:01 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 21:49:56 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/11/21 20:22:14 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/11/21 20:22:47 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBS_H
-# define LIBS_H
-
-#include "../include/mlx.h"
-#include "../include/mlx_int.h"
 #include "../include/cub3d.h"
-#include "../include/structs.h"
-#include "../include/colors.h"
-#include "../include/libft.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "../include/libs.h"
 
-#endif
+unsigned long	rgb_to_hex(int r, int g, int b)
+{
+	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:17:01 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:32:32 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 00:15:08 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
+
 # define MINIMAP_SCALE 7
+# define MINIMAP_FG 0x3b014a
+# define MINIMAP_BG 0xd9fff2
 
 #include "../include/mlx.h"
 #include "../include/mlx_int.h"

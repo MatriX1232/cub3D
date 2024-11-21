@@ -6,12 +6,16 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:17:01 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 21:49:56 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 23:32:32 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBS_H
 # define LIBS_H
+
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
+# define MINIMAP_SCALE 7
 
 #include "../include/mlx.h"
 #include "../include/mlx_int.h"

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:12:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 23:31:20 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	main(int argc, char **argv)
 		put_img_to_img(cub3d.buffer, cub3d.sprites[i], i * 70, 0);
 		i++;
 	}
-	mlx_put_image_to_window(mlx, win, cub3d.buffer->img, 0, 0);
 	ft_draw_minimap(&cub3d);
+	mlx_put_image_to_window(mlx, win, cub3d.buffer->img, 0, 0);
 
 	mlx_loop(mlx);
 

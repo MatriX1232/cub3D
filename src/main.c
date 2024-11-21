@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 22:21:34 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 23:12:20 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	main(int argc, char **argv)
 
 	void	*mlx = mlx_init();
 	void	*win = mlx_new_window(mlx, 800, 600, "CUB3D");
+	if (!mlx || !win)
+		return (ft_log("Failed to initialize MLX or create window", NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
+
+	cub3d.win_width = 800;
+	cub3d.win_height = 600;
 
 	cub3d.mlx = mlx;
 	cub3d.win = win;
@@ -52,15 +57,23 @@ int	main(int argc, char **argv)
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
 	mlx_key_hook(cub3d.win, ft_key_hook, &cub3d);
 
-	t_sprite *sprite = xpm_load_image(mlx, "textures/42warsaw.xpm");
+	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
+	if (!cub3d.buffer)
+		return (ft_log("Failed to allocate memory for sprite buffer", NULL, 3), 1);
+	cub3d.buffer->img = mlx_new_image(mlx, 800, 600);
+	if (!cub3d.buffer->img)
+		return (ft_log("Failed to create new image", NULL, 3), 1);
+	cub3d.buffer->addr = mlx_get_data_addr(cub3d.buffer->img, &cub3d.buffer->bits_per_pixel, &cub3d.buffer->line_length, &cub3d.buffer->endian);
+	if (!cub3d.buffer->addr)
+		return (ft_log("Failed to get data address", NULL, 3), 1);
 	int	i = 0;
 	while (cub3d.sprites[i])
 	{
-		put_img_to_img(sprite, cub3d.sprites[i], i * 70, 0);
+		put_img_to_img(cub3d.buffer, cub3d.sprites[i], i * 70, 0);
 		i++;
 	}
-	mlx_put_image_to_window(mlx, win, sprite->img, 0, 0);
-
+	mlx_put_image_to_window(mlx, win, cub3d.buffer->img, 0, 0);
+	ft_draw_minimap(&cub3d);
 
 	mlx_loop(mlx);
 

@@ -6,46 +6,54 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:25:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:31:47 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 00:03:56 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-void	ft_draw_minimap(t_cub3d *cub3d)
+static void	ft_draw_scale(t_cub3d *cub3d, int x, int y, int color)
 {
-    int		x;
-    int		y;
-    int		i;
-    int		j;
-    int		offset_x;
-    int		offset_y;
+	int	i;
+	int	j;
+	int	offset_x;
+	int	offset_y;
 
-    offset_x = (cub3d->win_width - (cub3d->map->width * MINIMAP_SCALE)) - 10;
+	offset_x = (cub3d->win_width - (cub3d->map->width * MINIMAP_SCALE)) - 10;
 	offset_y = 10;
-    x = 0;
-    while (x < cub3d->map->width)
-    {
-        y = 0;
-        while (y < cub3d->map->height)
-        {
-            if (cub3d->map->grid[y][x] == '0')
-            {
-                i = 0;
-                while (i < MINIMAP_SCALE)
-                {
-                    j = 0;
-                    while (j < MINIMAP_SCALE)
-                    {
-                        put_pixel_to_img(cub3d->buffer, offset_x + (x * MINIMAP_SCALE) + i, offset_y + (y * MINIMAP_SCALE) + j, 0x00FF00);
-                        j++;
-                    }
-                    i++;
-                }
-            }
-            y++;
-        }
-        x++;
-    }
+	i = 0;
+	while (i < MINIMAP_SCALE)
+	{
+		j = 0;
+		while (j < MINIMAP_SCALE)
+		{
+			put_pixel_to_img(cub3d->buffer, offset_x + (x * MINIMAP_SCALE) + i, offset_y + (y * MINIMAP_SCALE) + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_draw_minimap(t_cub3d *cub3d, int px, int py)
+{
+	int	x;
+	int	y;
+
+	if (cub3d->map->width <= 0 || cub3d->map->height <= 0)
+		ft_log("Map width or height is <= 0", NULL, 2);
+	x = 0;
+	while (x < cub3d->map->width)
+	{
+		y = 0;
+		while (y < cub3d->map->height)
+		{
+			if (cub3d->map->grid[y][x] == '0')
+				ft_draw_scale(cub3d, x, y, 0x00FF00);
+			if (x == px && y == py)
+				ft_draw_scale(cub3d, x, y, 0xFF0000);
+			y++;
+		}
+		x++;
+	}
 }

@@ -100,5 +100,6 @@ int	raycaster(t_cub3d *cub3d)
 			texx = texwidth - texx - 1;
 		if (ray.side == 1 && ray.raydiry < 0)
 			texx = texwidth - texx - 1;
+		
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:44:06 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:56:16 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ typedef struct s_sprite
 	int		height;
 	int		endian;
 }	t_sprite;
+
+typedef struct s_anim
+{
+	t_sprite	**sprites;
+	int			frame;
+	int			frame_count;
+	int			frame_delay;
+	int			duration;
+}	t_anim;
 
 typedef struct s_map
 {
@@ -77,25 +86,5 @@ typedef struct s_cub3d
 	t_map		*map;
 	t_player	*player;
 }	t_cub3d;
-
-
-typedef struct s_ray
-{
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
-	int			mapx;
-	int			mapy;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
-
-} t_ray;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 18:11:40 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:19:01 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,12 @@ void	ft_anim(t_cub3d *cub3d)
 		return (ft_log("Cannot allocate memory for animation", NULL, 3));
 
 	anim->frame = 0;
-	anim->frame_count = ft_2d_len((void **)anim->sprites);
+	anim->frame_count = 52;
 	anim->frame_delay = (1000 / 60) * 1000;
 	anim->duration = anim->frame_count * anim->frame_delay;
-	anim->sprites = load_batch(cub3d, "textures/coin/");
+	anim->sprites = load_batch(cub3d, "textures/cat/");
 
+	printf("Frame count: %d\n", anim->frame_count);
 	anim->frame = 0;
 	while (anim->frame < anim->frame_count - 1)
 	{

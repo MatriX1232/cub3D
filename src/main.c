@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:41:42 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:57:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	main(int argc, char **argv)
 	(void)argc;
 
 	t_cub3d cub3d;
-	cub3d.h = 600;
-	cub3d.w = 800;
+	// cub3d.h = 600;
+	// cub3d.w = 800;
 
 
 	void	*mlx = mlx_init();
@@ -77,6 +77,8 @@ int	main(int argc, char **argv)
 	}
 	ft_draw_minimap(&cub3d, 5, 3);
 	mlx_put_image_to_window(mlx, win, cub3d.buffer->img, 0, 0);
+
+	ft_anim(&cub3d);
 
 	mlx_loop(mlx);
 

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 22:40:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:03:20 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	ret = (t_sprite *) malloc(1 * sizeof(t_sprite));
 	if (!ret)
 	{
-		// printf("%s[ ERROR ] Cannot allocate memory for sprite: %s%s\n", RED, path, END);
 		ft_log("Cannot allocate memory for sprite: ", path, 3);
 		return (NULL);
 	}
@@ -51,7 +50,7 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	ret->bits_per_pixel = bpp;
 	ret->line_length = ll;
 	ret->endian = ed;
-	ft_log("Image loaded", path, 0);
+	ft_log_sub("Image loaded", path, 0, 1);
 	return (ret);
 }
 

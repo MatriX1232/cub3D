@@ -17,9 +17,15 @@
 # include <mlx_int.h>
 # include "structs.h"
 # include <stdio.h>
+#	include <math.h>
 
 # define KEY_ESC 65307
 # define ON_DESTROY 17
+
+// 	RAYCASTER.C
+int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
+int	raycaster(t_cub3d *cub3d);
+
 
 //	MAIN.C
 void	ft_cprint(char *color, char *str);
@@ -30,33 +36,5 @@ t_sprite	**ft_load_sprites(void *mlx);
 
 //	FT_LOGS.C
 void	ft_log(char *str, int level);
-
-typedef struct s_player
-{
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-} t_player;
-
-typedef struct s_ray
-{
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
-	int			mapx;
-	int			mapy;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
-
-} t_ray;
 
 #endif

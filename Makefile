@@ -3,9 +3,6 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
 MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
 
-THREADS = $(shell nproc)
-THREADS := $(shell expr $(THREADS))
-
 NAME = cub3d
 
 LIBFT = libft
@@ -16,7 +13,13 @@ DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 FILES = \
 	src/main.c \
 	src/ft_images.c \
-	src/ft_logs.c
+	src/ft_draw.c \
+	src/ft_minimap.c \
+	src/ft_logs.c \
+	src/ft_map_load.c \
+	src/gnl.c \
+	src/utils.c \
+	src/ft_free.c
 
 
 OBJS = ${FILES:.c=.o}

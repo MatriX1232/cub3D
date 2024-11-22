@@ -13,6 +13,7 @@ DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 FILES = \
 	src/main.c \
 	src/ft_images.c \
+	src/anim.c \
 	src/ft_draw.c \
 	src/ft_minimap.c \
 	src/ft_logs.c \

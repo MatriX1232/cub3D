@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 15:07:04 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:40:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	ret = (t_sprite *) malloc(1 * sizeof(t_sprite));
 	if (!ret)
 	{
-		printf("%s[ ERROR ] Cannot allocate memory for sprite: %s%s\n", RED, path, END);
+		// printf("%s[ ERROR ] Cannot allocate memory for sprite: %s%s\n", RED, path, END);
+		ft_log("Cannot allocate memory for sprite: ", path, 3);
 		return (NULL);
 	}
 	bpp = 0;
@@ -44,13 +45,13 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	ed = 0;
 	ret->img = mlx_xpm_file_to_image(mlx, path, &(ret->width), &(ret->height));
 	if (ret->img == NULL)
-		ft_log("Image failed to load\n", 3);
+		ft_log("Image failed to load", path, 3);
 	ret->addr = mlx_get_data_addr(ret->img, &bpp, &ll, &ed);
 	ret->path = path;
 	ret->bits_per_pixel = bpp;
 	ret->line_length = ll;
 	ret->endian = ed;
-	printf("%s[ SUCCESS ] Image loaded: %s%s\n", GREEN, path, END);
+	ft_log("Image loaded", path, 0);
 	return (ret);
 }
 
@@ -61,7 +62,7 @@ t_sprite	**ft_load_sprites(void *mlx)
 	sprites = (t_sprite **) malloc(9 * sizeof(t_sprite *));
 	if (!sprites)
 	{
-		ft_log("Cannot allocate memory for sprites!", 3);
+		ft_log("Cannot allocate memory for sprites!", NULL, 3);
 		return (NULL);
 	}
 	sprites[0] = xpm_load_image(mlx, "textures/blue_stone.xpm");
@@ -73,6 +74,23 @@ t_sprite	**ft_load_sprites(void *mlx)
 	sprites[6] = xpm_load_image(mlx, "textures/red_brick.xpm");
 	sprites[7] = xpm_load_image(mlx, "textures/wood.xpm");
 	sprites[8] = NULL;
-	ft_log("All sprites loaded sucessfully!\n", 0);
+	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);
+}
+
+void	ft_free_sprites(t_cub3d *cub3d)
+{
+	int	i;
+
+	i = 0;
+	while (cub3d->sprites[i])
+	{
+		mlx_destroy_image(cub3d->mlx, cub3d->sprites[i]->img);
+		free(cub3d->sprites[i]);
+		i++;
+	}
+	free(cub3d->sprites);
+	mlx_destroy_image(cub3d->mlx, cub3d->buffer->img);
+	free(cub3d->buffer);
+	ft_log("Sprites freed", NULL, 1);
 }

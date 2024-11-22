@@ -50,37 +50,6 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
-	int			mapx;
-	int			mapy;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
-
-} t_ray;
-
-typedef struct s_cub3d
-{
-	void		*mlx;
-	void		*win;
-	int			win_width;
-	int			win_height;
-	t_sprite	**sprites;
-	t_sprite	*buffer;
-	t_map		*map;
-	t_player	*player;
-}	t_cub3d;
-
-
-typedef struct s_ray
-{
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
@@ -97,5 +66,20 @@ typedef struct s_ray
 	int			side;
 
 } t_ray;
+
+
+typedef struct s_cub3d
+{
+	void		*mlx;
+	void		*win;
+	int			win_width;
+	int			win_height;
+	t_sprite	**sprites;
+	t_sprite	*buffer;
+	t_map		*map;
+	t_player	*player;
+}	t_cub3d;
+
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:40:10 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:03:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_sprite	**ft_load_sprites(void *mlx);
 t_sprite	*xpm_load_image(void *mlx, char *path);
 void	ft_free_sprites(t_cub3d *cub3d);
 
+//	ANIM.C
+void	ft_anim(t_cub3d *cub3d);
+
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);
 void put_pixel_to_img(t_sprite *img, int x, int y, int color);
@@ -45,6 +48,7 @@ void	ft_draw_minimap(t_cub3d *cub3d, int px, int py);
 
 //	FT_LOGS.C
 void	ft_log(char *str, char *str_optional, int level);
+void	ft_log_sub(char *str, char *str_optional, int level, int sub_level);
 
 //	FT_MAP.C
 t_map	*ft_load_map(char *path);
@@ -54,7 +58,7 @@ char	*get_next_line(int fd);
 
 //	UTILS.C
 unsigned long	rgb_to_hex(int r, int g, int b);
-int	ft_2d_len(char **array);
+int				ft_2d_len(void **array);
 
 //	FT_FREE.C
 void	ft_free_2d_array(char **array);

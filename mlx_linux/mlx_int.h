@@ -1,9 +1,9 @@
 /*
-** mlx_int.h for mlx in
-**
+** mlx_int.h for mlx in 
+** 
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-**
+** 
 ** Started on  Mon Jul 31 16:45:48 2000 Charlie Root
 ** Last update Wed May 25 16:44:16 2011 Olivier Crouzet
 */
@@ -120,7 +120,7 @@ typedef struct	s_xvar
 
 
 int				mlx_int_do_nothing();
-// int				mlx_get_color_value();
+int				mlx_get_color_value();
 int				mlx_int_get_good_color();
 int				mlx_int_find_in_pcm();
 int				mlx_int_anti_resize_win();
@@ -129,7 +129,7 @@ int				mlx_int_rgb_conversion();
 int				mlx_int_deal_shm();
 void			*mlx_int_new_xshm_image();
 char			**mlx_int_str_to_wordtab();
-// void			*mlx_new_image();
+void			*mlx_new_image();
 int				shm_att_pb();
 int				mlx_int_get_visual(t_xvar *xvar);
 int				mlx_int_set_win_event_mask(t_xvar *xvar);

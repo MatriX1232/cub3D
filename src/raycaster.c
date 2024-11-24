@@ -11,14 +11,26 @@
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include "../include/libs.h"
+
+int get_pixel_color(t_sprite *sprite, int x, int y)
+{
+	int color;
+	char *pixel;
+
+	pixel = sprite->addr + (y * sprite->line_length + x * (sprite->bits_per_pixel / 8));
+	color = *(unsigned int *)pixel;
+	return color;
+}
+
 
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x)
 {
-	ray->camerax = 2 * x / (double)cub3d->w - 1;
-	ray->raydirx = cub3d->player.dirx + cub3d->player.planex * ray->camerax;
-	ray->raydiry = cub3d->player.diry + cub3d->player.planey * ray->camerax;
-	ray->mapx = (int)cub3d->player.posx;
-	ray->mapy = (int)cub3d->player.posy;
+	ray->camerax = 2 * x / (double)cub3d->win_width - 1;
+	ray->raydirx = cub3d->player->dirx + cub3d->player->planex * ray->camerax;
+	ray->raydiry = cub3d->player->diry + cub3d->player->planey * ray->camerax;
+	ray->mapx = (int)cub3d->player->posx;
+	ray->mapy = (int)cub3d->player->posy;
 	if (ray->raydirx == 0)
 		ray->deltadistx = 1e30;
 	else
@@ -31,22 +43,22 @@ int	init_ray(t_ray *ray, t_cub3d *cub3d, int x)
 	if (ray->raydirx < 0)
 	{
 		ray->stepx = -1;
-		ray->sidedistx = (cub3d->player.posx - ray->mapx) * ray->deltadistx;
+		ray->sidedistx = (cub3d->player->posx - ray->mapx) * ray->deltadistx;
 	}
 	else
 	{
 		ray->stepx = 1;
-		ray->sidedistx = (ray->mapx + 1.0 - cub3d->player.posx) * ray->deltadistx;
+		ray->sidedistx = (ray->mapx + 1.0 - cub3d->player->posx) * ray->deltadistx;
 	}
 	if (ray->raydiry < 0)
 	{
 		ray->stepy = -1;
-		ray->sidedisty = (cub3d->player.posy - ray->mapy) * ray->deltadisty;
+		ray->sidedisty = (cub3d->player->posy - ray->mapy) * ray->deltadisty;
 	}
 	else
 	{
 		ray->stepy = 1;
-		ray->sidedisty = (ray->mapy + 1.0 - cub3d->player.posy) * ray->deltadisty;
+		ray->sidedisty = (ray->mapy + 1.0 - cub3d->player->posy) * ray->deltadisty;
 	}
 	return (0);
 }
@@ -55,9 +67,10 @@ int	raycaster(t_cub3d *cub3d)
 {
 	t_ray	ray;
 
-	for (int x = 0; x < cub3d->w; x++)
+	ft_memset(cub3d->buffer->addr, 0, cub3d->win_width * cub3d->win_height * 4);
+	for (int x = 0; x < cub3d->win_width; x++)
 	{
-		if (init_ray(&ray, cub3d))
+		if (init_ray(&ray, cub3d, x))
 			return (1);
 		while (ray.hit == 0)
 		{
@@ -73,33 +86,68 @@ int	raycaster(t_cub3d *cub3d)
 				ray.mapy += ray.stepy;
 				ray.side = 1;
 			}
-			if (cub3d->map.map[ray.mapx][ray.mapy] > 0)
+
+			// Bounds checking to prevent SIGSEGV
+			if (ray.mapx < 0 || ray.mapx >= cub3d->map->width ||
+				ray.mapy < 0 || ray.mapy >= cub3d->map->height)
+			{
+				// Optionally log an error or handle the boundary
+				ray.hit = 1; // Stop raycasting
+				break;
+			}
+
+			if (cub3d->map->grid[ray.mapy][ray.mapx] > '0') // Note: grid[y][x]
 				ray.hit = 1;
 		}
+		if (ray.hit == 0)
+			continue; // Skip rendering if no wall was hit
+
 		if (ray.side == 0)
 			ray.perpwalldist = (ray.sidedistx - ray.deltadistx);
 		else
 			ray.perpwalldist = (ray.sidedisty - ray.deltadisty);
-		int lineheight = (int)(cub3d->h / ray.perpwalldist);
+		int lineheight = (int)(cub3d->win_height / ray.perpwalldist);
 		int pitch = 100;
-		int drawstart = -lineheight / 2 + cub3d->h / 2 + pitch;
+		int drawstart = -lineheight / 2 + cub3d->win_height / 2 + pitch;
 		if (drawstart < 0)
 			drawstart = 0;
-		int drawend = lineheight / 2 + cub3d->h / 2 + pitch;
-		if (drawend >= cub3d->h)
-			drawend = cub3d->h - 1;
-		int texnum = cub3d->map.map[ray.mapx][ray.mapy] - 1;
+		int drawend = lineheight / 2 + cub3d->win_height / 2 + pitch;
+		if (drawend >= cub3d->win_height)
+			drawend = cub3d->win_height - 1;
+		int texnum;
+		if (ray.side == 0) // Vertical wall
+		{
+				if (ray.raydirx > 0)
+					texnum = 2; // EAST
+				else
+					texnum = 3; // WEST
+		}
+		else
+		{
+				if (ray.raydiry > 0)
+					texnum = 1; // SOUTH
+				else
+					texnum = 0; // NORTH
+		}
 		double wallx;
 		if (ray.side == 0)
-			wallx = cub3d->player.posy + ray.perpwalldist * ray.raydiry;
+			wallx = cub3d->player->posy + ray.perpwalldist * ray.raydiry;
 		else
-			wallx = cub3d->player.posx + ray.perpwalldist * ray.raydirx;
+			wallx = cub3d->player->posx + ray.perpwalldist * ray.raydirx;
 		wallx -= floor(wallx);
-		int texx = int(wallx * double(texwidth));
-		if (ray.side == 0 && ray.raydirx > 0)
-			texx = texwidth - texx - 1;
-		if (ray.side == 1 && ray.raydiry < 0)
-			texx = texwidth - texx - 1;
-		
+		int texx = (int)(wallx * (double)(cub3d->sprites[texnum]->width));
+	if (ray.side == 0 && ray.raydirx > 0)
+		texx = cub3d->sprites[texnum]->width - texx - 1;
+	if (ray.side == 1 && ray.raydiry < 0)
+		texx = cub3d->sprites[texnum]->width - texx - 1;
+	for (int y = drawstart; y < drawend; y++)
+	{
+		int d = (y - pitch) * 256 - cub3d->win_height * 128 + lineheight * 128;
+		int texy = ((d * cub3d->sprites[texnum]->height) / lineheight) / 256;
+		int color = get_pixel_color(cub3d->sprites[texnum], texx, texy);
+		put_pixel_to_img(cub3d->buffer, x, y, color);
 	}
+	}
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
+	return (0);
 }

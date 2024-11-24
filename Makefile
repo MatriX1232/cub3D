@@ -20,7 +20,8 @@ FILES = \
 	src/ft_map_load.c \
 	src/gnl.c \
 	src/utils.c \
-	src/ft_free.c
+	src/ft_free.c \
+	src/raycaster.c \
 
 
 OBJS = ${FILES:.c=.o}

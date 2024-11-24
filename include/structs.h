@@ -34,6 +34,16 @@ typedef struct s_anim
 	int			duration;
 }	t_anim;
 
+typedef struct s_player
+{
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+} t_player;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -45,17 +55,9 @@ typedef struct s_map
 	char 	*pathEA;
 	int		floor;
 	int		ceiling;
+	t_player *player;
 }	t_map;
 
-typedef struct s_player
-{
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-} t_player;
 
 typedef struct s_ray
 {

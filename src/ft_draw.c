@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/21 23:13:45 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:14:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_
 
 void put_pixel_to_img(t_sprite *img, int x, int y, int color)
 {
-	int bpp, size_line, endian;
-	char *data = mlx_get_data_addr(img->img, &bpp, &size_line, &endian);
-
-	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
+	if (img->addr && x >= 0 && x < img->width && y >= 0 && y < img->height)
 	{
-		int pixel_index = (y * size_line) + (x * (bpp / 8));
-		*(unsigned int *)(data + pixel_index) = color;
+		int pixel_index = (y * img->line_length) + (x * (img->bits_per_pixel / 8));
+		*(unsigned int *)(img->addr + pixel_index) = color;
 	}
 }

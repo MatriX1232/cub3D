@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:25:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 14:00:21 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:06:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,31 @@ void	ft_draw_minimap(t_cub3d *cub3d, int px, int py)
 	int	x;
 	int	y;
 
+	if (!cub3d->map || !cub3d->map->grid)
+		return (ft_log("Map or Grid is NULL", NULL, 2));
 	if (cub3d->map->width <= 0 || cub3d->map->height <= 0)
-		ft_log("Map width or height is <= 0", NULL, 2);
+		return (ft_log("Map width or height is <= 0", NULL, 2));
 	x = 0;
 	while (x < cub3d->map->width)
 	{
 		y = 0;
 		while (y < cub3d->map->height)
 		{
-			if (cub3d->map->grid[y][x] == '0')
-				ft_draw_scale(cub3d, x, y, MINIMAP_BG);
-			else if (cub3d->map->grid[y][x] == '1')
-				ft_draw_scale(cub3d, x, y, MINIMAP_FG);
-			if (x == px && y == py)
-				ft_draw_scale(cub3d, x, y, 0xFF0000);
-			y++;
+			if (!cub3d->map->grid[y] || !cub3d->map->grid[y][x])
+			{
+				y++;
+				continue;
+			}
+			else
+			{
+				if (cub3d->map->grid[y][x] == '0')
+					ft_draw_scale(cub3d, x, y, MINIMAP_BG);
+				else if (cub3d->map->grid[y][x] == '1')
+					ft_draw_scale(cub3d, x, y, MINIMAP_FG);
+				if (x == px && y == py)
+					ft_draw_scale(cub3d, x, y, 0xFF0000);
+				y++;
+			}
 		}
 		x++;
 	}

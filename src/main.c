@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 13:55:36 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:22:45 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,11 +155,7 @@ int	main(int argc, char **argv)
 	if (!cub3d.sprites)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
 
-	cub3d.map = ft_load_map(argv[1]);
-	if (!cub3d.map)
-		return (ft_log("Map failed to load", NULL, 3), 1);
-	cub3d.player = cub3d.map->player;
-
+	// Initialize buffer
 	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
 	if (!cub3d.buffer)
 		return (ft_log("Failed to allocate memory for sprite buffer", NULL, 3), 1);
@@ -169,6 +165,17 @@ int	main(int argc, char **argv)
 	cub3d.buffer->addr = mlx_get_data_addr(cub3d.buffer->img, &cub3d.buffer->bits_per_pixel, &cub3d.buffer->line_length, &cub3d.buffer->endian);
 	if (!cub3d.buffer->addr)
 		return (ft_log("Failed to get data address", NULL, 3), 1);
+	cub3d.buffer->width = cub3d.win_width;
+	cub3d.buffer->height = cub3d.win_height;
+
+
+	cub3d.map = ft_load_map(&cub3d, argv[1]);
+	if (!cub3d.map)
+		return (ft_log("Map failed to load", NULL, 3), 1);
+	cub3d.player = cub3d.map->player;
+
+
+
 	mlx_loop_hook(mlx, raycaster, &cub3d);
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
 	mlx_hook(cub3d.win, MotionNotify, PointerMotionMask, mouse_move, &cub3d);

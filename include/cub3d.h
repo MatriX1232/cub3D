@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 18:03:43 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:20:02 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_log(char *str, char *str_optional, int level);
 void	ft_log_sub(char *str, char *str_optional, int level, int sub_level);
 
 //	FT_MAP.C
-t_map	*ft_load_map(char *path);
+t_map	*ft_load_map(t_cub3d *cub3d, char *path);
 
 //	GNL.C
 char	*get_next_line(int fd);

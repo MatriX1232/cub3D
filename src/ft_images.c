@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 18:03:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:16:39 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,4 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 	sprites[8] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);
-}
-
-void	ft_free_sprites(t_cub3d *cub3d)
-{
-	int	i;
-
-	i = 0;
-	while (cub3d->sprites[i])
-	{
-		mlx_destroy_image(cub3d->mlx, cub3d->sprites[i]->img);
-		free(cub3d->sprites[i]);
-		i++;
-	}
-	free(cub3d->sprites);
-	mlx_destroy_image(cub3d->mlx, cub3d->buffer->img);
-	free(cub3d->buffer);
-	ft_log("Sprites freed", NULL, 1);
 }

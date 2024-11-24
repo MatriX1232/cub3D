@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 17:56:16 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:09:07 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char	**grid;
-	int		width;
-	int		height;
-	char	*pathNO;
-	char	*pathSO;
-	char	*pathWE;
-	char	*pathEA;
-	int		floor;
-	int		ceiling;
-	t_player *player;
+	char		**grid;
+	int			width;
+	int			height;
+	t_sprite	*spriteNO;
+	t_sprite	*spriteSO;
+	t_sprite	*spriteWE;
+	t_sprite	*spriteEA;
+	int			floor;
+	int			ceiling;
+	t_player	 *player;
 }	t_map;
 
 

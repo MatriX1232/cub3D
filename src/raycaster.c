@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:06:50 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/21 15:06:50 by idomagal         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:01:02 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ int	raycaster(t_cub3d *cub3d)
 	}
 	}
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
+	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 17:57:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:55:36 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static void	handle_movement(t_cub3d *cub3d, int keycode)
 			cub3d->player->posy = new_posy;
 		}
 	}
+	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 }
 
 int	ft_key_hook(int keycode, t_cub3d *cub3d)

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libs.h"
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -49,10 +51,10 @@ typedef struct s_map
 	char	**grid;
 	int		width;
 	int		height;
-	char 	*pathNO;
-	char 	*pathSO;
-	char 	*pathWE;
-	char 	*pathEA;
+	char	*pathNO;
+	char	*pathSO;
+	char	*pathWE;
+	char	*pathEA;
 	int		floor;
 	int		ceiling;
 	t_player *player;

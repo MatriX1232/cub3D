@@ -54,7 +54,7 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	return (ret);
 }
 
-t_sprite	**ft_load_sprites(void *mlx)
+t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 {
 	t_sprite	**sprites;
 
@@ -64,14 +64,15 @@ t_sprite	**ft_load_sprites(void *mlx)
 		ft_log("Cannot allocate memory for sprites!", NULL, 3);
 		return (NULL);
 	}
-	sprites[0] = xpm_load_image(mlx, "textures/blue_stone.xpm");
-	sprites[1] = xpm_load_image(mlx, "textures/color_stone.xpm");
-	sprites[2] = xpm_load_image(mlx, "textures/eagle.xpm");
-	sprites[3] = xpm_load_image(mlx, "textures/grey_stone.xpm");
-	sprites[4] = xpm_load_image(mlx, "textures/mossy.xpm");
-	sprites[5] = xpm_load_image(mlx, "textures/purple_stone.xpm");
-	sprites[6] = xpm_load_image(mlx, "textures/red_brick.xpm");
-	sprites[7] = xpm_load_image(mlx, "textures/wood.xpm");
+	// tried loading using cub3d->map->path**, but loading map first doesnt work, idk why
+	sprites[0] = xpm_load_image(cub3d->mlx, "textures/blue_stone.xpm");
+	sprites[1] = xpm_load_image(cub3d->mlx, "textures/color_stone.xpm");
+	sprites[2] = xpm_load_image(cub3d->mlx, "textures/grey_stone.xpm");
+	sprites[3] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm");
+	sprites[4] = xpm_load_image(cub3d->mlx, "textures/mossy.xpm");
+	sprites[5] = xpm_load_image(cub3d->mlx, "textures/purple_stone.xpm");
+	sprites[6] = xpm_load_image(cub3d->mlx, "textures/eagle.xpm");
+	sprites[7] = xpm_load_image(cub3d->mlx, "textures/wood.xpm");
 	sprites[8] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);

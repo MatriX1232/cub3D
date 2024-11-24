@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 00:04:36 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:10:53 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,25 @@ static int	ft_get_map_height(char *path)
 	return (height);
 }
 
-static void	ft_extract_info(t_map *map, char *line, int *i, t_player *player)
+static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
-	char	**split;
+	t_player	*player;
+	char		**split;
 
+	player = cub3d->player;
 	line = ft_strtrim(line, "\n");
 	if (*i < 6)
 		split = ft_split(line, ' ');
 	if (*i == 4 || *i == 5)
 		split = ft_split(line + 1, ',');
 	if (*i == 0)
-		map->pathNO = split[1];
+		map->spriteNO = xpm_load_image(cub3d->mlx, split[1]);
 	else if (*i == 1)
-		map->pathSO = split[1];
+		map->spriteSO = xpm_load_image(cub3d->mlx, split[1]);
 	else if (*i == 2)
-		map->pathWE = split[1];
+		map->spriteWE = xpm_load_image(cub3d->mlx, split[1]);
 	else if (*i == 3)
-		map->pathEA = split[1];
+		map->spriteEA = xpm_load_image(cub3d->mlx, split[1]);
 	else if (*i == 4)
 		map->floor = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
 	else if (*i == 5)

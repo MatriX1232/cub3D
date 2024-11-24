@@ -48,6 +48,7 @@ static void	ft_extract_info(t_map *map, char *line, int *i, t_player *player)
 {
 	char	**split;
 
+	line = ft_strtrim(line, "\n");
 	if (*i < 6)
 		split = ft_split(line, ' ');
 	if (*i == 4 || *i == 5)

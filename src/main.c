@@ -12,15 +12,6 @@
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
-#include <stdbool.h>
-
-
-#include <X11/keysym.h>
-
-#define KEY_W 119 // ASCII for 'w'
-#define KEY_A 97  // ASCII for 'a'
-#define KEY_S 115 // ASCII for 's'
-#define KEY_D 100 // ASCII for 'd'
 
 
 // Define movement speed
@@ -37,13 +28,56 @@ int ft_exit(t_cub3d *cub3d)
 	return (0);
 }
 
-// Function to handle player movement with collision detection
+
+int mouse_move(int x, int y, t_cub3d *cub3d)
+{
+	int center_x = cub3d->win_width / 2;
+	// int center_y = cub3d->win_height / 2;
+	double rotSpeed;
+	int delta_x = x - center_x;
+	if (delta_x != 0)
+	{
+		rotSpeed = delta_x * 0.002;
+		double oldDirX = cub3d->player->dirx;
+		double oldPlaneX = cub3d->player->planex;
+		cub3d->player->dirx = cub3d->player->dirx * cos(-rotSpeed) - cub3d->player->diry * sin(-rotSpeed);
+		cub3d->player->diry = oldDirX * sin(-rotSpeed) + cub3d->player->diry * cos(-rotSpeed);
+		cub3d->player->planex = cub3d->player->planex * cos(-rotSpeed) - cub3d->player->planey * sin(-rotSpeed);
+		cub3d->player->planey = oldPlaneX * sin(-rotSpeed) + cub3d->player->planey * cos(-rotSpeed);
+	}
+	(void)y;
+	return (0);
+}
+
+
+void handle_rotation(t_cub3d *cub3d, int keycode)
+{
+	double oldDirX = cub3d->player->dirx;
+	double oldPlaneX = cub3d->player->planex;
+	double rotSpeed = ROT_SPEED;
+
+	if (keycode == XK_Right)
+	{
+			cub3d->player->dirx = cub3d->player->dirx * cos(rotSpeed) - cub3d->player->diry * sin(rotSpeed);
+			cub3d->player->diry = oldDirX * sin(rotSpeed) + cub3d->player->diry * cos(rotSpeed);
+			cub3d->player->planex = cub3d->player->planex * cos(rotSpeed) - cub3d->player->planey * sin(rotSpeed);
+			cub3d->player->planey = oldPlaneX * sin(rotSpeed) + cub3d->player->planey * cos(rotSpeed);
+	}
+	else if (keycode == XK_Left)
+	{
+		cub3d->player->dirx = cub3d->player->dirx * cos(-rotSpeed) - cub3d->player->diry * sin(-rotSpeed);
+		cub3d->player->diry = oldDirX * sin(-rotSpeed) + cub3d->player->diry * cos(-rotSpeed);
+		cub3d->player->planex = cub3d->player->planex * cos(-rotSpeed) - cub3d->player->planey * sin(-rotSpeed);
+		cub3d->player->planey = oldPlaneX * sin(-rotSpeed) + cub3d->player->planey * cos(-rotSpeed);
+	}
+}
+
 static void	handle_movement(t_cub3d *cub3d, int keycode)
 {
 	double new_posx;
 	double new_posy;
 
-	if (keycode == KEY_W) // Move forward
+	if (keycode == KEY_W)
 	{
 		new_posx = cub3d->player->posx + cub3d->player->dirx * MOVE_SPEED;
 		new_posy = cub3d->player->posy + cub3d->player->diry * MOVE_SPEED;
@@ -53,7 +87,7 @@ static void	handle_movement(t_cub3d *cub3d, int keycode)
 			cub3d->player->posy = new_posy;
 		}
 	}
-	else if (keycode == KEY_S) // Move backward
+	else if (keycode == KEY_S)
 	{
 		new_posx = cub3d->player->posx - cub3d->player->dirx * MOVE_SPEED;
 		new_posy = cub3d->player->posy - cub3d->player->diry * MOVE_SPEED;
@@ -63,7 +97,7 @@ static void	handle_movement(t_cub3d *cub3d, int keycode)
 			cub3d->player->posy = new_posy;
 		}
 	}
-	else if (keycode == KEY_A) // Strafe left
+	else if (keycode == KEY_A)
 	{
 		new_posx = cub3d->player->posx - cub3d->player->planex * MOVE_SPEED;
 		new_posy = cub3d->player->posy - cub3d->player->planey * MOVE_SPEED;
@@ -73,7 +107,7 @@ static void	handle_movement(t_cub3d *cub3d, int keycode)
 			cub3d->player->posy = new_posy;
 		}
 	}
-	else if (keycode == KEY_D) // Strafe right
+	else if (keycode == KEY_D)
 	{
 		new_posx = cub3d->player->posx + cub3d->player->planex * MOVE_SPEED;
 		new_posy = cub3d->player->posy + cub3d->player->planey * MOVE_SPEED;
@@ -91,6 +125,8 @@ int	ft_key_hook(int keycode, t_cub3d *cub3d)
 	ft_log("Key pressed", ft_itoa(keycode), 1);
 	if (keycode == KEY_ESC)
 		ft_exit(cub3d);
+	else if (keycode == XK_Left || keycode == XK_Right)
+		handle_rotation(cub3d, keycode);
 	else
 		handle_movement(cub3d, keycode);
 	raycaster(cub3d);
@@ -102,8 +138,6 @@ int	main(int argc, char **argv)
 	(void)argc;
 
 	t_cub3d cub3d;
-	// cub3d.h = 600;
-	// cub3d.w = 800;
 
 	void	*mlx = mlx_init();
 	void	*win = mlx_new_window(mlx, 800, 600, "CUB3D");
@@ -116,15 +150,16 @@ int	main(int argc, char **argv)
 
 	cub3d.mlx = mlx;
 	cub3d.win = win;
-	cub3d.sprites = ft_load_sprites(mlx);
+
+	cub3d.sprites = ft_load_sprites(&cub3d);
 	if (!cub3d.sprites)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
+
 	cub3d.map = ft_load_map(argv[1]);
 	if (!cub3d.map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
 	cub3d.player = cub3d.map->player;
 
-	// Initialize buffer
 	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
 	if (!cub3d.buffer)
 		return (ft_log("Failed to allocate memory for sprite buffer", NULL, 3), 1);
@@ -134,14 +169,10 @@ int	main(int argc, char **argv)
 	cub3d.buffer->addr = mlx_get_data_addr(cub3d.buffer->img, &cub3d.buffer->bits_per_pixel, &cub3d.buffer->line_length, &cub3d.buffer->endian);
 	if (!cub3d.buffer->addr)
 		return (ft_log("Failed to get data address", NULL, 3), 1);
-
-	// Register raycaster as the loop hook
 	mlx_loop_hook(mlx, raycaster, &cub3d);
-
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
+	mlx_hook(cub3d.win, MotionNotify, PointerMotionMask, mouse_move, &cub3d);
 	mlx_key_hook(cub3d.win, ft_key_hook, &cub3d);
-
 	mlx_loop(mlx);
-
 	return (0);
 }

@@ -30,6 +30,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <X11/keysym.h>
 #include <X11/X.h>
+#include <X11/Xlib.h>
 
 #endif

@@ -21,6 +21,10 @@
 
 # define KEY_ESC 65307
 # define ON_DESTROY 17
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 // 	RAYCASTER.C
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
@@ -31,7 +35,7 @@ void	ft_cprint(char *color, char *str);
 
 //	FT_IMAGES.C
 void	ft_print_img_info(t_sprite *img);
-t_sprite	**ft_load_sprites(void *mlx);
+t_sprite	**ft_load_sprites(t_cub3d *cub3d);
 t_sprite	*xpm_load_image(void *mlx, char *path);
 void	ft_free_sprites(t_cub3d *cub3d);
 

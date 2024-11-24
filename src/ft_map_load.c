@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 17:10:53 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:15:10 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
 	t_player	*player;
 	char		**split;
+	char		*tmp;
 
 	player = cub3d->player;
-	line = ft_strtrim(line, "\n");
-	if (*i < 6)
+	tmp = ft_strtrim(line, "\n");
+	free(line);
+	line = tmp;
+	if (*i < 4)
 		split = ft_split(line, ' ');
 	if (*i == 4 || *i == 5)
 		split = ft_split(line + 1, ',');
@@ -110,11 +113,13 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 		}
 		if ((int)ft_strlen(line) > map->width)
 			map->width = ft_strlen(line);
-}
-*i += 1;
+	}
+	if (*i < 6)
+		ft_free_2d_array(split);
+	*i += 1;
 }
 
-t_map	*ft_load_map(char *path)
+t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 {
 	t_map	*map;
 	int		fd;
@@ -130,14 +135,17 @@ t_map	*ft_load_map(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ft_log("Cannot open file", path, 3), NULL);
-	map->grid = (char **)malloc(ft_get_map_height(path) * sizeof(char *));
+	map->height = ft_get_map_height(path) - 6;
+	map->grid = (char **)malloc((map->height + 1) * sizeof(char *));
 	if (!map->grid)
 		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);
 	i = 0;
 	map->width = 0;
+	cub3d->player = map->player;
+	ft_log("Loading map textures...", NULL, 1);
 	while ((line = get_next_line(fd)) != NULL)
-		ft_extract_info(map, line, &i, map->player);
-	map->height = i - 6;
+		ft_extract_info(cub3d, map, line, &i);
+	map->grid[i - 6] = NULL;
 	close(fd);
 	ft_log("Map loaded successfully", path, 0);
 	return (map);

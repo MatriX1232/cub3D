@@ -30,5 +30,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <X11/X.h>
 
 #endif

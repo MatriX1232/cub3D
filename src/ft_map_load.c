@@ -44,7 +44,7 @@ static int	ft_get_map_height(char *path)
 	return (height);
 }
 
-static void	ft_extract_info(t_map *map, char *line, int *i)
+static void	ft_extract_info(t_map *map, char *line, int *i, t_player *player)
 {
 	char	**split;
 
@@ -66,13 +66,49 @@ static void	ft_extract_info(t_map *map, char *line, int *i)
 		map->ceiling = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
 	else
 	{
-		map->grid[*i - 6] = line;
+		map->grid[*i - 6] = ft_strdup(line);
+		int y = *i - 6;
+		for (int x = 0; line[x]; x++)
+		{
+			if (line[x] == 'N' || line[x] == 'S' || line[x] == 'E' || line[x] == 'W')
+			{
+				player->posx = x + 0.5;
+				player->posy = y + 0.5;
+				if (line[x] == 'N')
+				{
+					player->dirx = 0;
+					player->diry = -1;
+					player->planex = 0.66;
+					player->planey = 0;
+				}
+				else if (line[x] == 'S')
+				{
+					player->dirx = 0;
+					player->diry = 1;
+					player->planex = -0.66;
+					player->planey = 0;
+				}
+				else if (line[x] == 'E')
+				{
+					player->dirx = 1;
+					player->diry = 0;
+					player->planex = 0;
+					player->planey = 0.66;
+				}
+				else if (line[x] == 'W')
+				{
+					player->dirx = -1;
+					player->diry = 0;
+					player->planex = 0;
+					player->planey = -0.66;
+				}
+				map->grid[y][x] = '0';
+			}
+		}
 		if ((int)ft_strlen(line) > map->width)
 			map->width = ft_strlen(line);
-	}
-	if (*i < 6)
-		ft_free_2d_array(split);
-	*i += 1;
+}
+*i += 1;
 }
 
 t_map	*ft_load_map(char *path)
@@ -85,18 +121,21 @@ t_map	*ft_load_map(char *path)
 	map = (t_map *)malloc(1 * sizeof(t_map));
 	if (!map)
 		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
+	map->player = (t_player *)malloc(sizeof(t_player));
+	if (!map->player)
+		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ft_log("Cannot open file", path, 3), NULL);
 	map->grid = (char **)malloc(ft_get_map_height(path) * sizeof(char *));
-	if (!map)
-		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
+	if (!map->grid)
+		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);
 	i = 0;
 	map->width = 0;
 	while ((line = get_next_line(fd)) != NULL)
-		ft_extract_info(map, line, &i);
+		ft_extract_info(map, line, &i, map->player);
 	map->height = i - 6;
 	close(fd);
-	ft_log("Map loaded sucessfully", path, 0);
+	ft_log("Map loaded successfully", path, 0);
 	return (map);
 }

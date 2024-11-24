@@ -26,7 +26,6 @@
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
 int	raycaster(t_cub3d *cub3d);
 
-
 //	MAIN.C
 void	ft_cprint(char *color, char *str);
 

@@ -1,10 +1,10 @@
 INC=/usr/include
 ##
 ## Makefile for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
-##
+## 
 ## Made by Olivier Crouzet
 ## Login   <ol@epitech.net>
-##
+## 
 ## Started on  Tue Oct  5 15:56:43 2004 Olivier Crouzet
 ## Last update Tue May 15 15:41:20 2007 Olivier Crouzet
 ##
@@ -38,29 +38,16 @@ OBJ_DIR = obj
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 CFLAGS	= -O3 -I$(INC)
 
-_BLUE=\e[34m
-_PURPLE=\e[35m
-_CYAN=\e[36m
-_RED=\e[31m
-_GREEN=\e[32m
-_YELLOW=\e[33m
-_WHITE=\e[37m
-_END=\e[0m
-
-PADDING = 50
-
-
 all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ)
-	@ar -r $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@cp $(NAME) $(NAME_UNAME)
+	ar -r $(NAME) $(OBJ)
+	ranlib $(NAME)
+	cp $(NAME) $(NAME_UNAME)
 
 check: all
 	@test/run_tests.sh
@@ -74,7 +61,6 @@ show:
 	@printf "OBJ		:\n	$(OBJ)\n"
 
 clean	:
-	@rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
-	@printf "${_CYAN}Removed all .o object files from: $(_GREEN)mlx/$(_END)\n"
+	rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
 
 .PHONY: all check show clean

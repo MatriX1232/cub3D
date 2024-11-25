@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 18:22:45 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:50:10 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,11 @@ static void	handle_movement(t_cub3d *cub3d, int keycode)
 
 int	ft_key_hook(int keycode, t_cub3d *cub3d)
 {
-	ft_log("Key pressed", ft_itoa(keycode), 1);
+	char	*key;
+
+	key = ft_itoa(keycode);
+	ft_log("Key pressed", key, 1);
+	free(key);
 	if (keycode == KEY_ESC)
 		ft_exit(cub3d);
 	else if (keycode == XK_Left || keycode == XK_Right)

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 13:44:24 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:46:20 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_sprite	**load_batch(t_cub3d *cub3d, char *dir_path)
 	t_sprite	**sprites;
 	char		*tmp;
 
-	ft_log("Loading sprites from directory...", dir_path, 1);
+	ft_log_sub("Loading sprites from directory...", dir_path, 1, 1);
 	names = ft_get_dir_files(dir_path);
 	if (!names)
 		return (ft_log("Cannot get directory files", NULL, 3), NULL);
@@ -109,7 +109,8 @@ t_sprite	**load_batch(t_cub3d *cub3d, char *dir_path)
 	while (names[i])
 	{
 		tmp = ft_strjoin(dir_path, names[i]);
-		sprites[i] = xpm_load_image(cub3d->mlx, tmp);
+		sprites[i] = xpm_load_image(cub3d->mlx, tmp, 2);
+		sprites[i] = ft_scale_sprite(cub3d, sprites[i], 300, 300);
 		if (!sprites[i])
 			return (ft_log("Cannot load image", names[i], 3), NULL);
 		free(tmp);
@@ -121,24 +122,75 @@ t_sprite	**load_batch(t_cub3d *cub3d, char *dir_path)
 	return (sprites);
 }
 
-void	ft_anim(t_cub3d *cub3d)
+t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 {
-	t_anim *anim = (t_anim *)malloc(sizeof(t_anim));
-	if (!anim)
-		return (ft_log("Cannot allocate memory for animation", NULL, 3));
+	t_anim	*anim;
 
+	anim = (t_anim *)malloc(sizeof(t_anim));
+	if (!anim)
+		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;
-	anim->frame_count = 52;
+	anim->frame_count = ft_get_dir_count(folder_path);
 	anim->frame_delay = (1000 / 60) * 1000;
 	anim->duration = anim->frame_count * anim->frame_delay;
-	anim->sprites = load_batch(cub3d, "textures/cat/");
+	anim->sprites = load_batch(cub3d, folder_path);
+	if (!anim->sprites)
+		return (ft_log("Cannot load batch", folder_path, 3), NULL);
+	return (anim);
+}
 
-	printf("Frame count: %d\n", anim->frame_count);
-	anim->frame = 0;
+t_anim	**ft_laod_anims(t_cub3d *cub3d)
+{
+	t_anim	**anims;
+
+	anims = (t_anim **)malloc(5 * sizeof(t_anim *));
+	if (!anims)
+		return (ft_log("Cannot allocate memory for anims", NULL, 3), NULL);
+	ft_log("Loading animations...", NULL, 1);
+	anims[0] = ft_load_anim(cub3d, "textures/knife/");
+	anims[1] = ft_load_anim(cub3d, "textures/pistol/");
+	anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
+	anims[3] = ft_load_anim(cub3d, "textures/minigun/");
+	anims[4] = NULL;
+	return (anims);
+}
+
+void	update_animation(t_cub3d *cub3d)
+{
+	static struct timeval	last_time;
+	struct timeval			current_time;
+	long					elapsed_time;
+	int						i;
+	t_anim					*anim;
+
+	gettimeofday(&current_time, NULL);
+	elapsed_time = (current_time.tv_sec - last_time.tv_sec) * 1000000 + (current_time.tv_usec - last_time.tv_usec);
+	if (elapsed_time >= 1000 / 60 * 1000)
+	{
+		i = 0;
+		while (cub3d->anims[i])
+		{
+			anim = cub3d->anims[i];
+			if (anim && anim->sprites)
+			{
+				anim->frame = (anim->frame + 1) % anim->frame_count;
+				mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, 200, 200);
+			}
+			i++;
+		}
+		last_time = current_time;
+	}
+}
+
+void	ft_anim(t_cub3d *cub3d)
+{
+	t_anim	*anim;
+
+	anim = cub3d->anims[0];
 	while (anim->frame < anim->frame_count - 1)
 	{
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, 200, 200);
 		anim->frame++;
-		usleep(anim->frame_delay * 10);
+		usleep(anim->frame_delay * 20);
 	}
 }

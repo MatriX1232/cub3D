@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:06:50 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/24 14:01:02 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:25:07 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,21 @@ int	raycaster(t_cub3d *cub3d)
 	}
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
+	cub3d->frame++;
+	if (FRAME_RATE >= 0)
+	{
+		char *fps_str;
+		int fps;
+		float frame_time;
+
+		frame_time = (get_timestamp() - cub3d->prev_time) / 1000.0;
+		fps = (int)(1.0 / frame_time);
+		fps_str = ft_itoa(fps);
+		mlx_string_put(cub3d->mlx, cub3d->win, 10, 10, 0xFFFFFF, "FPS:");
+		mlx_string_put(cub3d->mlx, cub3d->win, 50, 10, 0xFFFFFF, fps_str);
+		free(fps_str);
+		cub3d->prev_time = get_timestamp();
+		usleep(1000000 / (FRAME_RATE * 1.4));
+	}
 	return (0);
 }

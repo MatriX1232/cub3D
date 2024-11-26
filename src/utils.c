@@ -6,12 +6,15 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:22:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/22 17:57:19 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:49:45 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
+
+//	FOR GETTING FPS
+# include <sys/time.h>
 
 unsigned long	rgb_to_hex(int r, int g, int b)
 {
@@ -26,4 +29,12 @@ int	ft_2d_len(void **array)
 	while (array[i])
 		i++;
 	return (i);
+}
+
+long	get_timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

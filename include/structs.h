@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 17:09:07 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:55:19 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_cub3d
 	t_sprite	*buffer;
 	t_map		*map;
 	t_player	*player;
+	long		frame;
+	short		delta_time;
+	long		prev_time;
 }	t_cub3d;
 
 

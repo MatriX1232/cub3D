@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/25 12:50:10 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:22:52 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 
 // Define movement speed
-#define MOVE_SPEED 0.05
-#define ROT_SPEED 0.03
+#define MOVE_SPEED 0.2
+#define ROT_SPEED 0.06
 
 int ft_exit(t_cub3d *cub3d)
 {
@@ -178,7 +178,9 @@ int	main(int argc, char **argv)
 		return (ft_log("Map failed to load", NULL, 3), 1);
 	cub3d.player = cub3d.map->player;
 
-
+	cub3d.frame = 0;
+	cub3d.prev_time = get_timestamp();
+	cub3d.delta_time = 0;
 
 	mlx_loop_hook(mlx, raycaster, &cub3d);
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);

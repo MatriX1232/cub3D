@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 14:46:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:50:56 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,13 +184,18 @@ void	update_animation(t_cub3d *cub3d)
 
 void	ft_anim(t_cub3d *cub3d)
 {
-	t_anim	*anim;
+	int	i;
 
-	anim = cub3d->anims[0];
-	while (anim->frame < anim->frame_count - 1)
+	i = 0;
+	while (cub3d->anims[i])
 	{
-		mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, 200, 200);
-		anim->frame++;
-		usleep(anim->frame_delay * 20);
+		t_anim	*anim = cub3d->anims[i];
+		while (anim->frame < anim->frame_count - 1)
+		{
+			mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, WIN_WIDTH - 300, WIN_HEIGHT - 300);
+			anim->frame++;
+			usleep(anim->frame_delay * 20);
+		}
+		i++;
 	}
 }

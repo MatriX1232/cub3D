@@ -1,7 +1,7 @@
 /* XPM */
 static char * xpm_data[] = {
 "64 64 23 1",
-"0 c #980088ff",
+"0 c None",
 "1 c #fcfcfcff",
 "2 c #b8e8e8ff",
 "3 c #008484ff",

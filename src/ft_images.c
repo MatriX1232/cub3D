@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 17:16:39 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:42:19 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,48 @@ void	ft_print_img_info(t_sprite *img)
 	}
 }
 
-t_sprite	*xpm_load_image(void *mlx, char *path)
+t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_height)
+{
+	t_sprite	*scaled;
+	int			x;
+	int			y;
+	int			color;
+	double		x_ratio;
+	double		y_ratio;
+
+	if (!src || new_width <= 0 || new_height <= 0)
+		return (NULL);
+	scaled = (t_sprite *) malloc(sizeof(t_sprite));
+	if (!scaled)
+		return (NULL);
+	scaled->img = mlx_new_image(cub3d->mlx, new_width, new_height);
+	if (!scaled->img)
+	{
+		free(scaled);
+		return (NULL);
+	}
+	scaled->addr = mlx_get_data_addr(scaled->img, &scaled->bits_per_pixel, &scaled->line_length, &scaled->endian);
+	x_ratio = (double)src->width / new_width;
+	y_ratio = (double)src->height / new_height;
+	y = 0;
+	while (y < new_height)
+	{
+		x = 0;
+		while (x < new_width)
+		{
+			color = *(int *)(src->addr + ((int)(y * y_ratio) * src->line_length + (int)(x * x_ratio) * (src->bits_per_pixel / 8)));
+			*(int *)(scaled->addr + (y * scaled->line_length + x * (scaled->bits_per_pixel / 8))) = color;
+			x++;
+		}
+		y++;
+	}
+	scaled->width = new_width;
+	scaled->height = new_height;
+	scaled->path = src->path;
+	return (scaled);
+}
+
+t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level)
 {
 	t_sprite	*ret;
 	int			bpp;
@@ -50,7 +91,7 @@ t_sprite	*xpm_load_image(void *mlx, char *path)
 	ret->bits_per_pixel = bpp;
 	ret->line_length = ll;
 	ret->endian = ed;
-	ft_log_sub("Image loaded", path, 0, 1);
+	ft_log_sub("Image loaded", path, 0, sub_level);
 	return (ret);
 }
 
@@ -65,14 +106,14 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 		return (NULL);
 	}
 	// tried loading using cub3d->map->path**, but loading map first doesnt work, idk why
-	sprites[0] = xpm_load_image(cub3d->mlx, "textures/blue_stone.xpm");
-	sprites[1] = xpm_load_image(cub3d->mlx, "textures/color_stone.xpm");
-	sprites[2] = xpm_load_image(cub3d->mlx, "textures/grey_stone.xpm");
-	sprites[3] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm");
-	sprites[4] = xpm_load_image(cub3d->mlx, "textures/mossy.xpm");
-	sprites[5] = xpm_load_image(cub3d->mlx, "textures/purple_stone.xpm");
-	sprites[6] = xpm_load_image(cub3d->mlx, "textures/eagle.xpm");
-	sprites[7] = xpm_load_image(cub3d->mlx, "textures/wood.xpm");
+	sprites[0] = xpm_load_image(cub3d->mlx, "textures/blue_stone.xpm", 1);
+	sprites[1] = xpm_load_image(cub3d->mlx, "textures/color_stone.xpm", 1);
+	sprites[2] = xpm_load_image(cub3d->mlx, "textures/grey_stone.xpm", 1);
+	sprites[3] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm", 1);
+	sprites[4] = xpm_load_image(cub3d->mlx, "textures/mossy.xpm", 1);
+	sprites[5] = xpm_load_image(cub3d->mlx, "textures/purple_stone.xpm", 1);
+	sprites[6] = xpm_load_image(cub3d->mlx, "textures/eagle.xpm", 1);
+	sprites[7] = xpm_load_image(cub3d->mlx, "textures/wood.xpm", 1);
 	sprites[8] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);

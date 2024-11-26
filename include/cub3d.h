@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 13:21:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:43:30 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@ void	ft_cprint(char *color, char *str);
 //	FT_IMAGES.C
 void	ft_print_img_info(t_sprite *img);
 t_sprite	**ft_load_sprites(t_cub3d *cub3d);
-t_sprite	*xpm_load_image(void *mlx, char *path);
+t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level);
 void	ft_free_sprites(t_cub3d *cub3d);
+t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_height);
 
 //	ANIM.C
 void	ft_anim(t_cub3d *cub3d);
+t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path);
+t_anim	**ft_laod_anims(t_cub3d *cub3d);
+void	update_animation(t_cub3d *cub3d);
 
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);

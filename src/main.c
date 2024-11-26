@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 13:22:52 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:36:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,12 @@ int	main(int argc, char **argv)
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
+
+	cub3d.anims = ft_laod_anims(&cub3d);
+	if (!cub3d.anims)
+		return (ft_log("Anims failed to load", NULL, 3), 1);
+
+	ft_anim(&cub3d);
 
 	mlx_loop_hook(mlx, raycaster, &cub3d);
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);

@@ -109,10 +109,10 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 	sprites[0] = xpm_load_image(cub3d->mlx, "textures/blue_stone.xpm", 1);
 	sprites[1] = xpm_load_image(cub3d->mlx, "textures/color_stone.xpm", 1);
 	sprites[2] = xpm_load_image(cub3d->mlx, "textures/grey_stone.xpm", 1);
-	sprites[3] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm", 1);
+	sprites[3] = xpm_load_image(cub3d->mlx, "textures/eagle.xpm", 1);
 	sprites[4] = xpm_load_image(cub3d->mlx, "textures/mossy.xpm", 1);
 	sprites[5] = xpm_load_image(cub3d->mlx, "textures/purple_stone.xpm", 1);
-	sprites[6] = xpm_load_image(cub3d->mlx, "textures/eagle.xpm", 1);
+	sprites[6] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm", 1);
 	sprites[7] = xpm_load_image(cub3d->mlx, "textures/wood.xpm", 1);
 	sprites[8] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);

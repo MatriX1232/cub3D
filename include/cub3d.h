@@ -26,6 +26,8 @@
 # define KEY_S 115
 # define KEY_D 100
 # define STEP_SPEED 0.05
+# define MOVE_SPEED 0.02
+# define ROT_SPEED 0.06
 
 //	DEFINE FRAME RATE TO -1 TO DISABLE
 # define FRAME_RATE -1
@@ -36,6 +38,7 @@ int	raycaster(t_cub3d *cub3d);
 
 //	MAIN.C
 void	ft_cprint(char *color, char *str);
+int	ft_exit(t_cub3d *cub3d);
 
 //	FT_IMAGES.C
 void	ft_print_img_info(t_sprite *img);
@@ -74,5 +77,17 @@ long			get_timestamp(void);
 
 //	FT_FREE.C
 void	ft_free_2d_array(char **array);
+
+// INPUT.C
+void	handle_input(t_cub3d *cub3d);
+void	move_left(t_cub3d *cub3d);
+void	move_right(t_cub3d *cub3d);
+void	move_forward(t_cub3d *cub3d);
+void	move_backward(t_cub3d *cub3d);
+void	rotate_left(t_cub3d *cub3d);
+void	rotate_right(t_cub3d *cub3d);
+int	ft_key_press(int keycode, t_cub3d *cub3d);
+int	ft_key_release(int keycode, t_cub3d *cub3d);
+
 
 #endif

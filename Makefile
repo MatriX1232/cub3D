@@ -22,6 +22,7 @@ FILES = \
 	src/utils.c \
 	src/ft_free.c \
 	src/raycaster.c \
+	src/input.c \
 
 
 OBJS = ${FILES:.c=.o}

@@ -27,6 +27,16 @@ typedef struct s_sprite
 	int		endian;
 }	t_sprite;
 
+typedef struct s_keys
+{
+	int w;
+	int a;
+	int s;
+	int d;
+	int left;
+	int right;
+} t_keys;
+
 typedef struct s_anim
 {
 	t_sprite	**sprites;
@@ -92,6 +102,7 @@ typedef struct s_cub3d
 	t_sprite	*buffer;
 	t_map		*map;
 	t_player	*player;
+	t_keys	keys;
 	long		frame;
 	short		delta_time;
 	long		prev_time;

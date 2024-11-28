@@ -21,47 +21,48 @@
 
 void move_forward(t_cub3d *cub3d)
 {
-	double new_posx = cub3d->player->posx + cub3d->player->dirx * MOVE_SPEED;
-	double new_posy = cub3d->player->posy + cub3d->player->diry * MOVE_SPEED;
-	if (cub3d->map->grid[(int)new_posy][(int)new_posx] == '0')
-	{
-		cub3d->player->posx = new_posx;
-		cub3d->player->posy = new_posy;
-	}
+	double moveStepX = cub3d->player->dirx * MOVE_SPEED;
+	double moveStepY = cub3d->player->diry * MOVE_SPEED;
+
+	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
+		cub3d->player->posx += moveStepX;
+	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
+		cub3d->player->posy += moveStepY;
 }
+
 
 void move_backward(t_cub3d *cub3d)
 {
-	double new_posx = cub3d->player->posx - cub3d->player->dirx * MOVE_SPEED;
-	double new_posy = cub3d->player->posy - cub3d->player->diry * MOVE_SPEED;
-	if (cub3d->map->grid[(int)new_posy][(int)new_posx] == '0')
-	{
-		cub3d->player->posx = new_posx;
-		cub3d->player->posy = new_posy;
-	}
+	double moveStepX = -cub3d->player->dirx * MOVE_SPEED;
+	double moveStepY = -cub3d->player->diry * MOVE_SPEED;
+
+	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
+		cub3d->player->posx += moveStepX;
+	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
+		cub3d->player->posy += moveStepY;
 }
 
 void move_left(t_cub3d *cub3d)
 {
-	double new_posx = cub3d->player->posx - cub3d->player->planex * MOVE_SPEED;
-	double new_posy = cub3d->player->posy - cub3d->player->planey * MOVE_SPEED;
-	if (cub3d->map->grid[(int)new_posy][(int)new_posx] == '0')
-	{
-		cub3d->player->posx = new_posx;
-		cub3d->player->posy = new_posy;
-	}
+	double moveStepX = -cub3d->player->planex * MOVE_SPEED;
+	double moveStepY = -cub3d->player->planey * MOVE_SPEED;
+	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
+		cub3d->player->posx += moveStepX;
+	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
+		cub3d->player->posy += moveStepY;
 }
 
 void move_right(t_cub3d *cub3d)
 {
-	double new_posx = cub3d->player->posx + cub3d->player->planex * MOVE_SPEED;
-	double new_posy = cub3d->player->posy + cub3d->player->planey * MOVE_SPEED;
-	if (cub3d->map->grid[(int)new_posy][(int)new_posx] == '0')
-	{
-		cub3d->player->posx = new_posx;
-		cub3d->player->posy = new_posy;
-	}
+	double moveStepX = cub3d->player->planex * MOVE_SPEED;
+	double moveStepY = cub3d->player->planey * MOVE_SPEED;
+
+	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
+		cub3d->player->posx += moveStepX;
+	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
+		cub3d->player->posy += moveStepY;
 }
+
 
 
 void rotate_left(t_cub3d *cub3d)

@@ -139,6 +139,14 @@ int	raycaster(t_cub3d *cub3d)
 		{
 			int d = (y - pitch) * 256 - cub3d->win_height * 128 + lineheight * 128;
 			int texy = ((d * cub3d->sprites[texnum]->height) / lineheight) / 256;
+			if (texx < 0) 
+				texx = 0;
+			if (texx >= cub3d->sprites[texnum]->width) 
+				texx = cub3d->sprites[texnum]->width - 1;
+			if (texy < 0) 
+				texy = 0;
+			if (texy >= cub3d->sprites[texnum]->height) 
+				texy = cub3d->sprites[texnum]->height - 1;
 			int color = get_pixel_color(cub3d->sprites[texnum], texx, texy);
 			put_pixel_to_img(cub3d->buffer, x, y, color);
 		}

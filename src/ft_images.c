@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 14:42:19 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:34:11 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_
 	scaled->width = new_width;
 	scaled->height = new_height;
 	scaled->path = src->path;
+	ft_free_sptite(cub3d, src);
 	return (scaled);
 }
 

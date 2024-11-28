@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:07:23 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:33:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ long			get_timestamp(void);
 
 //	FT_FREE.C
 void	ft_free_all(t_cub3d *cub3d);
+void	ft_free_sptite(t_cub3d *cub3d, t_sprite *sprite);
 void	ft_free_2d_array(char **array);
 void	ft_free_animations(t_cub3d *cub3d);
 

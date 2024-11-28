@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/27 23:37:24 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:32:12 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 {
 	t_anim	*anim;
 
-	anim = (t_anim *)malloc(sizeof(t_anim));
+	anim = (t_anim *)malloc(1 * sizeof(t_anim));
 	if (!anim)
 		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;
@@ -153,33 +153,6 @@ t_anim	**ft_laod_anims(t_cub3d *cub3d)
 	anims[3] = ft_load_anim(cub3d, "textures/minigun/");
 	anims[4] = NULL;
 	return (anims);
-}
-
-void	update_animation(t_cub3d *cub3d)
-{
-	static struct timeval	last_time;
-	struct timeval			current_time;
-	long					elapsed_time;
-	int						i;
-	t_anim					*anim;
-
-	gettimeofday(&current_time, NULL);
-	elapsed_time = (current_time.tv_sec - last_time.tv_sec) * 1000000 + (current_time.tv_usec - last_time.tv_usec);
-	if (elapsed_time >= 1000 / 60 * 1000)
-	{
-		i = 0;
-		while (cub3d->anims[i])
-		{
-			anim = cub3d->anims[i];
-			if (anim && anim->sprites)
-			{
-				anim->frame = (anim->frame + 1) % anim->frame_count;
-				mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, 200, 200);
-			}
-			i++;
-		}
-		last_time = current_time;
-	}
 }
 
 void	ft_anim(t_cub3d *cub3d)

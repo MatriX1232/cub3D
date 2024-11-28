@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 14:06:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:38:00 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	}
 	if (*i < 6)
 		ft_free_2d_array(split);
+	free(line);
 	*i += 1;
 }
 

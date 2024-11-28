@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:08:09 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:31:37 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 int ft_exit(t_cub3d *cub3d)
 {
 	ft_free_all(cub3d);
-	mlx_destroy_window(cub3d->mlx, cub3d->win);
-	mlx_destroy_display(cub3d->mlx);
-	free(cub3d->mlx);
 	exit(0);
 	return (0);
 }
@@ -84,6 +81,7 @@ int	main(int argc, char **argv)
 	cub3d.sprites = ft_load_sprites(&cub3d);
 	if (!cub3d.sprites)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
+
 	// Initialize buffer
 	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
 	if (!cub3d.buffer)

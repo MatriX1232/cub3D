@@ -46,18 +46,19 @@ int main_loop(t_cub3d *cub3d)
 	double frame_time = (current_time - cub3d->prev_time) / 1000.0;
 	if (FRAME_RATE > 0)
 	{
-			double min_frame_time = 1.0 / FRAME_RATE;
-			if (frame_time < min_frame_time)
-			{
-					usleep((useconds_t)((min_frame_time - frame_time) * 1000000));
-					current_time = get_timestamp();
-					frame_time = (current_time - cub3d->prev_time) / 1000.0;
-			}
+		double min_frame_time = 1.0 / FRAME_RATE;
+		if (frame_time < min_frame_time)
+		{
+			usleep((useconds_t)((min_frame_time - frame_time) * 1000000));
+			current_time = get_timestamp();
+			frame_time = (current_time - cub3d->prev_time) / 1000.0;
+		}
 	}
 	cub3d->delta_time = frame_time;
 	cub3d->prev_time = current_time;
 	handle_input(cub3d);
 	raycaster(cub3d);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");

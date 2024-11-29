@@ -24,8 +24,7 @@ SRCS = \
 	src/raycaster.c \
 	src/input.c
 
-OBJDIR = obj
-OBJS = $(SRCS:src/%.c=obj/%.o)
+OBJS = $(SRCS:%.c=%.o)
 
 _BLUE=\e[34m
 _PURPLE=\e[35m
@@ -42,12 +41,9 @@ PADDING = 50
 
 all: $(NAME)
 
-$(OBJDIR)/%.o: src/%.c $(OBJDIR)
+%.o: %.c
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
 	@$(CC) $(CFLAGS) $(MLXFLAGSO) -c $< -o $@
-
-$(OBJDIR):
-	mkdir -p $@
 
 $(NAME): compile_dep $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LIBFT)/libft.a

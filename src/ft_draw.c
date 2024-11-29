@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/24 18:14:13 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:02:33 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,31 @@ void put_pixel_to_img(t_sprite *img, int x, int y, int color)
 	{
 		int pixel_index = (y * img->line_length) + (x * (img->bits_per_pixel / 8));
 		*(unsigned int *)(img->addr + pixel_index) = color;
+	}
+}
+
+void draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset)
+{
+	int x, y;
+	char *src_pixel;
+	char *dst_pixel;
+	int src_line_length = sprite->line_length;
+	int dst_line_length = cub3d->buffer->line_length;
+	int bytes_per_pixel = sprite->bits_per_pixel / 8;
+
+	for (y = 0; y < sprite->height; y++)
+	{
+		if (y + y_offset < 0 || y + y_offset >= cub3d->win_height)
+			continue;
+		for (x = 0; x < sprite->width; x++)
+		{
+			if (x + x_offset < 0 || x + x_offset >= cub3d->win_width)
+				continue;
+			src_pixel = sprite->addr + y * src_line_length + x * bytes_per_pixel;
+			dst_pixel = cub3d->buffer->addr + (y + y_offset) * dst_line_length + (x + x_offset) * bytes_per_pixel;
+			unsigned int color = *(unsigned int *)src_pixel;
+			if ((color & 0xFF000000) != 0xFF000000)
+				*(unsigned int *)dst_pixel = color;
+		}
 	}
 }

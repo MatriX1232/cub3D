@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:32:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:25:50 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,10 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;
 	anim->frame_count = ft_get_dir_count(folder_path);
-	anim->frame_delay = (1000 / 60) * 1000;
+	anim->frame_delay = 70;
 	anim->duration = anim->frame_count * anim->frame_delay;
 	anim->sprites = load_batch(cub3d, folder_path);
+	anim->finished = true;
 	if (!anim->sprites)
 		return (ft_log("Cannot load batch", folder_path, 3), NULL);
 	return (anim);
@@ -156,47 +157,23 @@ t_anim	**ft_laod_anims(t_cub3d *cub3d)
 	return (anims);
 }
 
-void	ft_anim(t_cub3d *cub3d)
+int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
-	int	i;
+	long current_time = get_timestamp();
 
-	i = 0;
-	while (cub3d->anims[i])
+	if (current_time - anim->last_update > anim->frame_delay)
 	{
-		t_anim	*anim = cub3d->anims[i];
-		while (anim->frame < anim->frame_count - 1)
+		if (anim->frame == anim->frame_count - 1)
 		{
-			mlx_put_image_to_window(cub3d->mlx, cub3d->win, anim->sprites[anim->frame]->img, WIN_WIDTH - 300, WIN_HEIGHT - 300);
-			anim->frame++;
-			usleep(anim->frame_delay * 20);
+			cub3d->gun_shooting = false;
+			anim->finished = true;
+			anim->frame = 0;
 		}
-		i++;
-	}
-}
-
-void draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset)
-{
-	int x, y;
-	char *src_pixel;
-	char *dst_pixel;
-	int src_line_length = sprite->line_length;
-	int dst_line_length = cub3d->buffer->line_length;
-	int bytes_per_pixel = sprite->bits_per_pixel / 8;
-
-	for (y = 0; y < sprite->height; y++)
-	{
-		if (y + y_offset < 0 || y + y_offset >= cub3d->win_height)
-			continue;
-		for (x = 0; x < sprite->width; x++)
+		else
 		{
-			if (x + x_offset < 0 || x + x_offset >= cub3d->win_width)
-				continue;
-			src_pixel = sprite->addr + y * src_line_length + x * bytes_per_pixel;
-			dst_pixel = cub3d->buffer->addr + (y + y_offset) * dst_line_length + (x + x_offset) * bytes_per_pixel;
-			unsigned int color = *(unsigned int *)src_pixel;
-			if ((color & 0xFF000000) != 0xFF000000)
-				*(unsigned int *)dst_pixel = color;
+			anim->frame = (anim->frame + 1) % anim->frame_count;
+			anim->last_update = current_time;
 		}
 	}
+	return (0);
 }
-

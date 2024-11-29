@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 23:22:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:52:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	mouse_press(int button, int x, int y, t_cub3d *cub3d)
 	(void)x;
 	(void)y;
 	if (button == 1)
+	{
 		cub3d->keys.mouse_1 = 1;
+	}
 	return (0);
 }
 
@@ -54,7 +56,9 @@ int mouse_release(int button, int x, int y, t_cub3d *cub3d)
 	(void)x;
 	(void)y;
 	if (button == 1)
+	{
 		cub3d->keys.mouse_1 = 0;
+	}
 	return (0);
 }
 
@@ -84,6 +88,8 @@ int main_loop(t_cub3d *cub3d)
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
 	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
+	ft_render_health(cub3d);
+	ft_render_ammo(cub3d);
 	free(fps_str);
 	return (0);
 }
@@ -149,6 +155,10 @@ int	main(int argc, char **argv)
 
 	cub3d.weapon_idx = 0;
 	cub3d.gun_shooting = false;
+	cub3d.max_ammo = 30;
+	cub3d.ammo = cub3d.max_ammo;
+	cub3d.fire_rate = 100;
+	cub3d.prev_shoot = 0;
 	cub3d.anims = ft_laod_anims(&cub3d);
 	if (!cub3d.anims)
 		return (ft_log("Anims failed to load", NULL, 3), 1);

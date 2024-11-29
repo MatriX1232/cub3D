@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 22:40:37 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 00:00:05 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:08:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	splash_screen(t_cub3d *cub3d)
 	if (!splash)
 		return (ft_log("Cannot load splash screen", NULL, 3), -1);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, splash->img, 0, 0);
-	sleep(3);
+	sleep(1);
 	ft_free_sptite(cub3d, splash);
 	return (0);
 }

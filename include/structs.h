@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 22:30:31 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:47:37 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_player
 	double	planex;
 	double	planey;
 	double	move_speed;
+	int		hp;
+	int		max_hp;
 }	t_player;
 
 typedef struct s_map
@@ -94,6 +96,13 @@ typedef struct s_ray
 	int			side;
 }	t_ray;
 
+typedef struct s_weapon
+{
+	char	*name;
+	int		current_ammo;
+	int 	ammo;
+	int		reload_time;
+}	t_weapon;
 
 typedef struct s_cub3d
 {
@@ -112,6 +121,10 @@ typedef struct s_cub3d
 	long		prev_time;
 	int			gun_shooting;
 	short		weapon_idx;
+	int			ammo;
+	int			max_ammo;
+	int			fire_rate;
+	long		prev_shoot;
 }	t_cub3d;
 
 

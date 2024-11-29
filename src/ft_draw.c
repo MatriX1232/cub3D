@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:02:33 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:12:33 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,4 @@ void draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y
 		}
 	}
 }
+

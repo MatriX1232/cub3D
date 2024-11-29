@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 00:03:57 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:54:52 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,21 @@ int	update_animation(t_cub3d *cub3d, t_anim *anim)
 	long current_time;
 
 	current_time = get_timestamp();
+	if (cub3d->ammo == 0 && cub3d->weapon_idx != 0)
+	{
+		anim->frame = 0;
+		anim->finished = true;
+		cub3d->gun_shooting = false;
+		put_img_to_img(cub3d->buffer, anim->sprites[anim->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+		return (0);
+	}
+	if ((int)(current_time - cub3d->prev_shoot) > cub3d->fire_rate && cub3d->weapon_idx != 0)
+	{
+		if (cub3d->ammo - 1 <= 0)
+			ft_log("Out of ammo", NULL, 2);
+		cub3d->ammo--;
+		cub3d->prev_shoot = current_time;
+	}
 	if (current_time - anim->last_update > anim->frame_delay)
 	{
 		if (anim->frame == anim->frame_count - 1)

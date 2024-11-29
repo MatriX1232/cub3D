@@ -23,7 +23,8 @@ SRCS = \
 	src/ft_free.c \
 	src/raycaster.c \
 	src/input.c \
-	src/splash_screen.c
+	src/splash_screen.c \
+	src/HUD.c
 
 OBJS = $(SRCS:%.c=%.o)
 

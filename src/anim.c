@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 22:39:45 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:03:57 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;
 	anim->frame_count = ft_get_dir_count(folder_path);
-	ft_log_sub("Frame count", ft_itoa(anim->frame_count), 1, 2);
 	anim->frame_delay = 70;
 	anim->sprites = load_batch(cub3d, folder_path);
 	anim->finished = true;

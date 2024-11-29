@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:28:34 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/29 09:28:39 by idomagal         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:28:15 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,6 @@ void handle_input(t_cub3d *cub3d)
 		rotate_left(cub3d);
 	if (cub3d->keys.right)
 		rotate_right(cub3d);
+	if (cub3d->keys.mouse_1)
+		cub3d->gun_shooting = 1;
 }

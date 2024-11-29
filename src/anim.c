@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:25:50 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:18:33 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 {
 	t_anim	*anim;
 
-	anim = (t_anim *)malloc(1 * sizeof(t_anim));
+	anim = (t_anim *) malloc(1 * sizeof(t_anim));
 	if (!anim)
 		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;

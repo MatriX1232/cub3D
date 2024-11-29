@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:24:55 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:29:49 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,16 @@ int	mouse_press(int button, int x, int y, t_cub3d *cub3d)
 	(void)x;
 	(void)y;
 	if (button == 1)
-		cub3d->gun_shooting = 1;
+		cub3d->keys.mouse_1 = 1;
+	return (0);
+}
+
+int mouse_release(int button, int x, int y, t_cub3d *cub3d)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+		cub3d->keys.mouse_1 = 0;
 	return (0);
 }
 
@@ -88,6 +97,7 @@ void initialize_keys(t_cub3d *cub3d)
 	cub3d->keys.left = 0;
 	cub3d->keys.right = 0;
 	cub3d->keys.shift = 0;
+	cub3d->keys.mouse_1 = 0;
 	cub3d->player->move_speed = MOVE_SPEED;
 }
 
@@ -147,6 +157,8 @@ int	main(int argc, char **argv)
 	// mlx_loop_hook(mlx, update_animation, &cub3d.anims[0]);
 	mlx_loop_hook(mlx, main_loop, &cub3d);
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
+	mlx_hook(cub3d.win, ButtonPress, ButtonPressMask, mouse_press, &cub3d);
+	mlx_hook(cub3d.win, ButtonRelease, ButtonReleaseMask, mouse_release, &cub3d);
 	mlx_hook(cub3d.win, KeyPress, KeyPressMask, ft_key_press, &cub3d);
 	mlx_hook(cub3d.win, KeyRelease, KeyReleaseMask, ft_key_release, &cub3d);
 	mlx_hook(cub3d.win, MotionNotify, PointerMotionMask, mouse_move, &cub3d);

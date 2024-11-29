@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 22:36:08 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 23:22:12 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int	main(int argc, char **argv)
 	cub3d.buffer->width = cub3d.win_width;
 	cub3d.buffer->height = cub3d.win_height;
 
+	splash_screen(&cub3d);
 
 	cub3d.map = ft_load_map(&cub3d, argv[1]);
 	if (!cub3d.map)

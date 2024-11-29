@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:24:29 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 23:41:16 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,11 @@ void	rotate_right(t_cub3d *cub3d);
 int	ft_key_press(int keycode, t_cub3d *cub3d);
 int	ft_key_release(int keycode, t_cub3d *cub3d);
 
+// SPLASH_SCREEN.C
+int		splash_screen(t_cub3d *cub3d);
+void	put_str_to_img(t_cub3d *cub3d, int pos_x, int pos_y, int color, int font_size, char *str);
+void	change_sprite_transparency(t_sprite *sprite, unsigned char transparency);
+void	lighten_image(t_sprite *sprite, int lighten_value);
+void	darken_image(t_sprite *sprite, int darken_value);
 
 #endif

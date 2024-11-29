@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 23:41:16 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:07:59 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,9 @@ void	put_str_to_img(t_cub3d *cub3d, int pos_x, int pos_y, int color, int font_si
 void	change_sprite_transparency(t_sprite *sprite, unsigned char transparency);
 void	lighten_image(t_sprite *sprite, int lighten_value);
 void	darken_image(t_sprite *sprite, int darken_value);
+
+// HUD.C
+void	ft_render_health(t_cub3d *cub3d);
+void	ft_render_ammo(t_cub3d *cub3d);
 
 #endif

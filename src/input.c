@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:28:34 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/29 22:27:55 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 00:49:52 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,7 @@ void handle_input(t_cub3d *cub3d)
 	if (cub3d->keys.right)
 		rotate_right(cub3d);
 	if (cub3d->keys.mouse_1)
+	{
 		cub3d->gun_shooting = 1;
+	}
 }

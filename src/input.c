@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:28:34 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/29 19:28:15 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:27:55 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,14 @@ int ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->keys.right = 1;
 	else if (keycode == XK_Shift_L)
 		cub3d->player->move_speed += 0.02;
+	else if (keycode == XK_1)
+		cub3d->weapon_idx= 0;
+	else if (keycode == XK_2)
+		cub3d->weapon_idx = 1;
+	else if (keycode == XK_3)
+		cub3d->weapon_idx = 2;
+	else if (keycode == XK_4)
+		cub3d->weapon_idx = 3;
 	return (0);
 }
 

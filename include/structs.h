@@ -29,13 +29,13 @@ typedef struct s_sprite
 
 typedef struct s_keys
 {
-	int w;
-	int a;
-	int s;
-	int d;
-	int left;
-	int right;
-	int shift;
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+	int	shift;
 } t_keys;
 
 typedef struct s_anim
@@ -108,6 +108,9 @@ typedef struct s_cub3d
 	long		frame;
 	short		delta_time;
 	long		prev_time;
+	int			gun_shooting;
+	int			gun_frame;
+	double	gun_anim_time;
 }	t_cub3d;
 
 

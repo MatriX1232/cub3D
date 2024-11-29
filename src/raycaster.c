@@ -23,7 +23,6 @@ int get_pixel_color(t_sprite *sprite, int x, int y)
 	return color;
 }
 
-
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x)
 {
 	ray->camerax = 2 * x / (double)cub3d->win_width - 1;
@@ -153,7 +152,6 @@ int	raycaster(t_cub3d *cub3d)
 		for (int y = drawend; y < cub3d->win_height; y++)
 			put_pixel_to_img(cub3d->buffer, x, y, cub3d->map->floor);
 	}
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 	cub3d->frame++;
 	return (0);

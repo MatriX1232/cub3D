@@ -52,6 +52,7 @@ void	ft_anim(t_cub3d *cub3d);
 t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path);
 t_anim	**ft_laod_anims(t_cub3d *cub3d);
 void	update_animation(t_cub3d *cub3d);
+void	draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);

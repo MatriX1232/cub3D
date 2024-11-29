@@ -143,15 +143,16 @@ t_anim	**ft_laod_anims(t_cub3d *cub3d)
 {
 	t_anim	**anims;
 
-	anims = (t_anim **)malloc(5 * sizeof(t_anim *));
+	anims = (t_anim **)malloc(2 * sizeof(t_anim *));
 	if (!anims)
 		return (ft_log("Cannot allocate memory for anims", NULL, 3), NULL);
 	ft_log("Loading animations...", NULL, 1);
-	anims[0] = ft_load_anim(cub3d, "textures/knife/");
-	anims[1] = ft_load_anim(cub3d, "textures/pistol/");
-	anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
-	anims[3] = ft_load_anim(cub3d, "textures/minigun/");
-	anims[4] = NULL;
+	anims[0] = ft_load_anim(cub3d, "textures/pistol/");
+	anims[1] = NULL;
+	// anims[1] = ft_load_anim(cub3d, "textures/pistol/");
+	// anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
+	// anims[3] = ft_load_anim(cub3d, "textures/minigun/");/
+	// anims[4] = NULL;
 	return (anims);
 }
 
@@ -172,3 +173,30 @@ void	ft_anim(t_cub3d *cub3d)
 		i++;
 	}
 }
+
+void draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset)
+{
+	int x, y;
+	char *src_pixel;
+	char *dst_pixel;
+	int src_line_length = sprite->line_length;
+	int dst_line_length = cub3d->buffer->line_length;
+	int bytes_per_pixel = sprite->bits_per_pixel / 8;
+
+	for (y = 0; y < sprite->height; y++)
+	{
+		if (y + y_offset < 0 || y + y_offset >= cub3d->win_height)
+			continue;
+		for (x = 0; x < sprite->width; x++)
+		{
+			if (x + x_offset < 0 || x + x_offset >= cub3d->win_width)
+				continue;
+			src_pixel = sprite->addr + y * src_line_length + x * bytes_per_pixel;
+			dst_pixel = cub3d->buffer->addr + (y + y_offset) * dst_line_length + (x + x_offset) * bytes_per_pixel;
+			unsigned int color = *(unsigned int *)src_pixel;
+			if ((color & 0xFF000000) != 0xFF000000)
+				*(unsigned int *)dst_pixel = color;
+		}
+	}
+}
+

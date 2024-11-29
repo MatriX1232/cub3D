@@ -13,7 +13,6 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-
 void move_forward(t_cub3d *cub3d)
 {
 	double moveStepX = cub3d->player->dirx * cub3d->player->move_speed;

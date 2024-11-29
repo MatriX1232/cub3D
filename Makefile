@@ -10,7 +10,7 @@ MLX = mlx_linux
 
 DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 
-FILES = \
+SRCS = \
 	src/main.c \
 	src/ft_images.c \
 	src/anim.c \
@@ -22,10 +22,10 @@ FILES = \
 	src/utils.c \
 	src/ft_free.c \
 	src/raycaster.c \
-	src/input.c \
+	src/input.c
 
-
-OBJS = ${FILES:.c=.o}
+OBJDIR = obj
+OBJS = $(SRCS:src/%.c=obj/%.o)
 
 _BLUE=\e[34m
 _PURPLE=\e[35m
@@ -42,10 +42,16 @@ PADDING = 50
 
 all: $(NAME)
 
-%.o: %.c
+$(OBJDIR)/%.o: src/%.c $(OBJDIR)
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
-	@$(CC) $(CFLAGS) $(MLXFLAGSO) -c $< -o ${<:.c=.o}
+	@$(CC) $(CFLAGS) $(MLXFLAGSO) -c $< -o $@
 
+$(OBJDIR):
+	mkdir -p $@
+
+$(NAME): compile_dep $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LIBFT)/libft.a
+	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
 
 compile_dep: $(MLX) $(LIBFT)
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s$(_END)\n" "Libft"
@@ -53,22 +59,15 @@ compile_dep: $(MLX) $(LIBFT)
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s$(_END)\n" "Minilibx"
 	@+make -C $(MLX) --no-print-directory
 
-
-$(NAME): compile_dep $(OBJS)
-	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s$(_END)\n" "Libft"
-	@+make -C $(LIBFT) --no-print-directory
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LIBFT)/libft.a
-	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
-
 clean:
 	@+make -C $(LIBFT) clean --no-print-directory
 	@+make -C $(MLX) clean --no-print-directory
-	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 	@printf "$(_CYAN)Removed all .o object files from: $(_GREEN)src/$(_END)\n"
 
 fclean: clean
 	@+make -C $(LIBFT) fclean --no-print-directory
-	@+make -C $(MLX) fclean --no-print-directory
+	@+make -C $(MLX) clean --no-print-directory
 	@rm -f $(NAME)
 	@printf "$(_CYAN)Removed executable: $(_PURPLE)$(NAME)$(_END)\n"
 
@@ -77,4 +76,4 @@ re:
 	@+make fclean --no-print-directory
 	@+make --no-print-directory
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re compile_dep

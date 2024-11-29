@@ -1,19 +1,14 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 09:28:34 by idomagal          #+#    #+#             */
+/*   Updated: 2024/11/29 09:28:39 by idomagal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
@@ -29,7 +24,6 @@ void move_forward(t_cub3d *cub3d)
 	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
 		cub3d->player->posy += moveStepY;
 }
-
 
 void move_backward(t_cub3d *cub3d)
 {

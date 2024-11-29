@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:38:00 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:02:00 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	tmp = ft_strtrim(line, "\n");
 	free(line);
 	line = tmp;
+
+	// Skip empty lines
+	if (ft_strlen(line) == 0)
+		return (free(line));
+
 	if (*i < 4)
 		split = ft_split(line, ' ');
 	if (*i == 4 || *i == 5)
@@ -73,6 +78,8 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	else
 	{
 		map->grid[*i - 6] = ft_strdup(line);
+		if (!map->grid[*i - 6])
+			ft_log("Cannot allocate memory for map grid", NULL, 3);
 		int y = *i - 6;
 		for (int x = 0; line[x]; x++)
 		{
@@ -140,6 +147,8 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	map->grid = (char **)malloc((map->height + 1) * sizeof(char *));
 	if (!map->grid)
 		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);
+	for (int j = 0; j < map->height; j++)
+		map->grid[j] = NULL;
 	i = 0;
 	map->width = 0;
 	cub3d->player = map->player;

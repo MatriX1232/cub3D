@@ -13,9 +13,6 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-
-// Define movement speed
-
 int ft_exit(t_cub3d *cub3d)
 {
 	ft_free_all(cub3d);

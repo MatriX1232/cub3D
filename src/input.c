@@ -21,8 +21,8 @@
 
 void move_forward(t_cub3d *cub3d)
 {
-	double moveStepX = cub3d->player->dirx * MOVE_SPEED;
-	double moveStepY = cub3d->player->diry * MOVE_SPEED;
+	double moveStepX = cub3d->player->dirx * cub3d->player->move_speed;
+	double moveStepY = cub3d->player->diry * cub3d->player->move_speed;
 
 	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
 		cub3d->player->posx += moveStepX;
@@ -33,8 +33,8 @@ void move_forward(t_cub3d *cub3d)
 
 void move_backward(t_cub3d *cub3d)
 {
-	double moveStepX = -cub3d->player->dirx * MOVE_SPEED;
-	double moveStepY = -cub3d->player->diry * MOVE_SPEED;
+	double moveStepX = -cub3d->player->dirx * cub3d->player->move_speed;
+	double moveStepY = -cub3d->player->diry * cub3d->player->move_speed;
 
 	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
 		cub3d->player->posx += moveStepX;
@@ -44,8 +44,8 @@ void move_backward(t_cub3d *cub3d)
 
 void move_left(t_cub3d *cub3d)
 {
-	double moveStepX = -cub3d->player->planex * MOVE_SPEED;
-	double moveStepY = -cub3d->player->planey * MOVE_SPEED;
+	double moveStepX = -cub3d->player->planex * cub3d->player->move_speed;
+	double moveStepY = -cub3d->player->planey * cub3d->player->move_speed;
 	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
 		cub3d->player->posx += moveStepX;
 	if (cub3d->map->grid[(int)(cub3d->player->posy + moveStepY)][(int)(cub3d->player->posx)] == '0')
@@ -54,8 +54,8 @@ void move_left(t_cub3d *cub3d)
 
 void move_right(t_cub3d *cub3d)
 {
-	double moveStepX = cub3d->player->planex * MOVE_SPEED;
-	double moveStepY = cub3d->player->planey * MOVE_SPEED;
+	double moveStepX = cub3d->player->planex * cub3d->player->move_speed;
+	double moveStepY = cub3d->player->planey * cub3d->player->move_speed;
 
 	if (cub3d->map->grid[(int)(cub3d->player->posy)][(int)(cub3d->player->posx + moveStepX)] == '0')
 		cub3d->player->posx += moveStepX;
@@ -105,6 +105,8 @@ int ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->keys.left = 1;
 	else if (keycode == XK_Right)
 		cub3d->keys.right = 1;
+	else if (keycode == XK_Shift_L)
+		cub3d->player->move_speed += 0.02;
 	return (0);
 }
 
@@ -122,6 +124,8 @@ int ft_key_release(int keycode, t_cub3d *cub3d)
 		cub3d->keys.left = 0;
 	else if (keycode == XK_Right)
 		cub3d->keys.right = 0;
+	else if (keycode == XK_Shift_L)
+		cub3d->player->move_speed = MOVE_SPEED;
 	return (0);
 }
 

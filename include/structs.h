@@ -35,6 +35,7 @@ typedef struct s_keys
 	int d;
 	int left;
 	int right;
+	int shift;
 } t_keys;
 
 typedef struct s_anim
@@ -54,6 +55,7 @@ typedef struct s_player
 	double	diry;
 	double	planex;
 	double	planey;
+	double	move_speed;
 } t_player;
 
 typedef struct s_map

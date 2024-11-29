@@ -77,6 +77,8 @@ void initialize_keys(t_cub3d *cub3d)
 	cub3d->keys.d = 0;
 	cub3d->keys.left = 0;
 	cub3d->keys.right = 0;
+	cub3d->keys.shift = 0;
+	cub3d->player->move_speed = MOVE_SPEED;
 }
 
 int	main(int argc, char **argv)

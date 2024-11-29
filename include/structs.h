@@ -6,11 +6,12 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/26 13:58:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:17:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libs.h"
+#include <stdbool.h>
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -45,6 +46,8 @@ typedef struct s_anim
 	int			frame_count;
 	int			frame_delay;
 	int			duration;
+	long		last_update;
+	bool		finished;
 }	t_anim;
 
 typedef struct s_player

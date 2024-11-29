@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:33:58 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:24:29 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	ft_free_sprites(t_cub3d *cub3d);
 t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_height);
 
 //	ANIM.C
+int		update_animation(t_cub3d *cub3d, t_anim *anim);
 void	ft_anim(t_cub3d *cub3d);
 t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path);
 t_anim	**ft_laod_anims(t_cub3d *cub3d);
-void	update_animation(t_cub3d *cub3d);
 void	draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 
 //	FT_DRAW.C

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 19:29:49 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:36:08 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int main_loop(t_cub3d *cub3d)
 	handle_input(cub3d);
 	raycaster(cub3d);
 	if (cub3d->gun_shooting)
-		update_animation(cub3d, cub3d->anims[0]);
-	draw_sprite_to_buffer(cub3d, cub3d->anims[0]->sprites[cub3d->anims[0]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+		update_animation(cub3d, cub3d->anims[cub3d->weapon_idx]);
+	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->weapon_idx]->sprites[cub3d->anims[cub3d->weapon_idx]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);
@@ -146,15 +146,15 @@ int	main(int argc, char **argv)
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
 
+	cub3d.weapon_idx = 0;
 	cub3d.gun_shooting = false;
 	cub3d.anims = ft_laod_anims(&cub3d);
 	if (!cub3d.anims)
 		return (ft_log("Anims failed to load", NULL, 3), 1);
 
 	// Register mouse press callback
-	mlx_mouse_hook(win, mouse_press, &cub3d);
+	// mlx_mouse_hook(win, mouse_press, &cub3d);
 
-	// mlx_loop_hook(mlx, update_animation, &cub3d.anims[0]);
 	mlx_loop_hook(mlx, main_loop, &cub3d);
 	mlx_hook(cub3d.win, ON_DESTROY, 0, ft_exit, &cub3d);
 	mlx_hook(cub3d.win, ButtonPress, ButtonPressMask, mouse_press, &cub3d);

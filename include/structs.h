@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 19:19:31 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:30:31 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_keys
 	int	right;
 	int	shift;
 	int	mouse_1;
-} t_keys;
+}	t_keys;
 
 typedef struct s_anim
 {
@@ -46,7 +46,6 @@ typedef struct s_anim
 	int			frame;
 	int			frame_count;
 	int			frame_delay;
-	int			duration;
 	long		last_update;
 	bool		finished;
 }	t_anim;
@@ -60,7 +59,7 @@ typedef struct s_player
 	double	planex;
 	double	planey;
 	double	move_speed;
-} t_player;
+}	t_player;
 
 typedef struct s_map
 {
@@ -93,8 +92,7 @@ typedef struct s_ray
 	int			stepy;
 	int			hit;
 	int			side;
-
-} t_ray;
+}	t_ray;
 
 
 typedef struct s_cub3d
@@ -108,13 +106,12 @@ typedef struct s_cub3d
 	t_sprite	*buffer;
 	t_map		*map;
 	t_player	*player;
-	t_keys	keys;
+	t_keys		keys;
 	long		frame;
 	short		delta_time;
 	long		prev_time;
 	int			gun_shooting;
-	int			gun_frame;
-	double	gun_anim_time;
+	short		weapon_idx;
 }	t_cub3d;
 
 

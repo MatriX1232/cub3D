@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 19:18:33 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:38:11 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,11 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 		return (ft_log("Cannot allocate memory for anim", NULL, 3), NULL);
 	anim->frame = 0;
 	anim->frame_count = ft_get_dir_count(folder_path);
+	ft_log_sub("Frame count", ft_itoa(anim->frame_count), 1, 2);
 	anim->frame_delay = 70;
-	anim->duration = anim->frame_count * anim->frame_delay;
 	anim->sprites = load_batch(cub3d, folder_path);
 	anim->finished = true;
+	anim->last_update = 0;
 	if (!anim->sprites)
 		return (ft_log("Cannot load batch", folder_path, 3), NULL);
 	return (anim);
@@ -144,23 +145,23 @@ t_anim	**ft_laod_anims(t_cub3d *cub3d)
 {
 	t_anim	**anims;
 
-	anims = (t_anim **)malloc(2 * sizeof(t_anim *));
+	anims = (t_anim **)malloc(5 * sizeof(t_anim *));
 	if (!anims)
 		return (ft_log("Cannot allocate memory for anims", NULL, 3), NULL);
 	ft_log("Loading animations...", NULL, 1);
-	anims[0] = ft_load_anim(cub3d, "textures/pistol/");
-	anims[1] = NULL;
-	// anims[1] = ft_load_anim(cub3d, "textures/pistol/");
-	// anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
-	// anims[3] = ft_load_anim(cub3d, "textures/minigun/");/
-	// anims[4] = NULL;
+	anims[0] = ft_load_anim(cub3d, "textures/knife/");
+	anims[1] = ft_load_anim(cub3d, "textures/pistol/");
+	anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
+	anims[3] = ft_load_anim(cub3d, "textures/minigun/");
+	anims[4] = NULL;
 	return (anims);
 }
 
 int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
-	long current_time = get_timestamp();
+	long current_time;
 
+	current_time = get_timestamp();
 	if (current_time - anim->last_update > anim->frame_delay)
 	{
 		if (anim->frame == anim->frame_count - 1)

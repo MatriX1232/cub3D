@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:06:50 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/29 00:59:30 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:16:15 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int	raycaster(t_cub3d *cub3d)
 		for (int y = drawend; y < cub3d->win_height; y++)
 			put_pixel_to_img(cub3d->buffer, x, y, cub3d->map->floor);
 	}
+
 	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 	cub3d->frame++;
 	return (0);

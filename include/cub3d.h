@@ -27,10 +27,10 @@
 # define KEY_D 100
 # define STEP_SPEED 0.05
 # define MOVE_SPEED 0.02
-# define ROT_SPEED 0.06
+# define ROT_SPEED 0.02
 
-//	DEFINE FRAME RATE TO -1 TO DISABLE
-# define FRAME_RATE -1
+//	DEFINE FRAME RATE TO 0 (or less) TO DISABLE FRAME RATE LIMITING
+# define FRAME_RATE 0
 
 // 	RAYCASTER.C
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);

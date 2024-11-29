@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 01:02:00 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:28:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	map = (t_map *)malloc(1 * sizeof(t_map));
 	if (!map)
 		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
-	map->player = (t_player *)malloc(sizeof(t_player));
+	map->player = (t_player *) malloc(1 * sizeof(t_player));
 	if (!map->player)
 		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
 	fd = open(path, O_RDONLY);

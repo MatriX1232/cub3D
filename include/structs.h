@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:17:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:19:31 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_keys
 	int	left;
 	int	right;
 	int	shift;
+	int	mouse_1;
 } t_keys;
 
 typedef struct s_anim

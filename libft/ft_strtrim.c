@@ -33,14 +33,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = 0;
 	first = 0;
-	while ((is_in_set(s1[i], set)))
+	while ((is_in_set(s1[i], set)) && s1[i])
 	{
 		first++;
 		i++;
 	}
 	i = (int)ft_strlen(s1) - 1;
 	last = ft_strlen(s1);
-	while ((is_in_set(s1[i], set)))
+	while ((is_in_set(s1[i], set)) && i > 0)
 	{
 		last--;
 		i--;

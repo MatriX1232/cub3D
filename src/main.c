@@ -45,8 +45,27 @@ int mouse_move(int x, int y, t_cub3d *cub3d)
 
 int main_loop(t_cub3d *cub3d)
 {
+	double current_time = get_timestamp();
+	double frame_time = (current_time - cub3d->prev_time) / 1000.0;
+	if (FRAME_RATE > 0)
+	{
+			double min_frame_time = 1.0 / FRAME_RATE;
+			if (frame_time < min_frame_time)
+			{
+					usleep((useconds_t)((min_frame_time - frame_time) * 1000000));
+					current_time = get_timestamp();
+					frame_time = (current_time - cub3d->prev_time) / 1000.0;
+			}
+	}
+	cub3d->delta_time = frame_time;
+	cub3d->prev_time = current_time;
 	handle_input(cub3d);
 	raycaster(cub3d);
+	int fps = (int)(1.0 / frame_time);
+	char *fps_str = ft_itoa(fps);
+	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
+	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
+	free(fps_str);
 	return (0);
 }
 

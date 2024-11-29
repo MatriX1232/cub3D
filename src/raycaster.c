@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:06:50 by idomagal          #+#    #+#             */
-/*   Updated: 2024/11/26 13:25:07 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:59:30 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,13 @@ int	raycaster(t_cub3d *cub3d)
 		{
 			int d = (y - pitch) * 256 - cub3d->win_height * 128 + lineheight * 128;
 			int texy = ((d * cub3d->sprites[texnum]->height) / lineheight) / 256;
-			if (texx < 0) 
+			if (texx < 0)
 				texx = 0;
-			if (texx >= cub3d->sprites[texnum]->width) 
+			if (texx >= cub3d->sprites[texnum]->width)
 				texx = cub3d->sprites[texnum]->width - 1;
-			if (texy < 0) 
+			if (texy < 0)
 				texy = 0;
-			if (texy >= cub3d->sprites[texnum]->height) 
+			if (texy >= cub3d->sprites[texnum]->height)
 				texy = cub3d->sprites[texnum]->height - 1;
 			int color = get_pixel_color(cub3d->sprites[texnum], texx, texy);
 			put_pixel_to_img(cub3d->buffer, x, y, color);

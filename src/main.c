@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 00:52:58 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 01:19:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int main_loop(t_cub3d *cub3d)
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
 	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
-	ft_render_health(cub3d);
+	// ft_render_health(cub3d);
 	ft_render_ammo(cub3d);
 	free(fps_str);
 	return (0);
@@ -147,11 +147,18 @@ int	main(int argc, char **argv)
 	cub3d.map = ft_load_map(&cub3d, argv[1]);
 	if (!cub3d.map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
+
 	cub3d.player = cub3d.map->player;
+	if (!cub3d.player)
+		return (ft_log("Player failed to load", NULL, 3), 1);
+	// cub3d.player->max_hp = 100;
+	// cub3d.player->hp = cub3d.player->max_hp;
+
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
+
 
 	cub3d.weapon_idx = 0;
 	cub3d.gun_shooting = false;

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 00:06:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 00:51:42 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/11/30 01:19:36 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ fc-list | grep "Tiny5"
 void	ft_render_health(t_cub3d *cub3d)
 {
 	// mlx_set_font(cub3d->mlx, cub3d->win, "Tiny5");
-	if (cub3d->player->hp <= 35)
-		mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFF0000, "HEALTH: 100");
-	else
-		mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFFFFFF, "HEALTH: 100");
+	if (!cub3d->player)
+		return (ft_log("Player not found", NULL, 3));
+	else if (cub3d->player)
+	{
+		if (cub3d->map->player->hp <= 35)
+			mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFF0000, "HEALTH: 100");
+		else
+			mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFFFFFF, "HEALTH: 100");
+	}
 }
 
 void	ft_render_ammo(t_cub3d *cub3d)

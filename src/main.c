@@ -100,6 +100,8 @@ void initialize_keys(t_cub3d *cub3d)
 	cub3d->keys.right = 0;
 	cub3d->keys.shift = 0;
 	cub3d->keys.mouse_1 = 0;
+	cub3d->keys.up = 0;
+	cub3d->keys.down = 0;
 	cub3d->player->move_speed = MOVE_SPEED;
 }
 
@@ -115,8 +117,8 @@ int	main(int argc, char **argv)
 		return (ft_log("Failed to initialize MLX or create window", NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
 
-	cub3d.win_width = 800;
-	cub3d.win_height = 600;
+	cub3d.win_width = WIN_WIDTH;
+	cub3d.win_height = WIN_HEIGHT;
 
 	cub3d.mlx = mlx;
 	cub3d.win = win;
@@ -147,12 +149,10 @@ int	main(int argc, char **argv)
 	cub3d.anims = ft_load_anims(&cub3d);
 	if (!cub3d.anims)
 		return (ft_log("Anims failed to load", NULL, 3), 1);
-
-	cub3d.player = cub3d.map->player;
 	if (!cub3d.player)
 		return (ft_log("Player failed to load", NULL, 3), 1);
-	cub3d.player->current_weapon = &cub3d.weapons[1];
-
+	cub3d.player->current_weapon = &cub3d.weapons[0];
+	cub3d.player->pitch = 300;
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();

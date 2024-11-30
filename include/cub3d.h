@@ -28,6 +28,8 @@
 # define STEP_SPEED 0.05
 # define MOVE_SPEED 0.02
 # define ROT_SPEED 0.02
+# define FLOOR 6
+# define CEILING 7
 
 //	DEFINE FRAME RATE TO 0 (or less) TO DISABLE FRAME RATE LIMITING
 # define FRAME_RATE 0

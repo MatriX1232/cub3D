@@ -79,6 +79,8 @@ int main_loop(t_cub3d *cub3d)
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
 	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
+	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);

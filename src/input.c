@@ -118,9 +118,12 @@ int ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->player->move_speed += 0.02;
 	else if (keycode == XK_1)
 		cub3d->player->current_weapon = &cub3d->weapons[1];
+		cub3d->player->current_weapon = &cub3d->weapons[1];
 	else if (keycode == XK_2)
 		cub3d->player->current_weapon = &cub3d->weapons[2];
+		cub3d->player->current_weapon = &cub3d->weapons[2];
 	else if (keycode == XK_3)
+		cub3d->player->current_weapon = &cub3d->weapons[3];
 		cub3d->player->current_weapon = &cub3d->weapons[3];
 	else if (keycode == XK_4)
 		cub3d->player->current_weapon = &cub3d->weapons[4];

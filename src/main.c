@@ -45,9 +45,7 @@ int	mouse_press(int button, int x, int y, t_cub3d *cub3d)
 	(void)x;
 	(void)y;
 	if (button == 1)
-	{
 		cub3d->keys.mouse_1 = 1;
-	}
 	return (0);
 }
 
@@ -56,9 +54,7 @@ int mouse_release(int button, int x, int y, t_cub3d *cub3d)
 	(void)x;
 	(void)y;
 	if (button == 1)
-	{
 		cub3d->keys.mouse_1 = 0;
-	}
 	return (0);
 }
 
@@ -81,8 +77,8 @@ int main_loop(t_cub3d *cub3d)
 	handle_input(cub3d);
 	raycaster(cub3d);
 	if (cub3d->gun_shooting)
-		update_animation(cub3d, cub3d->anims[cub3d->weapon_idx]);
-	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->weapon_idx]->sprites[cub3d->anims[cub3d->weapon_idx]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
+	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);
@@ -148,27 +144,22 @@ int	main(int argc, char **argv)
 	if (!cub3d.map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
 
+	cub3d.anims = ft_load_anims(&cub3d);
+	if (!cub3d.anims)
+		return (ft_log("Anims failed to load", NULL, 3), 1);
+
 	cub3d.player = cub3d.map->player;
 	if (!cub3d.player)
 		return (ft_log("Player failed to load", NULL, 3), 1);
-	// cub3d.player->max_hp = 100;
-	// cub3d.player->hp = cub3d.player->max_hp;
+	cub3d.player->current_weapon = &cub3d.weapons[1];
 
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
 
-
-	cub3d.weapon_idx = 0;
 	cub3d.gun_shooting = false;
-	cub3d.max_ammo = 30;
-	cub3d.ammo = cub3d.max_ammo;
-	cub3d.fire_rate = 100;
 	cub3d.prev_shoot = 0;
-	cub3d.anims = ft_laod_anims(&cub3d);
-	if (!cub3d.anims)
-		return (ft_log("Anims failed to load", NULL, 3), 1);
 
 	// Register mouse press callback
 	// mlx_mouse_hook(win, mouse_press, &cub3d);

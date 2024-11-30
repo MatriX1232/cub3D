@@ -50,6 +50,16 @@ typedef struct s_anim
 	bool		finished;
 }	t_anim;
 
+typedef struct s_weapon
+{
+	char	*name;
+	int		index;
+	int		current_ammo;
+	int		ammo;
+	int		reload_time;
+	int		fire_rate;
+}	t_weapon;
+
 typedef struct s_player
 {
 	double	posx;
@@ -59,6 +69,7 @@ typedef struct s_player
 	double	planex;
 	double	planey;
 	double	move_speed;
+	t_weapon	*current_weapon;
 	int		hp;
 	int		max_hp;
 }	t_player;
@@ -96,13 +107,6 @@ typedef struct s_ray
 	int			side;
 }	t_ray;
 
-typedef struct s_weapon
-{
-	char	*name;
-	int		current_ammo;
-	int 	ammo;
-	int		reload_time;
-}	t_weapon;
 
 typedef struct s_cub3d
 {
@@ -116,14 +120,11 @@ typedef struct s_cub3d
 	t_map		*map;
 	t_player	*player;
 	t_keys		keys;
+	t_weapon	weapons[5];
 	long		frame;
 	short		delta_time;
 	long		prev_time;
 	int			gun_shooting;
-	short		weapon_idx;
-	int			ammo;
-	int			max_ammo;
-	int			fire_rate;
 	long		prev_shoot;
 }	t_cub3d;
 

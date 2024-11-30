@@ -140,7 +140,16 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 	return (anim);
 }
 
-t_anim	**ft_laod_anims(t_cub3d *cub3d)
+void	init_weapons(t_cub3d *cub3d)
+{
+	cub3d->weapons[1] = (t_weapon){"KNIFE", 1, 0, 0, 0, 5000};
+	cub3d->weapons[2] = (t_weapon){"PISTOL", 2, 15, 15, 0, 1000};
+	cub3d->weapons[3] = (t_weapon){"LONG RIFLE", 3, 50, 50, 0, 300};
+	cub3d->weapons[4] = (t_weapon){"MINIGUN", 4, 500, 500, 0, 50};
+}
+
+
+t_anim	**ft_load_anims(t_cub3d *cub3d)
 {
 	t_anim	**anims;
 
@@ -153,15 +162,18 @@ t_anim	**ft_laod_anims(t_cub3d *cub3d)
 	anims[2] = ft_load_anim(cub3d, "textures/long_rifle/");
 	anims[3] = ft_load_anim(cub3d, "textures/minigun/");
 	anims[4] = NULL;
+	init_weapons(cub3d);
 	return (anims);
 }
 
 int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
-	long current_time;
+	long	current_time;
+	t_weapon	*weapon;
 
+	weapon = cub3d->player->current_weapon;
 	current_time = get_timestamp();
-	if (cub3d->ammo == 0 && cub3d->weapon_idx != 0)
+	if (weapon->current_ammo == 0 && weapon->index != 1)
 	{
 		anim->frame = 0;
 		anim->finished = true;
@@ -169,11 +181,11 @@ int	update_animation(t_cub3d *cub3d, t_anim *anim)
 		put_img_to_img(cub3d->buffer, anim->sprites[anim->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
 		return (0);
 	}
-	if ((int)(current_time - cub3d->prev_shoot) > cub3d->fire_rate && cub3d->weapon_idx != 0)
+	if ((int)(current_time - cub3d->prev_shoot) > weapon->fire_rate && weapon->index != 1)
 	{
-		if (cub3d->ammo - 1 <= 0)
+		if (weapon->current_ammo - 1 <= 0)
 			ft_log("Out of ammo", NULL, 2);
-		cub3d->ammo--;
+		weapon->current_ammo--;
 		cub3d->prev_shoot = current_time;
 	}
 	if (current_time - anim->last_update > anim->frame_delay)

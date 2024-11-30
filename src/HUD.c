@@ -36,21 +36,25 @@ void	ft_render_health(t_cub3d *cub3d)
 	else if (cub3d->player)
 	{
 		if (cub3d->map->player->hp <= 35)
-			mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFF0000, "HEALTH: 100");
+			mlx_string_put(cub3d->mlx, cub3d->win, 10, 30, 0xFF0000, "HEALTH: 100");
 		else
-			mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFFFFFF, "HEALTH: 100");
+			mlx_string_put(cub3d->mlx, cub3d->win, 10, 30, 0xFFFFFF, "HEALTH: 100");
 	}
 }
 
 void	ft_render_ammo(t_cub3d *cub3d)
 {
 	char	*ammo_str;
+	t_weapon	*weapon;
+
+	weapon = cub3d->player->current_weapon;
 	// mlx_set_font(cub3d->mlx, cub3d->win, "-*-helvetica-*-r-*-*-24-*-*-*-*-*-*-*");
-	if (cub3d->ammo == 0)
+	mlx_string_put(cub3d->mlx, cub3d->win, 10, 40, 0xFFFFFF, weapon->name);
+	if (weapon->current_ammo == 0 && weapon->index != 1)
 		mlx_string_put(cub3d->mlx, cub3d->win, 10, 50, 0xFF0000, "AMMO: OUT OF AMMO");
-	else if (cub3d->weapon_idx > 0)
+	else if (weapon->index > 1)
 	{
-		ammo_str = ft_itoa(cub3d->ammo);
+		ammo_str = ft_itoa(weapon->current_ammo);
 		mlx_string_put(cub3d->mlx, cub3d->win, 10, 50, 0xFFFFFF, "AMMO: ");
 		mlx_string_put(cub3d->mlx, cub3d->win, 60, 50, 0xFFFFFF, ammo_str);
 		free(ammo_str);

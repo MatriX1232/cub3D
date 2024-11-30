@@ -51,7 +51,7 @@ t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_
 int		update_animation(t_cub3d *cub3d, t_anim *anim);
 void	ft_anim(t_cub3d *cub3d);
 t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path);
-t_anim	**ft_laod_anims(t_cub3d *cub3d);
+t_anim	**ft_load_anims(t_cub3d *cub3d);
 void	draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 
 //	FT_DRAW.C

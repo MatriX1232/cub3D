@@ -99,7 +99,7 @@ int	raycaster(t_cub3d *cub3d)
 		else
 			ray.perpwalldist = (ray.sidedisty - ray.deltadisty);
 		int lineheight = (int)(cub3d->win_height / ray.perpwalldist);
-		int pitch = 0;
+		int pitch = (int)cub3d->player->pitch;
 		int drawstart = -lineheight / 2 + cub3d->win_height / 2 + pitch;
 		if (drawstart < 0)
 			drawstart = 0;
@@ -149,8 +149,51 @@ int	raycaster(t_cub3d *cub3d)
 			int color = get_pixel_color(cub3d->sprites[texnum], texx, texy);
 			put_pixel_to_img(cub3d->buffer, x, y, color);
 		}
-		for (int y = drawend; y < cub3d->win_height; y++)
-			put_pixel_to_img(cub3d->buffer, x, y, cub3d->map->floor);
+		double rayDirX0 = cub3d->player->dirx - cub3d->player->planex;
+		double rayDirY0 = cub3d->player->diry - cub3d->player->planey;
+		double rayDirX1 = cub3d->player->dirx + cub3d->player->planex;
+		double rayDirY1 = cub3d->player->diry + cub3d->player->planey;
+		for (int y = drawend + 1; y < cub3d->win_height; y++)
+		{
+			int currentY = y - cub3d->win_height / 2 - pitch;
+			double posZ = 0.5 * cub3d->win_height;
+			double rowDistance = posZ / currentY;
+			double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / cub3d->win_width;
+			double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / cub3d->win_width;
+			double floorX = cub3d->player->posx + rowDistance * rayDirX0;
+			double floorY = cub3d->player->posy + rowDistance * rayDirY0;
+			floorX += floorStepX * x;
+			floorY += floorStepY * x;
+			int floorTexX = (int)(floorX * cub3d->sprites[FLOOR]->width) % cub3d->sprites[FLOOR]->width;
+			int floorTexY = (int)(floorY * cub3d->sprites[FLOOR]->height) % cub3d->sprites[FLOOR]->height;
+			if (floorTexX < 0)
+				floorTexX += cub3d->sprites[FLOOR]->width;
+			if (floorTexY < 0)
+				floorTexY += cub3d->sprites[FLOOR]->height;
+			int floorColor = get_pixel_color(cub3d->sprites[FLOOR], floorTexX, floorTexY);
+			put_pixel_to_img(cub3d->buffer, x, y, floorColor);
+		}
+		for (int y = 0; y < drawstart; y++)
+		{
+			int currentY = y - cub3d->win_height / 2 - pitch;
+			double posZ = 0.5 * cub3d->win_height;
+			double rowDistance = posZ / -currentY;
+			double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / cub3d->win_width;
+			double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / cub3d->win_width;
+			double floorX = cub3d->player->posx + rowDistance * rayDirX0;
+			double floorY = cub3d->player->posy + rowDistance * rayDirY0;
+			floorX += floorStepX * x;
+			floorY += floorStepY * x;
+			int ceilTexX = (int)(floorX * cub3d->sprites[CEILING]->width) % cub3d->sprites[CEILING]->width;
+			int ceilTexY = (int)(floorY * cub3d->sprites[CEILING]->height) % cub3d->sprites[CEILING]->height;
+			if (ceilTexX < 0)
+				ceilTexX += cub3d->sprites[CEILING]->width;
+			if (ceilTexY < 0)
+				ceilTexY += cub3d->sprites[CEILING]->height;
+			int ceilColor = get_pixel_color(cub3d->sprites[CEILING], ceilTexX, ceilTexY);
+			put_pixel_to_img(cub3d->buffer, x, y, ceilColor);
+		}
+
 	}
 
 	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);

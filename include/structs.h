@@ -36,6 +36,8 @@ typedef struct s_keys
 	int	d;
 	int	left;
 	int	right;
+	int	up;
+	int	down;
 	int	shift;
 	int	mouse_1;
 }	t_keys;
@@ -68,6 +70,7 @@ typedef struct s_player
 	double	diry;
 	double	planex;
 	double	planey;
+	double	pitch;
 	double	move_speed;
 	t_weapon	*current_weapon;
 	int		hp;

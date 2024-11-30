@@ -82,6 +82,22 @@ void rotate_right(t_cub3d *cub3d)
 	cub3d->player->planey = oldPlaneX * sin(rotSpeed) + cub3d->player->planey * cos(rotSpeed);
 }
 
+void	look_up(t_cub3d *cub3d)
+{
+	double pitch_speed = 2.0;
+	cub3d->player->pitch += pitch_speed;
+	if (cub3d->player->pitch > (double)cub3d->win_height / 2)
+		cub3d->player->pitch = (double)cub3d->win_height / 2;
+}
+
+void	look_down(t_cub3d *cub3d)
+{
+	double pitch_speed = 2.0;
+	cub3d->player->pitch -= pitch_speed;
+	if (cub3d->player->pitch < (double)-cub3d->win_height / 2)
+		cub3d->player->pitch = (double)-cub3d->win_height / 2;
+}
+
 int ft_key_press(int keycode, t_cub3d *cub3d)
 {
 	if (keycode == KEY_ESC)
@@ -108,6 +124,10 @@ int ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->player->current_weapon = &cub3d->weapons[3];
 	else if (keycode == XK_4)
 		cub3d->player->current_weapon = &cub3d->weapons[4];
+	else if (keycode == XK_Up)
+		cub3d->keys.up = 1;
+	else if (keycode == XK_Down)
+		cub3d->keys.down = 1;
 	return (0);
 }
 
@@ -127,6 +147,10 @@ int ft_key_release(int keycode, t_cub3d *cub3d)
 		cub3d->keys.right = 0;
 	else if (keycode == XK_Shift_L)
 		cub3d->player->move_speed = MOVE_SPEED;
+	else if (keycode == XK_Up)
+		cub3d->keys.up = 0;
+	else if (keycode == XK_Down)
+		cub3d->keys.down = 0;
 	return (0);
 }
 
@@ -146,4 +170,8 @@ void handle_input(t_cub3d *cub3d)
 		rotate_right(cub3d);
 	if (cub3d->keys.mouse_1)
 		cub3d->gun_shooting = 1;
+	if (cub3d->keys.up)
+		look_up(cub3d);
+	if (cub3d->keys.down)
+		look_down(cub3d);
 }

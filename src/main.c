@@ -153,14 +153,14 @@ int	main(int argc, char **argv)
 		return (ft_log("Anims failed to load", NULL, 3), 1);
 	if (!cub3d.player)
 		return (ft_log("Player failed to load", NULL, 3), 1);
-	cub3d.player->current_weapon = &cub3d.weapons[0];
-	cub3d.player->pitch = 300;
+	cub3d.player->current_weapon = &cub3d.weapons[1];
+	cub3d.player->pitch = 100;
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
 
-	cub3d.gun_shooting = false;
+	cub3d.gun_shooting = 0;
 	cub3d.prev_shoot = 0;
 
 	// Register mouse press callback

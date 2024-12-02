@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 01:21:58 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:41:01 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int main_loop(t_cub3d *cub3d)
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
 	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
-	// ft_render_health(cub3d);
-	ft_render_ammo(cub3d);
+	ft_render_HUD(cub3d);
 	free(fps_str);
 	return (0);
 }
@@ -114,7 +113,7 @@ int	main(int argc, char **argv)
 	t_cub3d cub3d;
 
 	void	*mlx = mlx_init();
-	void	*win = mlx_new_window(mlx, 800, 600, "CUB3D");
+	void	*win = mlx_new_window(mlx, ALL_WIDTH, ALL_HEIGHT, "CUB3D");
 	if (!mlx || !win)
 		return (ft_log("Failed to initialize MLX or create window", NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
@@ -126,7 +125,8 @@ int	main(int argc, char **argv)
 	cub3d.win = win;
 
 	cub3d.sprites = ft_load_sprites(&cub3d);
-	if (!cub3d.sprites)
+	cub3d.HUD = xpm_load_image(mlx, "textures/hud.xpm", 0);
+	if (!cub3d.sprites || !cub3d.HUD)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
 
 	// Initialize buffer

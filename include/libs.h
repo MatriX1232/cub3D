@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:17:01 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 16:17:03 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:38:32 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
+# define ALL_WIDTH 800
+# define ALL_HEIGHT 701
 
 # define MINIMAP_SCALE 7
 # define MINIMAP_FG 0x3b014a

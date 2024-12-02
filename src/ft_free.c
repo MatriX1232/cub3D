@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 00:34:00 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:41:11 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ void	ft_free_all(t_cub3d *cub3d)
 	ft_free_sptite(cub3d, cub3d->map->spriteEA);
 	ft_free_sprites(cub3d);
 	ft_free_2d_array(cub3d->map->grid);
+	ft_free_sptite(cub3d, cub3d->HUD);
+	ft_free_sptite(cub3d, cub3d->weapons[1].icon);
+	ft_free_sptite(cub3d, cub3d->weapons[2].icon);
+	ft_free_sptite(cub3d, cub3d->weapons[3].icon);
+	ft_free_sptite(cub3d, cub3d->weapons[4].icon);
 	free(cub3d->map);
 	free(cub3d->player); // Free player structure
 	mlx_destroy_window(cub3d->mlx, cub3d->win);

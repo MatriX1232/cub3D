@@ -2,6 +2,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
 MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
+INCLUDES = -I/usr/include/freetype2
+LDFLAGS = -lfreetype -lXft
 
 NAME = cub3d
 
@@ -24,7 +26,8 @@ SRCS = \
 	src/raycaster.c \
 	src/input.c \
 	src/splash_screen.c \
-	src/HUD.c
+	src/HUD.c \
+	src/font_renderer.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -45,10 +48,10 @@ all: $(NAME)
 
 %.o: %.c
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
-	@$(CC) $(CFLAGS) $(MLXFLAGSO) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLXFLAGSO) $(INCLUDES) -c $< -o $@
 
 $(NAME): compile_dep $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LIBFT)/libft.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LDFLAGS) $(LIBFT)/libft.a
 	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
 
 compile_dep: $(MLX) $(LIBFT)
@@ -60,7 +63,7 @@ compile_dep: $(MLX) $(LIBFT)
 clean:
 	@+make -C $(LIBFT) clean --no-print-directory
 	@+make -C $(MLX) clean --no-print-directory
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJS)
 	@printf "$(_CYAN)Removed all .o object files from: $(_GREEN)src/$(_END)\n"
 
 fclean: clean

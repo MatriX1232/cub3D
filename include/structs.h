@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 12:36:59 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:48:49 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_cub3d
 	t_sprite	*HUD;
 	t_anim		**anims;
 	t_sprite	*buffer;
+	t_sprite	*buffer_HUD;
 	t_map		*map;
 	t_player	*player;
 	t_keys		keys;

@@ -6,24 +6,16 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 13:35:18 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:03:44 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
-#include <X11/Xlib.h>
-#include <X11/Xft/Xft.h>
 
 int ft_exit(t_cub3d *cub3d)
 {
 	ft_free_all(cub3d);
-	Display *display = ((t_xvar *)cub3d->mlx)->display;
-	if (display)
-	{
-		XCloseDisplay(display);
-	}
-	FcFini();
 	exit(0);
 	return (0);
 }
@@ -87,15 +79,14 @@ int main_loop(t_cub3d *cub3d)
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
 	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
-		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
-	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+	ft_render_HUD(cub3d);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer_HUD->img, 0, WIN_HEIGHT - 1);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
 	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
-	ft_render_HUD(cub3d);
 	free(fps_str);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	return (0);
 }
 
@@ -112,6 +103,24 @@ void initialize_keys(t_cub3d *cub3d)
 	cub3d->keys.up = 0;
 	cub3d->keys.down = 0;
 	cub3d->player->move_speed = MOVE_SPEED;
+}
+
+t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height)
+{
+	t_sprite	*image;
+
+	image = (t_sprite *) malloc(1 * sizeof(t_sprite));
+	if (!image)
+		return (ft_log("Failed to allocate memory for blank image", NULL, 3), NULL);
+	image->img = mlx_new_image(cub3d->mlx, width, height);
+	if (!image->img)
+		return (ft_log("Failed to create new image", NULL, 3), NULL);
+	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
+	if (!image->addr)
+		return (ft_log("Failed to get data address", NULL, 3), NULL);
+	image->width = width;
+	image->height = height;
+	return (image);
 }
 
 int	main(int argc, char **argv)
@@ -138,23 +147,16 @@ int	main(int argc, char **argv)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
 
 	// Initialize buffer
-	cub3d.buffer = (t_sprite *) malloc(sizeof(t_sprite));
-	if (!cub3d.buffer)
-		return (ft_log("Failed to allocate memory for sprite buffer", NULL, 3), 1);
-	cub3d.buffer->img = mlx_new_image(mlx, cub3d.win_width, cub3d.win_height);
-	if (!cub3d.buffer->img)
-		return (ft_log("Failed to create new image", NULL, 3), 1);
-	cub3d.buffer->addr = mlx_get_data_addr(cub3d.buffer->img, &cub3d.buffer->bits_per_pixel, &cub3d.buffer->line_length, &cub3d.buffer->endian);
-	if (!cub3d.buffer->addr)
-		return (ft_log("Failed to get data address", NULL, 3), 1);
-	cub3d.buffer->width = cub3d.win_width;
-	cub3d.buffer->height = cub3d.win_height;
+	cub3d.buffer = ft_create_blank(&cub3d, cub3d.win_width, cub3d.win_height);
+	cub3d.buffer_HUD = ft_create_blank(&cub3d, ALL_WIDTH, ALL_HEIGHT - WIN_HEIGHT);
+	if (!cub3d.buffer || !cub3d.buffer_HUD)
+		return (ft_log("Failed to create buffer", NULL, 3), 1);
 
 	cub3d.characters = load_font(&cub3d, "textures/font/", 30);
 	if (!cub3d.characters)
 		return (ft_log("Failed to load font characters", NULL, 3), 1);
 
-	splash_screen(&cub3d);
+	// splash_screen(&cub3d);
 
 	cub3d.map = ft_load_map(&cub3d, argv[1]);
 	if (!cub3d.map)
@@ -165,6 +167,7 @@ int	main(int argc, char **argv)
 		return (ft_log("Anims failed to load", NULL, 3), 1);
 	if (!cub3d.player)
 		return (ft_log("Player failed to load", NULL, 3), 1);
+
 	cub3d.player->current_weapon = &cub3d.weapons[1];
 	cub3d.player->pitch = 100;
 	initialize_keys(&cub3d);

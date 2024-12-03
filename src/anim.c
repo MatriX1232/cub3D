@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:38:40 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:03:23 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path)
 
 void	init_weapons(t_cub3d *cub3d)
 {
+	int	i;
+
 	cub3d->weapons[1] = (t_weapon){"KNIFE", NULL, 1, 0, 0, 0, 5000};
 	cub3d->weapons[1].icon = xpm_load_image(cub3d->mlx, "textures/Pistol_icon.xpm", 0);
 	cub3d->weapons[2] = (t_weapon){"PISTOL", NULL, 2, 15, 15, 0, 1000};
@@ -150,6 +152,12 @@ void	init_weapons(t_cub3d *cub3d)
 	cub3d->weapons[3].icon = xpm_load_image(cub3d->mlx, "textures/Longrifle_icon.xpm", 0);
 	cub3d->weapons[4] = (t_weapon){"MINIGUN", NULL, 4, 500, 500, 0, 50};
 	cub3d->weapons[4].icon = xpm_load_image(cub3d->mlx, "textures/Minigun_icon.xpm", 0);
+	i = 1;
+	while (i < 5 && cub3d->weapons[i].name != NULL)
+	{
+		cub3d->weapons[i].icon = ft_scale_sprite(cub3d, cub3d->weapons[i].icon, 200, 85);
+		i++;
+	}
 }
 
 

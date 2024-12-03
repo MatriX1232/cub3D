@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/30 00:12:33 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:56:25 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,28 @@ void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_
 
 			if (dest_pixel_index >= 0 && dest_pixel_index < dest_size_line * src_height)
 			{
+				ft_log("put_img_to_img: ", "dest_pixel_index is out of bounds", 2);
 				*(unsigned int *)(dest_data + dest_pixel_index) = *(unsigned int *)(src_data + src_pixel_index);
 			}
 		}
 	}
 }
+
+// void	put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	for (y = 0; y < src_img->height; y++)
+// 	{
+// 		for (x = 0; x < src_img->width; x++)
+// 		{
+// 			int src_pixel = *(unsigned int *)(src_img->addr + (y * src_img->line_length) + (x * (src_img->bits_per_pixel / 8)));
+// 			if (src_pixel != 0x00000000) // Assuming 0x00000000 is transparent
+// 				*(unsigned int *)(dest_img->addr + ((dest_y + y) * dest_img->line_length) + ((dest_x + x) * (dest_img->bits_per_pixel / 8))) = src_pixel;
+// 		}
+// 	}
+// }
 
 void put_pixel_to_img(t_sprite *img, int x, int y, int color)
 {

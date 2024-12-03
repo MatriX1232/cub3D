@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 21:39:29 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 13:31:31 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:02:49 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 	{
 		if (!(i >= '0' && i <= '9') && !(i >= 'A' && i <= 'Z'))
 		{
+			characters[i] = NULL;
 			i++;
 			continue;
 		}
@@ -49,7 +50,7 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 		if (font->sprite)
 		{
 			font->name = i;
-			font->sprite = ft_scale_sprite(cub3d, font->sprite, font_size, (font_size * font->sprite->height) / font->sprite->width);
+			// font->sprite = ft_scale_sprite(cub3d, font->sprite, font_size, (font_size * font->sprite->height) / font->sprite->width);
 			characters[i] = font;
 		}
 		else
@@ -57,6 +58,7 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 		new_path = ft_memset(new_path, 0, 256);
 		i++;
 	}
+	free(new_path);
 	return (characters);
 }
 
@@ -71,8 +73,8 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset)
 		font = cub3d->characters[(int)str[i]];
 		if (font)
 		{
-			mlx_put_image_to_window(cub3d->mlx, cub3d->win, font->sprite->img, x, y);
-			// put_img_to_img(cub3d->buffer, font->sprite, x, y);
+			// mlx_put_image_to_window(cub3d->mlx, cub3d->win, font->sprite->img, x, y);
+			put_img_to_img(cub3d->buffer, font->sprite, x, y);
 		}
 		else
 			ft_log("Character not supported!", NULL, 2);

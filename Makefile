@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
 MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
 INCLUDES = -I/usr/include/freetype2
-LDFLAGS = -lfreetype -lXft
+LDFLAGS = -lfreetype -lXft -lfontconfig -lXrender
 
 NAME = cub3d
 

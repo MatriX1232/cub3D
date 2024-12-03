@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:33:20 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:48:27 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	ft_render_ammo(t_cub3d *cub3d);
 void	ft_render_weapon(t_cub3d *cub3d);
 
 // FONT_RENDERER.C
+t_font	**load_font(t_cub3d *cub3d, char *path);
 void	draw_text(t_cub3d *cub3d, const char *fontfile, int fontsize, const char *text, int x, int y);
+// void	draw_text_v2(t_cub3d *cub3d, int x, int y, char *str, int size);
 
 #endif

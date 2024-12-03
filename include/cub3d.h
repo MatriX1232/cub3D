@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 16:40:03 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:48:19 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ void	ft_anim(t_cub3d *cub3d);
 t_anim	*ft_load_anim(t_cub3d *cub3d, char *folder_path);
 t_anim	**ft_load_anims(t_cub3d *cub3d);
 void	draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
+
+//	ANIM_UTILS.C
+int			ft_get_dir_count(char *path);
+char		**ft_get_dir_files(char *path);
+char		**ft_string_sort(char **names);
+t_sprite	**load_batch(t_cub3d *cub3d, char *dir_path);
+t_sprite	**load_scale(t_cub3d *cub3d, char **names, t_sprite **imgs, char *dir);
 
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);
@@ -109,8 +116,10 @@ void	ft_render_weapon(t_cub3d *cub3d);
 
 // FONT_RENDERER.C
 t_font	**load_font(t_cub3d *cub3d, char *path, int font_size);
-void	draw_text(t_cub3d *cub3d, const char *fontfile, int fontsize, const char *text, int x, int y);
-// void	draw_text_v2(t_cub3d *cub3d, int x, int y, char *str, int size);
 void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset);
+
+
+//	WEAPONS.C
+void	init_weapons(t_cub3d *cub3d);
 
 #endif

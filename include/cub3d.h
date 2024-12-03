@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 17:48:19 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:56:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 //	DEFINE FRAME RATE TO 0 (or less) TO DISABLE FRAME RATE LIMITING
 # define FRAME_RATE 0
+# define OFFSET 5
 
 // 	RAYCASTER.C
 int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
@@ -116,7 +117,7 @@ void	ft_render_weapon(t_cub3d *cub3d);
 
 // FONT_RENDERER.C
 t_font	**load_font(t_cub3d *cub3d, char *path, int font_size);
-void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset);
+void	draw_font(t_cub3d *cub3d, char *str, int x, int y);
 
 
 //	WEAPONS.C

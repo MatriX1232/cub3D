@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 14:08:34 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:52:06 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_free_sprites(t_cub3d *cub3d)
 		free(cub3d->sprites);
 	if (cub3d->buffer)
 		ft_free_sptite(cub3d, cub3d->buffer);
+	if (cub3d->buffer_HUD)
+		ft_free_sptite(cub3d, cub3d->buffer_HUD);
 	ft_log("Sprites freed", NULL, 1);
 }
 

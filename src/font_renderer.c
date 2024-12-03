@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 21:39:29 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 14:32:19 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:51:11 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 	char	*new_path;
 	char	c[2];
 
-	// (void)font_size;
 	characters = (t_font **)malloc(sizeof(t_font *) * 256);
 	new_path = ft_calloc(256, sizeof(char));
 	if (!characters)
@@ -78,53 +77,10 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset)
 		}
 		font = cub3d->characters[(int)str[i]];
 		if (font)
-		{
-			// mlx_put_image_to_window(cub3d->mlx, cub3d->win, font->sprite->img, x, y);
-			put_img_to_img(cub3d->buffer, font->sprite, x, y);
-		}
+			draw_sprite_to_HUD(cub3d, font->sprite, x, y);
 		else
 			ft_log("Character not supported!", &str[i], 2);
 		x += font->sprite->width + offset;
 		i++;
 	}
-}
-
-void	draw_text(t_cub3d *cub3d, const char *fontfile, int fontsize, const char *text, int x, int y)
-{
-	Display			*display = ((t_xvar *)cub3d->mlx)->display;
-	Window 			window = ((t_win_list *)cub3d->win)->window;
-	int 			screen = DefaultScreen(display);
-	XftFont			*font;
-	XftDraw			*draw;
-	XftColor		color;
-	XRenderColor	render_color = {0xffff, 0xffff, 0xffff, 0xffff}; // White color
-	char 			fontname[256];
-
-	// Create the font name with size
-	snprintf(fontname, sizeof(fontname), "%s-%d", fontfile, fontsize);
-
-	// Open the font
-	font = XftFontOpenName(display, screen, fontname);
-	if (!font)
-		return (ft_log("Unable to open font", fontname, 3));
-
-	// Create a drawable
-	draw = XftDrawCreate(display, window, DefaultVisual(display, screen), DefaultColormap(display, screen));
-	if (!draw)
-		return (ft_log("Unable to create drawable", NULL, 3), XftFontClose(display, font));
-
-	// Allocate color
-	if (!XftColorAllocValue(display, DefaultVisual(display, screen), DefaultColormap(display, screen), &render_color, &color))
-	{
-		ft_log("Unable to allocate color", NULL, 3);
-		return (XftDrawDestroy(draw), XftFontClose(display, font));
-	}
-
-	// Draw the text
-	XftDrawStringUtf8(draw, &color, font, x, y, (XftChar8 *)text, strlen(text));
-
-	// Clean up
-	XftColorFree(display, DefaultVisual(display, screen), DefaultColormap(display, screen), &color);
-	XftDrawDestroy(draw);
-	XftFontClose(display, font);
 }

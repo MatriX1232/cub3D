@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 13:21:01 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:40:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y
 //	FT_DRAW.C
 void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);
 void put_pixel_to_img(t_sprite *img, int x, int y, int color);
+void draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 
 //	FT_MINIMAP.C
 void	ft_draw_minimap(t_cub3d *cub3d, int px, int py);

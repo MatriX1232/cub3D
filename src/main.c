@@ -6,16 +6,24 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:41:01 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:35:18 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
+#include <X11/Xlib.h>
+#include <X11/Xft/Xft.h>
 
 int ft_exit(t_cub3d *cub3d)
 {
 	ft_free_all(cub3d);
+	Display *display = ((t_xvar *)cub3d->mlx)->display;
+	if (display)
+	{
+		XCloseDisplay(display);
+	}
+	FcFini();
 	exit(0);
 	return (0);
 }
@@ -81,13 +89,13 @@ int main_loop(t_cub3d *cub3d)
 	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
 	draw_sprite_to_buffer(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
 	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
 	ft_render_HUD(cub3d);
 	free(fps_str);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	return (0);
 }
 
@@ -141,6 +149,10 @@ int	main(int argc, char **argv)
 		return (ft_log("Failed to get data address", NULL, 3), 1);
 	cub3d.buffer->width = cub3d.win_width;
 	cub3d.buffer->height = cub3d.win_height;
+
+	cub3d.characters = load_font(&cub3d, "textures/font/", 30);
+	if (!cub3d.characters)
+		return (ft_log("Failed to load font characters", NULL, 3), 1);
 
 	splash_screen(&cub3d);
 

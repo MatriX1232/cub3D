@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:41:11 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:17:28 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,22 @@ void	ft_free_animations(t_cub3d *cub3d)
 	ft_log("Animations freed", NULL, 1);
 }
 
+void	ft_free_font(t_cub3d *cub3d)
+{
+	int	i;
+
+	i = 0;
+	while (cub3d->characters[i])
+	{
+		ft_free_sptite(cub3d, cub3d->characters[i]->sprite);
+		free(cub3d->characters[i]);
+		i++;
+	}
+}
+
 void	ft_free_all(t_cub3d *cub3d)
 {
+	ft_free_font(cub3d);
 	ft_free_animations(cub3d);
 	ft_free_sptite(cub3d, cub3d->map->spriteNO);
 	ft_free_sptite(cub3d, cub3d->map->spriteSO);

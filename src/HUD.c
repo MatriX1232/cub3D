@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 00:06:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:39:01 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:35:25 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,17 @@ void	ft_render_health(t_cub3d *cub3d)
 	else if (cub3d->player)
 	{
 		if (cub3d->map->player->hp <= 35)
-			draw_text(cub3d, "Tiny5", 40, "100", 510, WIN_HEIGHT + 80);
+		{
+			// XDrawString(((t_xvar *)cub3d->mlx)->display, ((t_win_list *)cub3d->win)->window, ((t_xvar *)cub3d->mlx)->gc, 510, WIN_HEIGHT + 80, "35", 2);
+			// draw_text(cub3d, "Tiny5", 40, "100", 510, WIN_HEIGHT + 80);
+			draw_font(cub3d, "35", 510, WIN_HEIGHT + 35, 5);
+		}
 		else
-			draw_text(cub3d, "Tiny5", 40, "100", 510, WIN_HEIGHT + 80);
+		{
+			// XDrawString(((t_xvar *)cub3d->mlx)->display, ((t_win_list *)cub3d->win)->window, ((t_xvar *)cub3d->mlx)->gc, 510, WIN_HEIGHT + 80, "100", 3);
+			// draw_text(cub3d, "Tiny5", 40, "100", 510, WIN_HEIGHT + 80);
+			draw_font(cub3d, "100", 510, WIN_HEIGHT + 35, 5);
+		}
 	}
 }
 
@@ -65,18 +73,29 @@ void	ft_render_ammo(t_cub3d *cub3d)
 
 	weapon = cub3d->player->current_weapon;
 	if (weapon->current_ammo == 0 && weapon->index != 1)
-		draw_text(cub3d, "Tiny5", 40, "OUT", 640, WIN_HEIGHT + 80);
+	{
+		draw_font(cub3d, "OUT", 640, WIN_HEIGHT + 35, 5);
+		// draw_text(cub3d, "Tiny5", 40, "OUT", 640, WIN_HEIGHT + 80);
+	}
 	else if (weapon->index > 1)
 	{
 		ammo_str = ft_itoa(weapon->current_ammo);
 		if (ft_strlen(ammo_str) == 3)
-			draw_text(cub3d, "Tiny5", 40, ammo_str, 660, WIN_HEIGHT + 80);
+			draw_font(cub3d, ammo_str, 640, WIN_HEIGHT + 35, 5);
 		else if (ft_strlen(ammo_str) == 2)
-			draw_text(cub3d, "Tiny5", 40, ammo_str, 670, WIN_HEIGHT + 80);
+			draw_font(cub3d, ammo_str, 650, WIN_HEIGHT + 35, 5);
 		else if (ft_strlen(ammo_str) == 1)
-			draw_text(cub3d, "Tiny5", 40, ammo_str, 680, WIN_HEIGHT + 80);
-		free(ammo_str);
+			draw_font(cub3d, ammo_str, 660, WIN_HEIGHT + 35, 5);
+		// 	draw(cub3d, "Tiny5", 40, ammo_str, 660, WIN_HEIGHT + 80);
+		// else if (ft_strlen(ammo_str) == 2)
+		// 	draw_text(cub3d, "Tiny5", 40, ammo_str, 670, WIN_HEIGHT + 80);
+		// else if (ft_strlen(ammo_str) == 1)
+		// 	draw_text(cub3d, "Tiny5", 40, ammo_str, 680, WIN_HEIGHT + 80);
+		// free(ammo_str);
 	}
 	else
-		draw_text(cub3d, "Tiny5", 20, "INFINITE", 650, WIN_HEIGHT + 80);
+	{
+		draw_font(cub3d, "INF", 650, WIN_HEIGHT + 35, 5);
+		// draw_text(cub3d, "Tiny5", 20, "INFINITE", 650, WIN_HEIGHT + 80);
+	}
 }

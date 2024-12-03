@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 16:24:53 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:36:59 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ typedef struct s_anim
 	long		last_update;
 	bool		finished;
 }	t_anim;
+
+typedef struct s_font
+{
+	t_sprite	*sprite;
+	char		name;
+	int			size_x;
+	int 		size_y;
+}	t_font;
 
 typedef struct s_weapon
 {
@@ -118,6 +126,7 @@ typedef struct s_cub3d
 	void		*win;
 	int			win_width;
 	int			win_height;
+	t_font		**characters;
 	t_sprite	**sprites;
 	t_sprite	*HUD;
 	t_anim		**anims;

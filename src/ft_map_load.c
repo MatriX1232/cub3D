@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/11/29 23:35:21 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:11:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 		map->grid[j] = NULL;
 	i = 0;
 	map->width = 0;
+	map->player->hp = 100;
 	cub3d->player = map->player;
 	ft_log("Loading map textures...", NULL, 1);
 	while ((line = get_next_line(fd)) != NULL)

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 17:53:18 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:44:21 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	finish_shooting(t_cub3d *cub3d, t_anim *anim)
 	anim->frame = 0;
 	anim->finished = true;
 	cub3d->gun_shooting = false;
-	put_img_to_img(cub3d->buffer, anim->sprites[anim->frame], x, y);
+	draw_2_buffer(cub3d->buffer, anim->sprites[anim->frame], x, y);
 }
 
 void	change_frame(t_cub3d *cub3d, t_anim *anim, long current_time)

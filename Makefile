@@ -27,7 +27,9 @@ SRCS = \
 	src/input.c \
 	src/splash_screen.c \
 	src/HUD.c \
-	src/font_renderer.c
+	src/font_renderer.c \
+	src/weapons.c \
+	src/anim_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 

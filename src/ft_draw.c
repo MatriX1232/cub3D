@@ -6,104 +6,58 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 16:39:38 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:51:55 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y)
+void	put_pixel_to_img(t_sprite *img, int x, int y, int color)
 {
-	int src_bpp, src_size_line, src_endian;
-	int dest_bpp, dest_size_line, dest_endian;
+	int	pixel_index;
 
-	char *src_data = mlx_get_data_addr(src_img->img, &src_bpp, &src_size_line, &src_endian);
-	char *dest_data = mlx_get_data_addr(dest_img->img, &dest_bpp, &dest_size_line, &dest_endian);
-
-	int	src_width = src_img->width;
-	int	src_height = src_img->height;
-
-	if (!src_data || !dest_data)
-		return (ft_log("put_img_to_img: ", "src_data or dest_data is NULL", 2));
-
-	if (dest_x < 0 || dest_y < 0 || dest_x + src_img->width > dest_img->width || dest_y + src_img->height > dest_img->height)
-	{
-		printf("dest_x: %d | dest_y: %d | src_width: %d | src_height: %d\n", dest_x, dest_y, src_width, src_height);
-		return (ft_log("Image position out of bounds", NULL, 3));
-	}
-
-	for (int y = 0; y < src_height; y++)
-	{
-		for (int x = 0; x < src_width; x++)
-		{
-			int src_pixel_index = (y * src_size_line) + (x * (src_bpp / 8));
-			int dest_pixel_index = ((dest_y + y) * dest_size_line) + ((dest_x + x) * (dest_bpp / 8));
-
-			if (dest_pixel_index >= 0 && dest_pixel_index < dest_size_line * dest_img->height)
-				*(unsigned int *)(dest_data + dest_pixel_index) = *(unsigned int *)(src_data + src_pixel_index);
-		}
-	}
-}
-
-void put_pixel_to_img(t_sprite *img, int x, int y, int color)
-{
 	if (img->addr && x >= 0 && x < img->width && y >= 0 && y < img->height)
 	{
-		int pixel_index = (y * img->line_length) + (x * (img->bits_per_pixel / 8));
-		*(unsigned int *)(img->addr + pixel_index) = color;
+		pixel_index = (y * img->line_length) + (x * (img->bits_per_pixel / 8));
+		if ((color & 0xFF000000) != 0xFF000000)
+			*(unsigned int *)(img->addr + pixel_index) = color;
 	}
 }
 
-void draw_sprite_to_buffer(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset)
+int	is_within_bounds(t_sprite *img, int x, int y)
 {
-	int x, y;
-	char *src_pixel;
-	char *dst_pixel;
-	int src_line_length = sprite->line_length;
-	int dst_line_length = cub3d->buffer->line_length;
-	int bytes_per_pixel = sprite->bits_per_pixel / 8;
+	return (x >= 0 && x < img->width && y >= 0 && y < img->height);
+}
 
-	for (y = 0; y < sprite->height; y++)
+void	blend_pixel(t_sprite *dest, t_sprite *src, int x, int y, int x_off, int y_off)
+{
+	unsigned int	src_color;
+	unsigned int	dest_color;
+	char			*src_p;
+	char			*dest_p;
+
+	src_p = src->addr + y * src->line_length + x * (src->bits_per_pixel / 8);
+	dest_p = dest->addr + (y + y_off) * dest->line_length + (x + x_off) * (dest->bits_per_pixel / 8);
+	src_color = *(unsigned int *)src_p;
+	dest_color = *(unsigned int *)dest_p;
+	if ((src_color & 0xFF000000) != 0xFF000000)
+		*(unsigned int *)dest_p = src_color;
+}
+
+void	draw_2_buffer(t_sprite *dest, t_sprite *src, int x_offset, int y_offset)
+{
+	int	x;
+	int	y;
+
+	for (y = 0; y < src->height; y++)
 	{
-		if (y + y_offset < 0 || y + y_offset >= cub3d->win_height)
-			continue;
-		for (x = 0; x < sprite->width; x++)
+		for (x = 0; x < src->width; x++)
 		{
-			if (x + x_offset < 0 || x + x_offset >= cub3d->win_width)
-				continue;
-			src_pixel = sprite->addr + y * src_line_length + x * bytes_per_pixel;
-			dst_pixel = cub3d->buffer->addr + (y + y_offset) * dst_line_length + (x + x_offset) * bytes_per_pixel;
-			unsigned int color = *(unsigned int *)src_pixel;
-			if ((color & 0xFF000000) != 0xFF000000)
-				*(unsigned int *)dst_pixel = color;
+			if (is_within_bounds(dest, x + x_offset, y + y_offset))
+			{
+				blend_pixel(dest, src, x, y, x_offset, y_offset);
+			}
 		}
 	}
 }
-
-void draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset)
-{
-	int x, y;
-	char *src_pixel;
-	char *dst_pixel;
-	int src_line_length = sprite->line_length;
-	int dst_line_length = cub3d->buffer_HUD->line_length;
-	int bytes_per_pixel = sprite->bits_per_pixel / 8;
-
-	for (y = 0; y < sprite->height; y++)
-	{
-		if (y + y_offset < 0 || y + y_offset >= cub3d->win_height)
-			continue;
-		for (x = 0; x < sprite->width; x++)
-		{
-			if (x + x_offset < 0 || x + x_offset >= cub3d->win_width)
-				continue;
-			src_pixel = sprite->addr + y * src_line_length + x * bytes_per_pixel;
-			dst_pixel = cub3d->buffer_HUD->addr + (y + y_offset) * dst_line_length + (x + x_offset) * bytes_per_pixel;
-			unsigned int color = *(unsigned int *)src_pixel;
-			if ((color & 0xFF000000) != 0xFF000000)
-				*(unsigned int *)dst_pixel = color;
-		}
-	}
-}
-

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 00:06:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 17:56:02 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:43:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ fc-list | grep "Tiny5"
 
 void	ft_render_HUD(t_cub3d *cub3d)
 {
-	draw_sprite_to_HUD(cub3d, cub3d->HUD, 0, 0);
+	draw_2_buffer(cub3d->buffer_HUD, cub3d->HUD, 0, 0);
 	ft_render_health(cub3d);
 	ft_render_ammo(cub3d);
 	ft_render_weapon(cub3d);
@@ -40,7 +40,7 @@ void	ft_render_weapon(t_cub3d *cub3d)
 	t_weapon	*weapon;
 
 	weapon = cub3d->player->current_weapon;
-	draw_sprite_to_HUD(cub3d, weapon->icon, 345, 5);
+	draw_2_buffer(cub3d->buffer_HUD, weapon->icon, 345, 5);
 }
 
 void	ft_render_health(t_cub3d *cub3d)

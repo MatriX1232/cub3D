@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 17:56:13 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:48:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ t_sprite	**load_batch(t_cub3d *cub3d, char *dir_path);
 t_sprite	**load_scale(t_cub3d *cub3d, char **names, t_sprite **imgs, char *dir);
 
 //	FT_DRAW.C
-void put_img_to_img(t_sprite *dest_img, t_sprite *src_img, int dest_x, int dest_y);
-void put_pixel_to_img(t_sprite *img, int x, int y, int color);
-void draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
+void	put_pixel_to_img(t_sprite *img, int x, int y, int color);
+void	draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
+void	draw_2_buffer(t_sprite *dest, t_sprite *src, int x_offset, int y_offset);
 
 //	FT_MINIMAP.C
 void	ft_draw_minimap(t_cub3d *cub3d, int px, int py);

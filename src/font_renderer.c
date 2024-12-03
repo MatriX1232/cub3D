@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 21:39:29 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:49 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:32:19 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 	char	*new_path;
 	char	c[2];
 
-	(void)font_size;
+	// (void)font_size;
 	characters = (t_font **)malloc(sizeof(t_font *) * 256);
 	new_path = ft_calloc(256, sizeof(char));
 	if (!characters)
@@ -40,9 +40,9 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 		}
 		c[0] = i;
 		c[1] = '\0';
-		ft_strcat(new_path, path);
-		ft_strcat(new_path, c);
-		ft_strcat(new_path, ".xpm");
+		ft_strlcat(new_path, path, 256);
+		ft_strlcat(new_path, c, 256);
+		ft_strlcat(new_path, ".xpm", 256);
 		font = (t_font *)malloc(sizeof(t_font));
 		if (!font)
 			return (ft_log("Failed to allocate memory for font character", NULL, 3), NULL);
@@ -50,7 +50,7 @@ t_font	**load_font(t_cub3d *cub3d, char *path, int font_size)
 		if (font->sprite)
 		{
 			font->name = i;
-			// font->sprite = ft_scale_sprite(cub3d, font->sprite, font_size, (font_size * font->sprite->height) / font->sprite->width);
+			font->sprite = ft_scale_sprite(cub3d, font->sprite, (font_size * font->sprite->width) / font->sprite->height, font_size);
 			characters[i] = font;
 		}
 		else
@@ -70,6 +70,12 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == ' ')
+		{
+			x += offset;
+			i++;
+			continue;
+		}
 		font = cub3d->characters[(int)str[i]];
 		if (font)
 		{
@@ -77,7 +83,7 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y, int offset)
 			put_img_to_img(cub3d->buffer, font->sprite, x, y);
 		}
 		else
-			ft_log("Character not supported!", NULL, 2);
+			ft_log("Character not supported!", &str[i], 2);
 		x += font->sprite->width + offset;
 		i++;
 	}

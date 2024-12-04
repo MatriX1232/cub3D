@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 22:40:37 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 13:13:52 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:59:17 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,4 @@ int	splash_screen(t_cub3d *cub3d)
 	sleep(1);
 	ft_free_sptite(cub3d, splash);
 	return (0);
-}
-
-void change_sprite_transparency(t_sprite *sprite, unsigned char transparency)
-{
-	int x, y;
-	int bytes_per_pixel = sprite->bits_per_pixel / 8;
-	char *pixel;
-
-	for (y = 0; y < sprite->height; y++)
-	{
-		for (x = 0; x < sprite->width; x++)
-		{
-			pixel = sprite->addr + (y * sprite->line_length + x * bytes_per_pixel);
-			unsigned int color = *(unsigned int *)pixel;
-			// Modify the alpha channel
-			color = (color & 0x00FFFFFF) | (transparency << 24);
-			*(unsigned int *)pixel = color;
-		}
-	}
 }

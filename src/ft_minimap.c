@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:25:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:21:11 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:21:39 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static void	ft_draw_scale(t_cub3d *cub3d, int x, int y, int color)
 		j = 0;
 		while (j < MINIMAP_SCALE)
 		{
-			put_pixel_to_img(cub3d->buffer, offx + (x * s) + i, offy + (y * s) + j, color);
+			put_pixel_to_img(cub3d->buffer, \
+				offx + (x * s) + i, \
+				offy + (y * s) + j, \
+				color);
 			j++;
 		}
 		i++;

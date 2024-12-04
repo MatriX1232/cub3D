@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:16:55 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:43:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,10 @@ void	move_forward(t_cub3d *cub3d);
 void	move_backward(t_cub3d *cub3d);
 void	rotate_left(t_cub3d *cub3d);
 void	rotate_right(t_cub3d *cub3d);
-int	ft_key_press(int keycode, t_cub3d *cub3d);
-int	ft_key_release(int keycode, t_cub3d *cub3d);
+int		ft_key_press(int keycode, t_cub3d *cub3d);
+int		ft_key_release(int keycode, t_cub3d *cub3d);
+void	look_up(t_cub3d *cub3d);
+void	look_down(t_cub3d *cub3d);
 
 // SPLASH_SCREEN.C
 int		splash_screen(t_cub3d *cub3d);

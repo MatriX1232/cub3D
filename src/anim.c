@@ -86,13 +86,13 @@ int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
 	long		current_time;
 	t_weapon	*weapon;
-	int			delta;
+	long			delta;
 
 	weapon = cub3d->player->current_weapon;
 	current_time = get_timestamp();
 	if (weapon->current_ammo == 0 && weapon->index != 1)
 		return (finish_shooting(cub3d, anim), 0);
-	delta = (int)(current_time - cub3d->prev_shoot);
+	delta = current_time - cub3d->prev_shoot;
 	if (delta > weapon->fire_rate && weapon->index != 1)
 	{
 		if (weapon->current_ammo - 1 <= 0)

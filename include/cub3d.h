@@ -68,6 +68,8 @@ t_sprite	**load_scale(t_cub3d *cub3d, char **names, t_sprite **imgs, char *dir);
 void	put_pixel_to_img(t_sprite *img, int x, int y, int color);
 void	draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 void	draw_2_buffer(t_sprite *dest, t_sprite *src, int x_offset, int y_offset);
+void	blend_pixel(t_sprite *dest, t_sprite *src, int x, int y, int x_off, int y_off);
+int		is_within_bounds(t_sprite *img, int x, int y);
 
 //	FT_MINIMAP.C
 void	ft_draw_minimap(t_cub3d *cub3d, int px, int py);

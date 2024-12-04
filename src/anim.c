@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:01:42 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 14:34:15 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:18:10 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
 	long			current_time;
 	long			delta;
-	t_weapon	*weapon;
+	t_weapon		*weapon;
 
 	weapon = cub3d->player->current_weapon;
 	current_time = get_timestamp();

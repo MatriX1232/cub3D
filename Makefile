@@ -15,6 +15,7 @@ DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 SRCS = \
 	src/main.c \
 	src/ft_images.c \
+	src/ft_images2.c \
 	src/anim.c \
 	src/ft_draw.c \
 	src/ft_minimap.c \
@@ -25,6 +26,8 @@ SRCS = \
 	src/ft_free.c \
 	src/raycaster.c \
 	src/input.c \
+	src/input2.c \
+	src/input3.c \
 	src/splash_screen.c \
 	src/HUD.c \
 	src/font_renderer.c \

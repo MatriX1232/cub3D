@@ -25,6 +25,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_SPACE 32
 # define STEP_SPEED 0.05
 # define MOVE_SPEED 0.02
 # define ROT_SPEED 0.02
@@ -121,6 +122,8 @@ void	ft_render_weapon(t_cub3d *cub3d);
 // FONT_RENDERER.C
 t_font	**load_font(t_cub3d *cub3d, char *path, int font_size);
 void	draw_font(t_cub3d *cub3d, char *str, int x, int y);
+
+// DOOR.C
 
 
 //	WEAPONS.C

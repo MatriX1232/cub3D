@@ -30,7 +30,8 @@ SRCS = \
 	src/font_renderer.c \
 	src/weapons.c \
 	src/anim_utils.c \
-	src/ft_free2.c
+	src/ft_free2.c \
+	src/door.c
 
 OBJS = $(SRCS:%.c=%.o)
 

@@ -39,7 +39,7 @@ static void	ft_draw_scale(t_cub3d *cub3d, int x, int y, int color)
 
 static void	custom_switch(t_cub3d *cub3d, int x, int y)
 {
-	if (cub3d->map->grid[y][x] == '0')
+	if (cub3d->map->grid[y][x] == '0' || cub3d->map->grid[y][x] == '2')
 		ft_draw_scale(cub3d, x, y, MINIMAP_BG);
 	else if (cub3d->map->grid[y][x] == '1')
 		ft_draw_scale(cub3d, x, y, MINIMAP_FG);

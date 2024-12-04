@@ -111,17 +111,17 @@ int	raycaster(t_cub3d *cub3d)
 		int texnum;
 		if (ray.side == 0)
 		{
-				if (ray.raydirx > 0)
-					texnum = 2; // EAST
-				else
-					texnum = 3; // WEST
+			if (ray.raydirx > 0)
+				texnum = 2; // EAST
+			else
+				texnum = 3; // WEST
 		}
 		else
 		{
-				if (ray.raydiry > 0)
-					texnum = 1; // SOUTH
-				else
-					texnum = 0; // NORTH
+			if (ray.raydiry > 0)
+				texnum = 1; // SOUTH
+			else
+				texnum = 0; // NORTH
 		}
 		double wallx;
 		if (ray.side == 0)

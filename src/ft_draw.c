@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:55:23 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 18:53:33 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:35:46 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ int	is_within_bounds(t_sprite *img, int x, int y)
 	return (x >= 0 && x < img->width && y >= 0 && y < img->height);
 }
 
-void	blend_pixel(t_sprite *dest, t_sprite *src, int x, int y, int x_off, int y_off)
+void	blend_pixel(t_sprite *dest, t_sprite *src, t_vec2 v, t_vec2 off)
 {
 	unsigned int	src_color;
 	unsigned int	dest_color;
 	char			*src_p;
 	char			*dest_p;
 
-	src_p = src->addr + y * src->line_length + x * (src->bits_per_pixel / 8);
-	dest_p = dest->addr + (y + y_off) * dest->line_length + (x + x_off) * (dest->bits_per_pixel / 8);
+	src_p = src->addr + v.y * src->line_length + \
+		v.x * (src->bits_per_pixel / 8);
+	dest_p = dest->addr + (v.y + off.y) * dest->line_length + \
+		(v.x + off.x) * (dest->bits_per_pixel / 8);
 	src_color = *(unsigned int *)src_p;
 	dest_color = *(unsigned int *)dest_p;
 	if ((src_color & 0xFF000000) != 0xFF000000)
@@ -50,14 +52,18 @@ void	draw_2_buffer(t_sprite *dest, t_sprite *src, int x_offset, int y_offset)
 	int	x;
 	int	y;
 
-	for (y = 0; y < src->height; y++)
+	y = 0;
+	while (y < src->height)
 	{
-		for (x = 0; x < src->width; x++)
+		x = 0;
+		while (x < src->width)
 		{
 			if (is_within_bounds(dest, x + x_offset, y + y_offset))
-			{
-				blend_pixel(dest, src, x, y, x_offset, y_offset);
-			}
+				blend_pixel(dest, src, \
+					(t_vec2){x, y}, \
+					(t_vec2){x_offset, y_offset});
+			x++;
 		}
+		y++;
 	}
 }

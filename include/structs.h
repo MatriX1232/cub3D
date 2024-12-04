@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 14:34:18 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:29:15 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}	t_vec2;
 
 typedef struct s_sprite
 {

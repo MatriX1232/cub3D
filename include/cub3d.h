@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 14:43:43 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:34:10 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_sprite	**load_scale(t_cub3d *cub3d, char **names, t_sprite **imgs, char *dir);
 void	put_pixel_to_img(t_sprite *img, int x, int y, int color);
 void	draw_sprite_to_HUD(t_cub3d *cub3d, t_sprite *sprite, int x_offset, int y_offset);
 void	draw_2_buffer(t_sprite *dest, t_sprite *src, int x_offset, int y_offset);
-void	blend_pixel(t_sprite *dest, t_sprite *src, int x, int y, int x_off, int y_off);
+void	blend_pixel(t_sprite *dest, t_sprite *src, t_vec2 v, t_vec2 off);
 int		is_within_bounds(t_sprite *img, int x, int y);
 
 //	FT_MINIMAP.C

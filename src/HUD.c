@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 00:06:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 18:43:05 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:13:12 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ fc-cache -fv
 fc-list | grep "Tiny5"
 */
 
-void	ft_render_HUD(t_cub3d *cub3d)
+void	ft_render_hud(t_cub3d *cub3d)
 {
 	draw_2_buffer(cub3d->buffer_HUD, cub3d->HUD, 0, 0);
 	ft_render_health(cub3d);

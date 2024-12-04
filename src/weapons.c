@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:41:55 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 17:45:13 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:09:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ void	init_weapons(t_cub3d *cub3d)
 	free(rifle);
 	free(minigun);
 }
-
-

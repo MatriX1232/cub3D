@@ -6,27 +6,12 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 15:52:06 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:47:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
-
-void	ft_free_2d_array(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
-	}
-	free(array);
-	array = NULL;
-}
 
 void	ft_free_sptite(t_cub3d *cub3d, t_sprite *sprite)
 {
@@ -80,21 +65,6 @@ void	ft_free_animations(t_cub3d *cub3d)
 	ft_log("Animations freed", NULL, 1);
 }
 
-void	ft_free_font(t_cub3d *cub3d)
-{
-	int	i;
-
-	i = 0;
-	while (i < 256)
-	{
-		if (cub3d->characters[i] != NULL)
-			ft_free_sptite(cub3d, cub3d->characters[i]->sprite);
-		free(cub3d->characters[i]);
-		i++;
-	}
-	free(cub3d->characters);
-}
-
 void	ft_free_all(t_cub3d *cub3d)
 {
 	ft_free_font(cub3d);
@@ -111,7 +81,7 @@ void	ft_free_all(t_cub3d *cub3d)
 	ft_free_sptite(cub3d, cub3d->weapons[3].icon);
 	ft_free_sptite(cub3d, cub3d->weapons[4].icon);
 	free(cub3d->map);
-	free(cub3d->player); // Free player structure
+	free(cub3d->player);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);
 	mlx_destroy_display(cub3d->mlx);
 	free(cub3d->mlx);

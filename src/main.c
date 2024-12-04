@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 18:43:48 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:17:30 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int main_loop(t_cub3d *cub3d)
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
 	draw_2_buffer(cub3d->buffer, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
+	ft_render_hud(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
-	ft_render_HUD(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer_HUD->img, 0, WIN_HEIGHT - 1);
 	int fps = (int)(1.0 / frame_time);
 	char *fps_str = ft_itoa(fps);

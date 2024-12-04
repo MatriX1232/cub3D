@@ -143,6 +143,4 @@ typedef struct s_cub3d
 	long		prev_shoot;
 }	t_cub3d;
 
-
-
 #endif

@@ -100,7 +100,7 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 {
 	t_sprite	**sprites;
 
-	sprites = (t_sprite **) malloc(9 * sizeof(t_sprite *));
+	sprites = (t_sprite **) malloc(10 * sizeof(t_sprite *));
 	if (!sprites)
 	{
 		ft_log("Cannot allocate memory for sprites!", NULL, 3);
@@ -115,7 +115,8 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 	sprites[5] = xpm_load_image(cub3d->mlx, "textures/purple_stone.xpm", 1);
 	sprites[6] = xpm_load_image(cub3d->mlx, "textures/red_brick.xpm", 1);
 	sprites[7] = xpm_load_image(cub3d->mlx, "textures/wood.xpm", 1);
-	sprites[8] = NULL;
+	sprites[8] = xpm_load_image(cub3d->mlx, "textures/door.xpm", 1);
+	sprites[9] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);
 }

@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 20:22:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:08:14 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/12/04 11:44:19 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/12/04 11:44:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
-#include <sys/time.h>
 
-unsigned long	rgb_to_hex(int r, int g, int b)
+void	ft_free_font(t_cub3d *cub3d)
 {
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+	int	i;
+
+	i = 0;
+	while (i < 256)
+	{
+		if (cub3d->characters[i] != NULL)
+			ft_free_sptite(cub3d, cub3d->characters[i]->sprite);
+		free(cub3d->characters[i]);
+		i++;
+	}
+	free(cub3d->characters);
 }
 
-int	ft_2d_len(void **array)
+void	ft_free_2d_array(char **array)
 {
 	int	i;
 
 	i = 0;
 	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
 		i++;
-	return (i);
-}
-
-long	get_timestamp(void)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	}
+	free(array);
+	array = NULL;
 }

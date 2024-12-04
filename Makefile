@@ -25,6 +25,8 @@ SRCS = \
 	src/ft_free.c \
 	src/raycaster.c \
 	src/input.c \
+	src/input2.c \
+	src/input3.c \
 	src/splash_screen.c \
 	src/HUD.c \
 	src/font_renderer.c \

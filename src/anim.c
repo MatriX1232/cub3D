@@ -84,9 +84,9 @@ void	change_frame(t_cub3d *cub3d, t_anim *anim, long current_time)
 
 int	update_animation(t_cub3d *cub3d, t_anim *anim)
 {
-	long		current_time;
-	t_weapon	*weapon;
+	long			current_time;
 	long			delta;
+	t_weapon	*weapon;
 
 	weapon = cub3d->player->current_weapon;
 	current_time = get_timestamp();

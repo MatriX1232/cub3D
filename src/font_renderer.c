@@ -89,7 +89,7 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y)
 		}
 		font = cub3d->characters[(int)str[i]];
 		if (font)
-			draw_2_buffer(cub3d->HUD, font->sprite, x, y);
+			draw_2_buffer(cub3d->buffer_HUD, font->sprite, x, y);
 		else
 			ft_log("Character not supported!", &str[i], 2);
 		x += font->sprite->width + OFFSET;

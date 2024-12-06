@@ -89,7 +89,7 @@ int	raycaster(t_cub3d *cub3d)
 				ray.hit = 1;
 				break;
 			}
-			if (cub3d->map->grid[ray.mapy][ray.mapx] > '0') // Note: grid[y][x]
+			if (cub3d->map->grid[ray.mapy][ray.mapx] > '0')
 				ray.hit = 1;
 		}
 		if (ray.hit == 0)
@@ -106,22 +106,25 @@ int	raycaster(t_cub3d *cub3d)
 		int drawend = lineheight / 2 + cub3d->win_height / 2 + pitch;
 		if (drawend >= cub3d->win_height)
 			drawend = cub3d->win_height - 1;
-		for (int y = 0; y < drawstart; y++)
-			put_pixel_to_img(cub3d->buffer, x, y, cub3d->map->ceiling);
 		int texnum;
-		if (ray.side == 0)
-		{
-			if (ray.raydirx > 0)
-				texnum = 2; // EAST
-			else
-				texnum = 3; // WEST
-		}
+		if (cub3d->map->grid[ray.mapy][ray.mapx] == '2')
+			texnum = 8;
 		else
 		{
-			if (ray.raydiry > 0)
-				texnum = 1; // SOUTH
+			if (ray.side == 0)
+			{
+				if (ray.raydirx > 0)
+					texnum = 2; // EAST
+				else
+					texnum = 3; // WEST
+			}
 			else
-				texnum = 0; // NORTH
+			{
+				if (ray.raydiry > 0)
+					texnum = 1; // SOUTH
+				else
+					texnum = 0; // NORTH
+			}
 		}
 		double wallx;
 		if (ray.side == 0)
@@ -134,6 +137,8 @@ int	raycaster(t_cub3d *cub3d)
 			texx = cub3d->sprites[texnum]->width - texx - 1;
 		if (ray.side == 1 && ray.raydiry < 0)
 			texx = cub3d->sprites[texnum]->width - texx - 1;
+		for (int y = 0; y < drawstart; y++)
+			put_pixel_to_img(cub3d->buffer, x, y, cub3d->map->ceiling);
 		for (int y = drawstart; y < drawend; y++)
 		{
 			int d = (y - pitch) * 256 - cub3d->win_height * 128 + lineheight * 128;
@@ -193,9 +198,7 @@ int	raycaster(t_cub3d *cub3d)
 			int ceilColor = get_pixel_color(cub3d->sprites[CEILING], ceilTexX, ceilTexY);
 			put_pixel_to_img(cub3d->buffer, x, y, ceilColor);
 		}
-
 	}
-
 	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 	cub3d->frame++;
 	return (0);

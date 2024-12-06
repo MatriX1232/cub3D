@@ -47,6 +47,8 @@ int	ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->keys.up = 1;
 	else if (keycode == XK_Down)
 		cub3d->keys.down = 1;
+	else if (keycode == KEY_SPACE)
+		try_open_door(cub3d);
 	ft_key_weapon(keycode, cub3d);
 	return (0);
 }

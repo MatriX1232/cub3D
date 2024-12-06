@@ -75,6 +75,7 @@ int main_loop(t_cub3d *cub3d)
 	cub3d->delta_time = frame_time;
 	cub3d->prev_time = current_time;
 	handle_input(cub3d);
+	update_doors(cub3d);
 	raycaster(cub3d);
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
@@ -134,47 +135,37 @@ int	main(int argc, char **argv)
 	if (!mlx || !win)
 		return (ft_log("Failed to initialize MLX or create window", NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
-
 	cub3d.win_width = WIN_WIDTH;
 	cub3d.win_height = WIN_HEIGHT;
-
 	cub3d.mlx = mlx;
 	cub3d.win = win;
-
 	cub3d.sprites = ft_load_sprites(&cub3d);
 	cub3d.HUD = xpm_load_image(mlx, "textures/hud.xpm", 0);
 	if (!cub3d.sprites || !cub3d.HUD)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
-
 	// Initialize buffer
 	cub3d.buffer = ft_create_blank(&cub3d, cub3d.win_width, cub3d.win_height);
 	cub3d.buffer_HUD = ft_create_blank(&cub3d, ALL_WIDTH, ALL_HEIGHT - WIN_HEIGHT);
 	if (!cub3d.buffer || !cub3d.buffer_HUD)
 		return (ft_log("Failed to create buffer", NULL, 3), 1);
-
 	cub3d.characters = load_font(&cub3d, "textures/font/", 30);
 	if (!cub3d.characters)
 		return (ft_log("Failed to load font characters", NULL, 3), 1);
-
 	// splash_screen(&cub3d);
-
 	cub3d.map = ft_load_map(&cub3d, argv[1]);
 	if (!cub3d.map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
-
 	cub3d.anims = ft_load_anims(&cub3d);
 	if (!cub3d.anims)
 		return (ft_log("Anims failed to load", NULL, 3), 1);
 	if (!cub3d.player)
 		return (ft_log("Player failed to load", NULL, 3), 1);
-
 	cub3d.player->current_weapon = &cub3d.weapons[1];
 	cub3d.player->pitch = 100;
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();
 	cub3d.delta_time = 0;
-
 	cub3d.gun_shooting = 0;
 	cub3d.prev_shoot = 0;
 

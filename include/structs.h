@@ -103,7 +103,7 @@ typedef struct s_map
 	t_sprite	*spriteEA;
 	int			floor;
 	int			ceiling;
-	t_player	 *player;
+	t_player	*player;
 }	t_map;
 
 
@@ -147,6 +147,10 @@ typedef struct s_cub3d
 	long		prev_time;
 	int			gun_shooting;
 	long		prev_shoot;
+	int		door_is_open;
+	int		door_x;
+	int		door_y;
+	long	door_opened_time;
 }	t_cub3d;
 
 #endif

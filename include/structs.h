@@ -15,12 +15,21 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+# define MAX_DOORS 100
 
 typedef struct s_vec2
 {
 	int	x;
 	int	y;
 }	t_vec2;
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	int		open;
+	long	open_time;
+}	t_door;
 
 typedef struct s_sprite
 {
@@ -147,10 +156,8 @@ typedef struct s_cub3d
 	long		prev_time;
 	int			gun_shooting;
 	long		prev_shoot;
-	int		door_is_open;
-	int		door_x;
-	int		door_y;
-	long	door_opened_time;
+	int			door_count;
+	t_door	doors[MAX_DOORS];
 }	t_cub3d;
 
 #endif

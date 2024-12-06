@@ -128,6 +128,7 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y);
 // DOOR.C
 void	update_doors(t_cub3d *cub3d);
 int		try_open_door(t_cub3d *cub3d);
+void	init_door_system(t_cub3d *cub3d);
 
 //	WEAPONS.C
 void	init_weapons(t_cub3d *cub3d);

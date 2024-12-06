@@ -23,19 +23,19 @@ int ft_exit(t_cub3d *cub3d)
 int mouse_move(int x, int y, t_cub3d *cub3d)
 {
 	int center_x = cub3d->win_width / 2;
-	// int center_y = cub3d->win_height / 2;
-	double rotSpeed;
+	int center_y = cub3d->win_height / 2;
 	int delta_x = x - center_x;
 	if (delta_x != 0)
 	{
-		rotSpeed = delta_x * 0.002;
+		double rotSpeed = delta_x * 0.002;
 		double oldDirX = cub3d->player->dirx;
 		double oldPlaneX = cub3d->player->planex;
-		cub3d->player->dirx = cub3d->player->dirx * cos(-rotSpeed) - cub3d->player->diry * sin(-rotSpeed);
-		cub3d->player->diry = oldDirX * sin(-rotSpeed) + cub3d->player->diry * cos(-rotSpeed);
-		cub3d->player->planex = cub3d->player->planex * cos(-rotSpeed) - cub3d->player->planey * sin(-rotSpeed);
-		cub3d->player->planey = oldPlaneX * sin(-rotSpeed) + cub3d->player->planey * cos(-rotSpeed);
+		cub3d->player->dirx = cub3d->player->dirx * cos(rotSpeed) - cub3d->player->diry * sin(rotSpeed);
+		cub3d->player->diry = oldDirX * sin(rotSpeed) + cub3d->player->diry * cos(rotSpeed);
+		cub3d->player->planex = cub3d->player->planex * cos(rotSpeed) - cub3d->player->planey * sin(rotSpeed);
+		cub3d->player->planey = oldPlaneX * sin(rotSpeed) + cub3d->player->planey * cos(rotSpeed);
 	}
+	mlx_mouse_move(cub3d->mlx, cub3d->win, center_x, center_y);
 	(void)y;
 	return (0);
 }
@@ -139,6 +139,7 @@ int	main(int argc, char **argv)
 	cub3d.win_height = WIN_HEIGHT;
 	cub3d.mlx = mlx;
 	cub3d.win = win;
+	mlx_mouse_hide(cub3d.mlx, cub3d.win);
 	cub3d.sprites = ft_load_sprites(&cub3d);
 	cub3d.HUD = xpm_load_image(mlx, "textures/hud.xpm", 0);
 	if (!cub3d.sprites || !cub3d.HUD)
@@ -155,6 +156,7 @@ int	main(int argc, char **argv)
 	cub3d.map = ft_load_map(&cub3d, argv[1]);
 	if (!cub3d.map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
+	init_door_system(&cub3d);
 	cub3d.anims = ft_load_anims(&cub3d);
 	if (!cub3d.anims)
 		return (ft_log("Anims failed to load", NULL, 3), 1);

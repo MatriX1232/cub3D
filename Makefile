@@ -38,7 +38,9 @@ SRCS = \
 	src/anim_utils.c \
 	src/ft_free2.c \
 	src/door.c \
-	src/door2.c
+	src/door2.c \
+	src/mouse.c \
+	src/keys.c
 
 OBJS = $(SRCS:%.c=%.o)
 

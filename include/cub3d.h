@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:14:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:41:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,11 @@ void	put_str_to_img(t_cub3d *cub3d, int pos_x, int pos_y, int color, int font_si
 void	change_sprite_transparency(t_sprite *sprite, unsigned char transparency);
 
 // HUD.C
-void	ft_render_hud(t_cub3d *cub3d);
+void	ft_render_hud(t_cub3d *cub3d, int frame_time);
 void	ft_render_health(t_cub3d *cub3d);
 void	ft_render_ammo(t_cub3d *cub3d);
 void	ft_render_weapon(t_cub3d *cub3d);
+void	ft_render_framerate(t_cub3d *cub3d, int frame_time);
 
 // FONT_RENDERER.C
 t_font	**load_font(t_cub3d *cub3d, char *path, int font_size);
@@ -142,5 +143,13 @@ void	add_new_door(t_cub3d *cub3d, int nx, int ny);
 
 //	WEAPONS.C
 void	init_weapons(t_cub3d *cub3d);
+
+//  MOUSE.C
+int	mouse_move(int x, int y, t_cub3d *cub3d);
+int	mouse_press(int button, int x, int y, t_cub3d *cub3d);
+int	mouse_release(int button, int x, int y, t_cub3d *cub3d);
+
+//  KEYS.C
+void	initialize_keys(t_cub3d *cub3d);
 
 #endif

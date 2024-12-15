@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HUD.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 00:06:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:13:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:05:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,28 @@ fc-cache -fv
 fc-list | grep "Tiny5"
 */
 
-void	ft_render_hud(t_cub3d *cub3d)
+void	ft_render_hud(t_cub3d *cub3d, int frame_time)
 {
 	draw_2_buffer(cub3d->buffer_HUD, cub3d->HUD, 0, 0);
 	ft_render_health(cub3d);
 	ft_render_ammo(cub3d);
 	ft_render_weapon(cub3d);
+	ft_render_framerate(cub3d, frame_time);
+	(void)frame_time;
+}
+
+void	ft_render_framerate(t_cub3d *cub3d, int frame_time)
+{
+	int		fps;
+	char	*fps_str;
+
+	fps = (int)(1.0 / frame_time);
+	if (fps < 0)
+		fps = 0;
+	fps_str = ft_itoa(fps);
+	draw_font(cub3d, "FPS", 130, 50);
+	draw_font(cub3d, fps_str, 220, 50);
+	free(fps_str);
 }
 
 void	ft_render_weapon(t_cub3d *cub3d)

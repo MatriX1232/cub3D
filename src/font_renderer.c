@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   font_renderer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 21:39:29 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:51:06 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:28:22 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:41:03 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:05:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,20 @@ int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
 int	raycaster(t_cub3d *cub3d);
 
 //	MAIN.C
-void	ft_cprint(char *color, char *str);
+int	main_loop(t_cub3d *cub3d);
 int	ft_exit(t_cub3d *cub3d);
 
+//	INIT.C
+int	ft_init_cub3d(t_cub3d *cub3d, char **argv);
+void	ft_set_default_state(t_cub3d *cub3d);
+
 //	FT_IMAGES.C
-void	ft_print_img_info(t_sprite *img);
+void	    ft_print_img_info(t_sprite *img);
 t_sprite	**ft_load_sprites(t_cub3d *cub3d);
 t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level);
-void	ft_free_sprites(t_cub3d *cub3d);
+void	    ft_free_sprites(t_cub3d *cub3d);
 t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_height);
+t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height);
 
 //	ANIM.C
 int		update_animation(t_cub3d *cub3d, t_anim *anim);

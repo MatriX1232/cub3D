@@ -14,6 +14,7 @@ DEPS = $(MLX)/libmlx.a $(LIBFT)/libft.a
 
 SRCS = \
 	src/main.c \
+	src/init.c \
 	src/ft_images.c \
 	src/ft_images2.c \
 	src/anim.c \

@@ -2,8 +2,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
 MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
-INCLUDES = -I/usr/include/freetype2
-LDFLAGS = -lfreetype -lXft -lfontconfig -lXrender
+INCLUDES = -I/usr/include/
+LDFLAGS = -lXft
 
 NAME = cub3d
 
@@ -34,7 +34,8 @@ SRCS = \
 	src/weapons.c \
 	src/anim_utils.c \
 	src/ft_free2.c \
-	src/door.c
+	src/door.c \
+	src/door2.c
 
 OBJS = $(SRCS:%.c=%.o)
 

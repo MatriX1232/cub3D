@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_images.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 15:11:43 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:50:18 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,25 @@ t_sprite	**ft_load_sprites(t_cub3d *cub3d)
 	sprites[9] = NULL;
 	ft_log("All sprites loaded sucessfully!", NULL, 0);
 	return (sprites);
+}
+
+t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height)
+{
+	t_sprite	*image;
+
+	image = (t_sprite *) malloc(1 * sizeof(t_sprite));
+	if (!image)
+		return (ft_log("Failed to allocate memory for blank image", NULL, 3), \
+		NULL);
+	image->img = mlx_new_image(cub3d->mlx, width, height);
+	if (!image->img)
+		return (ft_log("Failed to create new image", NULL, 3), NULL);
+	image->addr = mlx_get_data_addr(\
+		image->img, &image->bits_per_pixel, \
+		&image->line_length, &image->endian);
+	if (!image->addr)
+		return (ft_log("Failed to get data address", NULL, 3), NULL);
+	image->width = width;
+	image->height = height;
+	return (image);
 }

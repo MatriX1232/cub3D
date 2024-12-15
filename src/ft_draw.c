@@ -33,7 +33,6 @@ int	is_within_bounds(t_sprite *img, int x, int y)
 void	blend_pixel(t_sprite *dest, t_sprite *src, t_vec2 v, t_vec2 off)
 {
 	unsigned int	src_color;
-	unsigned int	dest_color;
 	char			*src_p;
 	char			*dest_p;
 
@@ -42,7 +41,6 @@ void	blend_pixel(t_sprite *dest, t_sprite *src, t_vec2 v, t_vec2 off)
 	dest_p = dest->addr + (v.y + off.y) * dest->line_length + \
 		(v.x + off.x) * (dest->bits_per_pixel / 8);
 	src_color = *(unsigned int *)src_p;
-	dest_color = *(unsigned int *)dest_p;
 	if ((src_color & 0xFF000000) != 0xFF000000)
 		*(unsigned int *)dest_p = src_color;
 }

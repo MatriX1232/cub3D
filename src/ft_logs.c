@@ -15,9 +15,9 @@
 
 void	ft_cprint(char *color, char *str)
 {
-	write(1, color, ft_strlen(color));
-	write(1, str, ft_strlen(str));
-	write(1, END, ft_strlen(END));
+	(void)!write(1, color, ft_strlen(color));
+	(void)!write(1, str, ft_strlen(str));
+	(void)!write(1, END, ft_strlen(END));
 }
 
 void	ft_log(char *str, char *str_optional, int level)

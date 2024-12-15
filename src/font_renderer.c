@@ -13,7 +13,6 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 #include <X11/Xlib.h>
-#include <X11/Xft/Xft.h>
 
 int	fit_height(int size, t_sprite *sprite)
 {

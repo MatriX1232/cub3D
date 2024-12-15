@@ -58,7 +58,7 @@ static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	// Skip empty lines
 	if (ft_strlen(line) == 0)
 		return (free(line));
-
+	split = NULL;
 	if (*i < 4)
 		split = ft_split(line, ' ');
 	if (*i == 4 || *i == 5)
@@ -144,6 +144,8 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	if (fd < 0)
 		return (ft_log("Cannot open file", path, 3), NULL);
 	map->height = ft_get_map_height(path) - 6;
+	if (map->height < 0 || (unsigned long)map->height > (9223372036854775807 / sizeof(char *) - 1))
+		return (ft_log("Invalid map height", NULL, 3), NULL);
 	map->grid = (char **)malloc((map->height + 1) * sizeof(char *));
 	if (!map->grid)
 		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);

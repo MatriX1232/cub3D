@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 15:34:10 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:09:26 by msolinsk         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -33,7 +33,7 @@
 # define CEILING 7
 
 //	DEFINE FRAME RATE TO 0 (or less) TO DISABLE FRAME RATE LIMITING
-# define FRAME_RATE 0
+# define FRAME_RATE -1
 # define OFFSET 5
 
 // 	RAYCASTER.C
@@ -129,6 +129,8 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y);
 void	update_doors(t_cub3d *cub3d);
 int		try_open_door(t_cub3d *cub3d);
 void	init_door_system(t_cub3d *cub3d);
+void	open_existing_door(t_cub3d *cub3d, int nx, int ny);
+void	add_new_door(t_cub3d *cub3d, int nx, int ny);
 
 //	WEAPONS.C
 void	init_weapons(t_cub3d *cub3d);

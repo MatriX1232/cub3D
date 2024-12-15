@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 17:59:03 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:30:56 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,6 @@ int ft_exit(t_cub3d *cub3d)
 {
 	ft_free_all(cub3d);
 	exit(0);
-	return (0);
-}
-
-int mouse_move(int x, int y, t_cub3d *cub3d)
-{
-	int center_x = cub3d->win_width / 2;
-	int center_y = cub3d->win_height / 2;
-	int delta_x = x - center_x;
-	if (delta_x != 0)
-	{
-		double rotSpeed = delta_x * 0.002;
-		double oldDirX = cub3d->player->dirx;
-		double oldPlaneX = cub3d->player->planex;
-		cub3d->player->dirx = cub3d->player->dirx * cos(rotSpeed) - cub3d->player->diry * sin(rotSpeed);
-		cub3d->player->diry = oldDirX * sin(rotSpeed) + cub3d->player->diry * cos(rotSpeed);
-		cub3d->player->planex = cub3d->player->planex * cos(rotSpeed) - cub3d->player->planey * sin(rotSpeed);
-		cub3d->player->planey = oldPlaneX * sin(rotSpeed) + cub3d->player->planey * cos(rotSpeed);
-	}
-	mlx_mouse_move(cub3d->mlx, cub3d->win, center_x, center_y);
-	(void)y;
-	return (0);
-}
-
-int	mouse_press(int button, int x, int y, t_cub3d *cub3d)
-{
-	(void)x;
-	(void)y;
-	if (button == 1)
-		cub3d->keys.mouse_1 = 1;
-	return (0);
-}
-
-int mouse_release(int button, int x, int y, t_cub3d *cub3d)
-{
-	(void)x;
-	(void)y;
-	if (button == 1)
-		cub3d->keys.mouse_1 = 0;
 	return (0);
 }
 
@@ -80,30 +42,10 @@ int main_loop(t_cub3d *cub3d)
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[cub3d->player->current_weapon->index - 1]);
 	draw_2_buffer(cub3d->buffer, cub3d->anims[cub3d->player->current_weapon->index - 1]->sprites[cub3d->anims[cub3d->player->current_weapon->index - 1]->frame], (int)((WIN_WIDTH / 2) - 150), WIN_HEIGHT - 300);
-	ft_render_hud(cub3d);
+	ft_render_hud(cub3d, frame_time);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer_HUD->img, 0, WIN_HEIGHT - 1);
-	int fps = (int)(1.0 / frame_time);
-	char *fps_str = ft_itoa(fps);
-	mlx_string_put(cub3d->mlx, cub3d->win, 10, 20, 0xFFFFFF, "FPS:");
-	mlx_string_put(cub3d->mlx, cub3d->win, 50, 20, 0xFFFFFF, fps_str);
-	free(fps_str);
 	return (0);
-}
-
-void initialize_keys(t_cub3d *cub3d)
-{
-	cub3d->keys.w = 0;
-	cub3d->keys.a = 0;
-	cub3d->keys.s = 0;
-	cub3d->keys.d = 0;
-	cub3d->keys.left = 0;
-	cub3d->keys.right = 0;
-	cub3d->keys.shift = 0;
-	cub3d->keys.mouse_1 = 0;
-	cub3d->keys.up = 0;
-	cub3d->keys.down = 0;
-	cub3d->player->move_speed = MOVE_SPEED;
 }
 
 t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height)
@@ -127,7 +69,6 @@ t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height)
 int	main(int argc, char **argv)
 {
 	(void)argc;
-
 	t_cub3d cub3d;
 
 	void	*mlx = mlx_init();

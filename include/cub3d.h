@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/11 13:09:26 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:14:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -79,8 +79,16 @@ void	ft_draw_minimap(t_cub3d *cub3d, int px, int py);
 void	ft_log(char *str, char *str_optional, int level);
 void	ft_log_sub(char *str, char *str_optional, int level, int sub_level);
 
-//	FT_MAP.C
+//	FT_MAP_LOAD.C
 t_map	*ft_load_map(t_cub3d *cub3d, char *path);
+void	ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y);
+void	ft_north_south(t_player *player, char direction);
+void	ft_east_west(t_player *player, char direction);
+void	ft_set_player_position(t_player *player, int x, int y, char **grid);
+void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index);
+void	ft_load_color(t_map *map, char **split, int index);
+int     ft_get_map_height(char *path);
+void	ft_handle_split(t_map *map, char **split, int *i, t_cub3d *cub3d);
 
 //	GNL.C
 char	*get_next_line(int fd);

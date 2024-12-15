@@ -21,6 +21,9 @@ SRCS = \
 	src/ft_minimap.c \
 	src/ft_logs.c \
 	src/ft_map_load.c \
+	src/ft_map_load2.c \
+	src/ft_map_load3.c \
+	src/ft_map_load4.c \
 	src/gnl.c \
 	src/utils.c \
 	src/ft_free.c \

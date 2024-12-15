@@ -3,128 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/03 15:48:04 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:17:42 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-void	ft_print_map(t_map *map)
+static char	**ft_handle_split_sep(char **split, char *line, int *i)
 {
-	int i;
-
-	i = 0;
-	while (map->grid[i])
+	if (*i < 6)
 	{
-		printf("%s\n", map->grid[i]);
-		i++;
+		if (*i < 4)
+			split = ft_split(line, ' ');
+		else
+			split = ft_split(line, ',');
 	}
-}
-
-static int	ft_get_map_height(char *path)
-{
-	int		fd;
-	char	*line;
-	int		height;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (ft_log("Cannot open file", path, 3), 0);
-	height = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		height++;
-		free(line);
-	}
-	close(fd);
-	return (height);
+	return (split);
 }
 
 static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
-	t_player	*player;
 	char		**split;
 	char		*tmp;
 
-	player = cub3d->player;
 	tmp = ft_strtrim(line, "\n");
 	free(line);
 	line = tmp;
-
-	// Skip empty lines
 	if (ft_strlen(line) == 0)
-		return (free(line));
-	split = NULL;
-	if (*i < 4)
-		split = ft_split(line, ' ');
-	if (*i == 4 || *i == 5)
-		split = ft_split(line + 1, ',');
-	if (*i == 0)
-		map->spriteNO = xpm_load_image(cub3d->mlx, split[1], 1);
-	else if (*i == 1)
-		map->spriteSO = xpm_load_image(cub3d->mlx, split[1], 1);
-	else if (*i == 2)
-		map->spriteWE = xpm_load_image(cub3d->mlx, split[1], 0);
-	else if (*i == 3)
-		map->spriteEA = xpm_load_image(cub3d->mlx, split[1], 0);
-	else if (*i == 4)
-		map->floor = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
-	else if (*i == 5)
-		map->ceiling = (int)rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
-	else
 	{
-		map->grid[*i - 6] = ft_strdup(line);
-		if (!map->grid[*i - 6])
-			ft_log("Cannot allocate memory for map grid", NULL, 3);
-		int y = *i - 6;
-		for (int x = 0; line[x]; x++)
-		{
-			if (line[x] == 'N' || line[x] == 'S' || line[x] == 'E' || line[x] == 'W')
-			{
-				player->posx = x + 0.5;
-				player->posy = y + 0.5;
-				if (line[x] == 'N')
-				{
-					player->dirx = 0;
-					player->diry = -1;
-					player->planex = 0.66;
-					player->planey = 0;
-				}
-				else if (line[x] == 'S')
-				{
-					player->dirx = 0;
-					player->diry = 1;
-					player->planex = -0.66;
-					player->planey = 0;
-				}
-				else if (line[x] == 'E')
-				{
-					player->dirx = 1;
-					player->diry = 0;
-					player->planex = 0;
-					player->planey = 0.66;
-				}
-				else if (line[x] == 'W')
-				{
-					player->dirx = -1;
-					player->diry = 0;
-					player->planex = 0;
-					player->planey = -0.66;
-				}
-				map->grid[y][x] = '0';
-			}
-		}
-		if ((int)ft_strlen(line) > map->width)
-			map->width = ft_strlen(line);
+		free(line);
+		return ;
 	}
+	split = NULL;
+	split = ft_handle_split_sep(split, line, i);
+	if (*i < 6)
+		ft_handle_split(map, split, i, cub3d);
+	else
+		ft_process_grid(cub3d, map, line, *i - 6);
 	if (*i < 6)
 		ft_free_2d_array(split);
 	free(line);
 	*i += 1;
+}
+
+static t_map	*ft_init_map(t_map *map)
+{
+	map = (t_map *) malloc(1 * sizeof(t_map));
+	if (!map)
+		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
+	map->player = (t_player *) malloc(1 * sizeof(t_player));
+	if (!map->player)
+		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
+	return (map);
+}
+
+static t_map	*ft_init_grid(t_map *map, char *path)
+{
+	int	j;
+
+	map->height = ft_get_map_height(path) - 6;
+	if (map->height < 0 || \
+		(unsigned long)map->height > (9223372036854775807 / sizeof(char *) - 1))
+		return (ft_log("Invalid map height", NULL, 3), NULL);
+	map->grid = (char **)malloc((map->height + 1) * sizeof(char *));
+	if (!map->grid)
+		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);
+	j = 0;
+	while (j < map->height)
+		map->grid[j++] = NULL;
+	return (map);
 }
 
 t_map	*ft_load_map(t_cub3d *cub3d, char *path)
@@ -134,30 +85,22 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	char	*line;
 	int		i;
 
-	map = (t_map *)malloc(1 * sizeof(t_map));
-	if (!map)
-		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
-	map->player = (t_player *) malloc(1 * sizeof(t_player));
-	if (!map->player)
-		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
+	map = NULL;
+	map = ft_init_map(map);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ft_log("Cannot open file", path, 3), NULL);
-	map->height = ft_get_map_height(path) - 6;
-	if (map->height < 0 || (unsigned long)map->height > (9223372036854775807 / sizeof(char *) - 1))
-		return (ft_log("Invalid map height", NULL, 3), NULL);
-	map->grid = (char **)malloc((map->height + 1) * sizeof(char *));
-	if (!map->grid)
-		return (ft_log("Cannot allocate memory for map grid", NULL, 3), NULL);
-	for (int j = 0; j < map->height; j++)
-		map->grid[j] = NULL;
+	map = ft_init_grid(map, path);
 	i = 0;
 	map->width = 0;
-	map->player->hp = 100;
 	cub3d->player = map->player;
 	ft_log("Loading map textures...", NULL, 1);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
 		ft_extract_info(cub3d, map, line, &i);
+		line = get_next_line(fd);
+	}
 	map->grid[i - 6] = NULL;
 	close(fd);
 	ft_log("Map loaded successfully", path, 0);

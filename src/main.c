@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:17:30 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:59:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ int	main(int argc, char **argv)
 		return (ft_log("Player failed to load", NULL, 3), 1);
 	cub3d.player->current_weapon = &cub3d.weapons[1];
 	cub3d.player->pitch = 100;
+	cub3d.player->hp = 100;
 	initialize_keys(&cub3d);
 	cub3d.frame = 0;
 	cub3d.prev_time = get_timestamp();

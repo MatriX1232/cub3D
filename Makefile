@@ -41,7 +41,10 @@ SRCS = \
 	src/door.c \
 	src/door2.c \
 	src/mouse.c \
-	src/keys.c
+	src/keys.c \
+	src/draw_ceil_floor.c \
+	src/draw_wall.c \
+	src/ray_utils.c \
 
 OBJS = $(SRCS:%.c=%.o)
 

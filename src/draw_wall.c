@@ -1,0 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/16 16:17:30 by idomagal          #+#    #+#             */
+/*   Updated: 2024/12/16 16:17:33 by idomagal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/cub3d.h"
+#include "../include/libs.h"
+
+int	find_texnum(t_cub3d *cub3d, t_ray *ray)
+{
+	int	texnum;
+
+	if (cub3d->map->grid[ray->mapy][ray->mapx] == '2')
+		texnum = 8;
+	else
+	{
+		if (ray->side == 0)
+		{
+			if (ray->raydirx > 0)
+				texnum = 2;
+			else
+				texnum = 3;
+		}
+		else
+		{
+			if (ray->raydiry > 0)
+				texnum = 1;
+			else
+				texnum = 0;
+		}
+	}
+	return (texnum);
+}
+
+double	get_wallx(t_ray *ray, t_cub3d *cub3d)
+{
+	double	wallx;
+
+	if (ray->side == 0)
+		wallx = cub3d->player->posy + ray->perpwalldist * ray->raydiry;
+	else
+		wallx = cub3d->player->posx + ray->perpwalldist * ray->raydirx;
+	wallx -= floor(wallx);
+	return (wallx);
+}
+
+static void	draw_wall_loop(t_cub3d *cub3d, int *int_vars, int *temp_vars)
+{
+	while (temp_vars[4] < int_vars[3])
+	{
+		temp_vars[2] = (temp_vars[4] - int_vars[4])
+			* 256 - cub3d->win_height * 128 + temp_vars[1] * 128;
+		temp_vars[3] = ((temp_vars[2] * cub3d->sprites[int_vars[1]]->height)
+				/ temp_vars[1]) / 256;
+		if (temp_vars[0] < 0)
+			temp_vars[0] = 0;
+		if (temp_vars[0] >= cub3d->sprites[int_vars[1]]->width)
+			temp_vars[0] = cub3d->sprites[int_vars[1]]->width - 1;
+		if (temp_vars[3] < 0)
+			temp_vars[3] = 0;
+		if (temp_vars[3] >= cub3d->sprites[int_vars[1]]->height)
+			temp_vars[3] = cub3d->sprites[int_vars[1]]->height - 1;
+		put_pixel_to_img(cub3d->buffer, int_vars[0], temp_vars[4]++,
+			get_pixel_color(cub3d->sprites[int_vars[1]], temp_vars[0],
+				temp_vars[3]));
+	}
+}
+
+void	draw_wall(t_cub3d *cub3d, t_ray *ray, int *int_vars, double wallx)
+{
+	int	temp_vars[5];
+
+	temp_vars[0] = (int)(wallx * (double)(cub3d->sprites[int_vars[1]]->width));
+	temp_vars[1] = (int)(cub3d->win_height / ray->perpwalldist);
+	int_vars[4] = (int)cub3d->player->pitch;
+	int_vars[2] = -temp_vars[1] / 2 + cub3d->win_height / 2 + int_vars[4];
+	if (int_vars[2] < 0)
+		int_vars[2] = 0;
+	int_vars[3] = temp_vars[1] / 2 + cub3d->win_height / 2 + int_vars[4];
+	if (int_vars[3] >= cub3d->win_height)
+		int_vars[3] = cub3d->win_height - 1;
+	if (ray->side == 0 && ray->raydirx > 0)
+		temp_vars[0] = cub3d->sprites[int_vars[1]]->width - temp_vars[0] - 1;
+	if (ray->side == 1 && ray->raydiry < 0)
+		temp_vars[0] = cub3d->sprites[int_vars[1]]->width - temp_vars[0] - 1;
+	temp_vars[4] = 0;
+	while (temp_vars[4] < int_vars[2])
+		put_pixel_to_img(cub3d->buffer, int_vars[0],
+			temp_vars[4]++, cub3d->map->ceiling);
+	temp_vars[4] = int_vars[2];
+	draw_wall_loop(cub3d, int_vars, temp_vars);
+}

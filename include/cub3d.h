@@ -36,9 +36,22 @@
 # define FRAME_RATE -1
 # define OFFSET 5
 
-// 	RAYCASTER.C
-int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
+//	RAYCASTER.C
 int	raycaster(t_cub3d *cub3d);
+int	get_pixel_color(t_sprite *sprite, int x, int y);
+
+//	DRAW_WALL.C
+int	find_texnum(t_cub3d *cub3d, t_ray *ray);
+double	get_wallx(t_ray *ray, t_cub3d *cub3d);
+void	draw_wall(t_cub3d *cub3d, t_ray *ray, int *int_vars, double wallx);
+
+//	RAY_UTILS.C
+int	init_ray(t_ray *ray, t_cub3d *cub3d, int x);
+void	cast_ray(t_cub3d *cub3d, t_ray *ray);
+void	perpwalldist(t_ray *ray);
+
+//	DRAW_CEIL_FLOOR.C
+void	draw_ceil_floor(t_cub3d *cub3d, int *int_vars);
 
 //	MAIN.C
 int	main_loop(t_cub3d *cub3d);
@@ -49,10 +62,10 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv);
 void	ft_set_default_state(t_cub3d *cub3d);
 
 //	FT_IMAGES.C
-void	    ft_print_img_info(t_sprite *img);
+void			ft_print_img_info(t_sprite *img);
 t_sprite	**ft_load_sprites(t_cub3d *cub3d);
 t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level);
-void	    ft_free_sprites(t_cub3d *cub3d);
+void			ft_free_sprites(t_cub3d *cub3d);
 t_sprite	*ft_scale_sprite(t_cub3d *cub3d, t_sprite *src, int new_width, int new_height);
 t_sprite	*ft_create_blank(t_cub3d *cub3d, int width, int height);
 

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 21:39:29 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:28:22 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:00:02 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	draw_font(t_cub3d *cub3d, char *str, int x, int y)
 		}
 		font = cub3d->characters[(int)str[i]];
 		if (font)
-			draw_2_buffer(cub3d->buffer_HUD, font->sprite, x, y);
+			draw_2_buffer(cub3d->buffer_hud, font->sprite, x, y);
 		else
 			ft_log("Character not supported!", &str[i], 2);
 		x += font->sprite->width + OFFSET;

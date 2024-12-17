@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:09:07 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:19:37 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:58:06 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	ft_set_player_position(t_player *player, int x, int y, char **grid)
 void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index)
 {
 	if (index == 0)
-		map->spriteNO = xpm_load_image(cub3d->mlx, split[1], 1);
+		map->sprite_no = xpm_load_image(cub3d->mlx, split[1], 1);
 	else if (index == 1)
-		map->spriteSO = xpm_load_image(cub3d->mlx, split[1], 1);
+		map->sprite_so = xpm_load_image(cub3d->mlx, split[1], 1);
 	else if (index == 2)
-		map->spriteWE = xpm_load_image(cub3d->mlx, split[1], 0);
+		map->sprite_we = xpm_load_image(cub3d->mlx, split[1], 0);
 	else if (index == 3)
-		map->spriteEA = xpm_load_image(cub3d->mlx, split[1], 0);
+		map->sprite_ea = xpm_load_image(cub3d->mlx, split[1], 0);
 }
 
 void	ft_load_color(t_map *map, char **split, int index)

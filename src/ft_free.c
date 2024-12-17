@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 11:47:05 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:58:49 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_free_sprites(t_cub3d *cub3d)
 		free(cub3d->sprites);
 	if (cub3d->buffer)
 		ft_free_sptite(cub3d, cub3d->buffer);
-	if (cub3d->buffer_HUD)
-		ft_free_sptite(cub3d, cub3d->buffer_HUD);
+	if (cub3d->buffer_hud)
+		ft_free_sptite(cub3d, cub3d->buffer_hud);
 	ft_log("Sprites freed", NULL, 1);
 }
 
@@ -69,13 +69,13 @@ void	ft_free_all(t_cub3d *cub3d)
 {
 	ft_free_font(cub3d);
 	ft_free_animations(cub3d);
-	ft_free_sptite(cub3d, cub3d->map->spriteNO);
-	ft_free_sptite(cub3d, cub3d->map->spriteSO);
-	ft_free_sptite(cub3d, cub3d->map->spriteWE);
-	ft_free_sptite(cub3d, cub3d->map->spriteEA);
+	ft_free_sptite(cub3d, cub3d->map->sprite_no);
+	ft_free_sptite(cub3d, cub3d->map->sprite_so);
+	ft_free_sptite(cub3d, cub3d->map->sprite_we);
+	ft_free_sptite(cub3d, cub3d->map->sprite_ea);
 	ft_free_sprites(cub3d);
 	ft_free_2d_array(cub3d->map->grid);
-	ft_free_sptite(cub3d, cub3d->HUD);
+	ft_free_sptite(cub3d, cub3d->hud);
 	ft_free_sptite(cub3d, cub3d->weapons[1].icon);
 	ft_free_sptite(cub3d, cub3d->weapons[2].icon);
 	ft_free_sptite(cub3d, cub3d->weapons[3].icon);

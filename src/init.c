@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:44:12 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 18:14:24 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:39:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	ft_set_default_state(t_cub3d *cub3d)
 int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 {
 	cub3d->sprites = ft_load_sprites(cub3d);
-	cub3d->HUD = xpm_load_image(cub3d->mlx, "textures/hud.xpm", 0);
-	if (!cub3d->sprites || !cub3d->HUD)
+	cub3d->hud = xpm_load_image(cub3d->mlx, "textures/hud.xpm", 0);
+	if (!cub3d->sprites || !cub3d->hud)
 		return (ft_log("Sprites failed to load", NULL, 3), 1);
 	cub3d->buffer = ft_create_blank(cub3d, cub3d->win_width, cub3d->win_height);
-	cub3d->buffer_HUD = ft_create_blank(cub3d, \
+	cub3d->buffer_hud = ft_create_blank(cub3d, \
 		ALL_WIDTH, ALL_HEIGHT - WIN_HEIGHT);
-	if (!cub3d->buffer || !cub3d->buffer_HUD)
+	if (!cub3d->buffer || !cub3d->buffer_hud)
 		return (ft_log("Failed to create buffer", NULL, 3), 1);
 	cub3d->characters = load_font(cub3d, "textures/font/", 30);
 	if (!cub3d->characters)

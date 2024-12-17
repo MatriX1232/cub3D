@@ -105,8 +105,9 @@ void	ft_east_west(t_player *player, char direction);
 void	ft_set_player_position(t_player *player, int x, int y, char **grid);
 void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index);
 void	ft_load_color(t_map *map, char **split, int index);
-int     ft_get_map_height(char *path);
+int		ft_get_map_height(char *path);
 void	ft_handle_split(t_map *map, char **split, int *i, t_cub3d *cub3d);
+int		ft_check_map_closed(t_map *map);
 
 //	GNL.C
 char	*get_next_line(int fd);

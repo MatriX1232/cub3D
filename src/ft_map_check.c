@@ -13,7 +13,7 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-int ft_check_map_closed(t_map *map)
+int	ft_check_map_closed(t_map *map)
 {
 	int	x;
 	int	y;
@@ -24,12 +24,12 @@ int ft_check_map_closed(t_map *map)
 		x = 0;
 		while (map->grid[y][x])
 		{
-			if (map->grid[y][x] == '0')
+			if (map->grid[y][x] == '0' || map->grid[y][x] == '2')
 			{
-				if (x - 1 < 0 || map->grid[y][x - 1] == ' ' ||
-					y - 1 < 0 || map->grid[y - 1][x] == ' ' ||
-					x + 1 >= (int)ft_strlen(map->grid[y]) || map->grid[y][x + 1] == ' ' ||
-					y + 1 >= map->height || map->grid[y + 1][x] == ' ')
+				if (x - 1 < 0 || map->grid[y][x - 1] != '0' || map->grid[y][x - 1] != '1' || map->grid[y][x - 1] != '2' ||
+					y - 1 < 0 || map->grid[y - 1][x] != '0' || map->grid[y - 1][x] != '1' || map->grid[y - 1][x] != '2' ||
+					x + 1 >= (int)ft_strlen(map->grid[y]) || map->grid[y][x + 1] != '0' || map->grid[y][x + 1] != '1' || map->grid[y][x + 1] != '2' ||
+					y + 1 >= map->height || map->grid[y + 1][x] != '0' || map->grid[y + 1][x] != '1' || map->grid[y + 1][x] != '2')
 				{
 					ft_log("Map is not closed.", NULL, 3);
 					return (1);

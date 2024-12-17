@@ -41,6 +41,8 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 	cub3d->map = ft_load_map(cub3d, argv[1]);
 	if (!cub3d->map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
+	if (ft_check_map_closed(cub3d->map))
+		return (1);
 	init_door_system(cub3d);
 	cub3d->anims = ft_load_anims(cub3d);
 	if (!cub3d->anims || !cub3d->player)

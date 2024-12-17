@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 23:05:28 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:21:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ int	main(int argc, char **argv)
 	cub3d.win = win;
 	mlx_mouse_hide(cub3d.mlx, cub3d.win);
 	if (ft_init_cub3d(&cub3d, argv) == 1)
-		return (1);
+		return (ft_exit(&cub3d), 1);
+	if (ft_check_map_closed(cub3d.map))
+		return (ft_exit(&cub3d), 1);
 	ft_set_default_state(&cub3d);
 	mlx_loop_hook(mlx, main_loop, &cub3d);
 	ft_handle_hooks(&cub3d);

@@ -19,43 +19,43 @@
 
 typedef struct s_vec2
 {
-	int	x;
-	int	y;
-}	t_vec2;
+	int			x;
+	int			y;
+}				t_vec2;
 
 typedef struct s_door
 {
-	int		x;
-	int		y;
-	int		open;
-	long	open_time;
-}	t_door;
+	int			x;
+	int			y;
+	int			open;
+	long		open_time;
+}				t_door;
 
 typedef struct s_sprite
 {
-	void	*img;
-	char	*addr;
-	char	*path;
-	int		bits_per_pixel;
-	int		line_length;
-	int		width;
-	int		height;
-	int		endian;
-}	t_sprite;
+	void		*img;
+	char		*addr;
+	char		*path;
+	int			bits_per_pixel;
+	int			line_length;
+	int			width;
+	int			height;
+	int			endian;
+}				t_sprite;
 
 typedef struct s_keys
 {
-	int	w;
-	int	a;
-	int	s;
-	int	d;
-	int	left;
-	int	right;
-	int	up;
-	int	down;
-	int	shift;
-	int	mouse_1;
-}	t_keys;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+	int			up;
+	int			down;
+	int			shift;
+	int			mouse_1;
+}				t_keys;
 
 typedef struct s_anim
 {
@@ -65,7 +65,7 @@ typedef struct s_anim
 	int			frame_delay;
 	long		last_update;
 	bool		finished;
-}	t_anim;
+}				t_anim;
 
 typedef struct s_font
 {
@@ -73,7 +73,7 @@ typedef struct s_font
 	char		name;
 	int			size_x;
 	int			size_y;
-}	t_font;
+}				t_font;
 
 typedef struct s_weapon
 {
@@ -84,7 +84,7 @@ typedef struct s_weapon
 	int			ammo;
 	int			reload_time;
 	int			fire_rate;
-}	t_weapon;
+}				t_weapon;
 
 typedef struct s_player
 {
@@ -99,7 +99,7 @@ typedef struct s_player
 	t_weapon	*current_weapon;
 	int			hp;
 	int			max_hp;
-}	t_player;
+}				t_player;
 
 typedef struct s_map
 {
@@ -113,7 +113,7 @@ typedef struct s_map
 	int			floor;
 	int			ceiling;
 	t_player	*player;
-}	t_map;
+}				t_map;
 
 typedef struct s_ray
 {
@@ -131,7 +131,7 @@ typedef struct s_ray
 	int			stepy;
 	int			hit;
 	int			side;
-}	t_ray;
+}				t_ray;
 
 typedef struct s_cub3d
 {
@@ -156,6 +156,6 @@ typedef struct s_cub3d
 	long		prev_shoot;
 	int			door_count;
 	t_door		doors[MAX_DOORS];
-}	t_cub3d;
+}				t_cub3d;
 
 #endif

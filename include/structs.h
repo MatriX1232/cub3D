@@ -6,14 +6,14 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:04:11 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 23:04:42 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:02:07 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libs.h"
-#include <stdbool.h>
-
 #ifndef STRUCTS_H
+
+# include <stdbool.h>
+
 # define STRUCTS_H
 # define MAX_DOORS 100
 
@@ -72,7 +72,7 @@ typedef struct s_font
 	t_sprite	*sprite;
 	char		name;
 	int			size_x;
-	int 		size_y;
+	int			size_y;
 }	t_font;
 
 typedef struct s_weapon
@@ -88,17 +88,17 @@ typedef struct s_weapon
 
 typedef struct s_player
 {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	double	pitch;
-	double	move_speed;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		pitch;
+	double		move_speed;
 	t_weapon	*current_weapon;
-	int		hp;
-	int		max_hp;
+	int			hp;
+	int			max_hp;
 }	t_player;
 
 typedef struct s_map
@@ -106,26 +106,25 @@ typedef struct s_map
 	char		**grid;
 	int			width;
 	int			height;
-	t_sprite	*spriteNO;
-	t_sprite	*spriteSO;
-	t_sprite	*spriteWE;
-	t_sprite	*spriteEA;
+	t_sprite	*sprite_no;
+	t_sprite	*sprite_so;
+	t_sprite	*sprite_we;
+	t_sprite	*sprite_ea;
 	int			floor;
 	int			ceiling;
 	t_player	*player;
 }	t_map;
 
-
 typedef struct s_ray
 {
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	double		perpwalldist;
 	int			mapx;
 	int			mapy;
 	int			stepx;
@@ -133,7 +132,6 @@ typedef struct s_ray
 	int			hit;
 	int			side;
 }	t_ray;
-
 
 typedef struct s_cub3d
 {
@@ -143,10 +141,10 @@ typedef struct s_cub3d
 	int			win_height;
 	t_font		**characters;
 	t_sprite	**sprites;
-	t_sprite	*HUD;
+	t_sprite	*hud;
 	t_anim		**anims;
 	t_sprite	*buffer;
-	t_sprite	*buffer_HUD;
+	t_sprite	*buffer_hud;
 	t_map		*map;
 	t_player	*player;
 	t_keys		keys;
@@ -157,7 +155,7 @@ typedef struct s_cub3d
 	int			gun_shooting;
 	long		prev_shoot;
 	int			door_count;
-	t_door	doors[MAX_DOORS];
+	t_door		doors[MAX_DOORS];
 }	t_cub3d;
 
 #endif

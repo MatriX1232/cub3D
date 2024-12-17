@@ -22,20 +22,20 @@
 # define MINIMAP_FG 0x3b014a
 # define MINIMAP_BG 0xd9fff2
 
-#include "../include/mlx.h"
-#include "../include/mlx_int.h"
-#include "../include/cub3d.h"
-#include "../include/structs.h"
-#include "../include/colors.h"
-#include "../include/libft.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include <X11/keysym.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
+# include "../include/colors.h"
+# include "../include/cub3d.h"
+# include "../include/libft.h"
+# include "../include/mlx.h"
+# include "../include/mlx_int.h"
+# include "../include/structs.h"
+# include <X11/X.h>
+# include <X11/Xlib.h>
+# include <X11/keysym.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 #endif

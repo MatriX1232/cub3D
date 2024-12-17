@@ -45,6 +45,7 @@ SRCS = \
 	src/draw_ceil_floor.c \
 	src/draw_wall.c \
 	src/ray_utils.c \
+	src/ft_map_check.c
 
 OBJS = $(SRCS:%.c=%.o)
 

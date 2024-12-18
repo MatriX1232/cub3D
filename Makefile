@@ -5,7 +5,7 @@ MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no
 INCLUDES = -I/usr/include/
 LDFLAGS = -lXft
 
-NAME = cub3d
+NAME = cub3D
 
 LIBFT = libft
 MLX = mlx_linux

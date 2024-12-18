@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:17:01 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/02 17:06:46 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:34:51 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "../include/colors.h"
 # include "../include/cub3d.h"
 # include "../include/libft.h"
-# include "../include/mlx.h"
-# include "../include/mlx_int.h"
+# include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx_int.h"
 # include "../include/structs.h"
 # include <X11/X.h>
 # include <X11/Xlib.h>

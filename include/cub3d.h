@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 20:43:39 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:22:05 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ char			*get_next_line(int fd);
 unsigned long	rgb_to_hex(int r, int g, int b);
 int				ft_2d_len(void **array);
 long			get_timestamp(void);
+void			ft_assign_mlx(t_cub3d *cub3d, void *mlx, void *win);
+int				check_args(int argc, char **argv);
 
 //      FT_FREE.C
 void			ft_free_all(t_cub3d *cub3d);

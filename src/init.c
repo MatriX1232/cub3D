@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:44:12 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 23:32:42 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:53:12 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 		WIN_WIDTH, WIN_HEIGHT - RENDER_HEIGHT);
 	if (!cub3d->buffer || !cub3d->buffer_hud)
 		return (ft_log("Failed to create buffer", NULL, 3), 1);
-	splash_screen(cub3d);
 	cub3d->map = ft_load_map(cub3d, argv[1]);
 	if (!cub3d->map)
 		return (ft_log("Map failed to load", NULL, 3), 1);

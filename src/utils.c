@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:22:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 22:31:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:36:30 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	ft_assign_mlx(t_cub3d *cub3d, void *mlx, void *win)
 
 int	check_args(int argc, char **argv)
 {
-	int len;
+	int	len;
 
 	len = (int)ft_strlen(argv[1]);
 	if (argc == 1)
 		return (ft_log("No arguments provided.", NULL, 2), 1);
 	if (len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", len) != 0)
-		return (ft_log("Invalid file extension. Expected '.cub'.", NULL, 2), 1);
+		return (ft_log("Invalid file extension. Expected '.cub'.", \
+			NULL, 2), 1);
 	else if (argc >= 3)
 		return (ft_log("Too many arguments provided.", NULL, 2), 1);
 	return (0);

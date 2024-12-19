@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 21:59:57 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:36:53 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	ft_free_animations(t_cub3d *cub3d)
 
 void	ft_free_all(t_cub3d *cub3d)
 {
-	// if (cub3d->map)
-	// 	ft_free_map(cub3d->map);
 	ft_free_sprite(cub3d, cub3d->map->sprite_so);
 	ft_free_sprite(cub3d, cub3d->map->sprite_we);
 	ft_free_sprite(cub3d, cub3d->map->sprite_ea);

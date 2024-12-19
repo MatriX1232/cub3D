@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 18:58:49 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:59:57 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ void	ft_free_animations(t_cub3d *cub3d)
 
 void	ft_free_all(t_cub3d *cub3d)
 {
-	ft_free_sprite(cub3d, cub3d->map->sprite_no);
+	// if (cub3d->map)
+	// 	ft_free_map(cub3d->map);
 	ft_free_sprite(cub3d, cub3d->map->sprite_so);
 	ft_free_sprite(cub3d, cub3d->map->sprite_we);
 	ft_free_sprite(cub3d, cub3d->map->sprite_ea);
-	ft_free_sprites(cub3d);
+	ft_free_sprite(cub3d, cub3d->map->sprite_no);
 	ft_free_2d_array(cub3d->map->grid);
+	ft_free_sprites(cub3d);
 	free(cub3d->map);
 	free(cub3d->player);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);

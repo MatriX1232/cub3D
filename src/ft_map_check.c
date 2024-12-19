@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:09:19 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 18:55:08 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 20:45:47 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ static int	ft_check_neighbour(t_map *map, int x, int y)
 	}
 	return (0);
 	{
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_check_if_map_valid(t_map *map)
+{
+	if (!map)
+		return (ft_log("Map structure is NULL.", NULL, 3), 1);
+	if (!map->grid)
+		return (ft_log("Map grid is NULL.", NULL, 3), 1);
+	if (map->height <= 0)
+		return (ft_log("Map height is invalid.", NULL, 3), 1);
+	if (map->width <= 0)
+		return (ft_log("Map width is invalid.", NULL, 3), 1);
+	if (!map->sprite_no || !map->sprite_no || \
+		!map->sprite_ea || !map->sprite_we)
+	{
+		ft_log("One or more textures failed to load.", NULL, 3);
 		return (1);
 	}
 	return (0);

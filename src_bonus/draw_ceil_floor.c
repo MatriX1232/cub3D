@@ -48,7 +48,8 @@ static void	draw_floor(t_cub3d *cub3d, int *int_vars, double *temp_vars)
 		if (temp_int_vars[1] < 0)
 			temp_int_vars[1] += cub3d->sprites[FLOOR]->height;
 		put_pixel_to_img(cub3d->buffer, int_vars[0], y,
-			cub3d->map->floor);
+			get_pixel_color(cub3d->sprites[FLOOR],
+				temp_int_vars[0], temp_int_vars[1]));
 		y++;
 	}
 }
@@ -89,7 +90,8 @@ static void	draw_ceil(t_cub3d *cub3d, int *int_vars, double *temp_vars)
 		if (temp_int_vars[1] < 0)
 			temp_int_vars[1] += cub3d->sprites[CEILING]->height;
 		put_pixel_to_img(cub3d->buffer, int_vars[0], y,
-			cub3d->map->ceiling);
+			get_pixel_color(cub3d->sprites[CEILING],
+				temp_int_vars[0], temp_int_vars[1]));
 		y++;
 	}
 }

@@ -67,12 +67,19 @@ void	ft_free_animations(t_cub3d *cub3d)
 
 void	ft_free_all(t_cub3d *cub3d)
 {
+	ft_free_font(cub3d);
+	ft_free_animations(cub3d);
 	ft_free_sprite(cub3d, cub3d->map->sprite_no);
 	ft_free_sprite(cub3d, cub3d->map->sprite_so);
 	ft_free_sprite(cub3d, cub3d->map->sprite_we);
 	ft_free_sprite(cub3d, cub3d->map->sprite_ea);
 	ft_free_sprites(cub3d);
 	ft_free_2d_array(cub3d->map->grid);
+	ft_free_sprite(cub3d, cub3d->hud);
+	ft_free_sprite(cub3d, cub3d->weapons[1].icon);
+	ft_free_sprite(cub3d, cub3d->weapons[2].icon);
+	ft_free_sprite(cub3d, cub3d->weapons[3].icon);
+	ft_free_sprite(cub3d, cub3d->weapons[4].icon);
 	free(cub3d->map);
 	free(cub3d->player);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);

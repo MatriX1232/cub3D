@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 23:45:46 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/20 00:00:35 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main_loop(t_cub3d *cub3d)
 
 	frame_time = calculate_frame_time(cub3d);
 	wp_index = cub3d->player->current_weapon->index - 1;
-	printf("wp_index: %d\n", wp_index);
 	handle_input(cub3d);
 	update_doors(cub3d);
 	raycaster(cub3d);

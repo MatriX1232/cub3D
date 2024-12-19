@@ -53,7 +53,7 @@ double	get_wallx(t_ray *ray, t_cub3d *cub3d)
 
 static void	draw_wall_loop(t_cub3d *cub3d, int *int_vars, int *temp_vars)
 {
-	while (temp_vars[4] < int_vars[3])
+	while (temp_vars[4] <= int_vars[3])
 	{
 		temp_vars[2] = (temp_vars[4] - int_vars[4])
 			* 256 - cub3d->win_height * 128 + temp_vars[1] * 128;

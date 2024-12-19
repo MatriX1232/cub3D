@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:44:12 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 23:34:53 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:57:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	ft_set_default_state(t_cub3d *cub3d)
 	cub3d->prev_shoot = 0;
 }
 
+void	ft_set_player_state(t_cub3d *cub3d)
+{
+	cub3d->player->current_weapon = &cub3d->weapons[1];
+	cub3d->player->pitch = 100;
+	cub3d->player->hp = 100;
+}
+
 int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 {
 	cub3d->sprites = ft_load_sprites(cub3d);
@@ -34,15 +41,20 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 		WIN_WIDTH, WIN_HEIGHT - RENDER_HEIGHT);
 	if (!cub3d->buffer || !cub3d->buffer_hud)
 		return (ft_log("Failed to create buffer", NULL, 3), 1);
+	cub3d->characters = load_font(cub3d, "textures/font/", 30);
+	if (!cub3d->characters)
+		return (ft_log("Failed to load font characters", NULL, 3), 1);
 	splash_screen(cub3d);
 	cub3d->map = ft_load_map(cub3d, argv[1]);
 	if (!cub3d->map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
+	init_door_system(cub3d);
+	cub3d->anims = ft_load_anims(cub3d);
+	if (!cub3d->anims || !cub3d->player)
+		return (ft_log("Anims/Player failed to load", NULL, 3), 1);
 	if (ft_check_if_map_valid(cub3d->map))
 		return (ft_log("Map is invalid", NULL, 3), 1);
 	ft_replace_spaces(cub3d->map);
-	cub3d->player->current_weapon = &cub3d->weapons[1];
-	cub3d->player->pitch = 100;
-	cub3d->player->hp = 100;
+	ft_set_player_state(cub3d);
 	return (0);
 }

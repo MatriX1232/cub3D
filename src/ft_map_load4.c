@@ -6,12 +6,31 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:13:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:13:40 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:32:16 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
+
+void	ft_replace_spaces(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->grid[i])
+	{
+		j = 0;
+		while (map->grid[i][j])
+		{
+			if (map->grid[i][j] == ' ')
+				map->grid[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
 
 int	ft_get_map_height(char *path)
 {

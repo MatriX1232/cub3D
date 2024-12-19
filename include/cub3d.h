@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 22:22:05 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:33:46 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void			ft_handle_split(t_map *map, char **split, int *i,
 					t_cub3d *cub3d);
 int				ft_check_map_closed(t_map *map);
 int				ft_check_if_map_valid(t_map *map);
+void			ft_replace_spaces(t_map *map);
 
 //      GNL.C
 char			*get_next_line(int fd);

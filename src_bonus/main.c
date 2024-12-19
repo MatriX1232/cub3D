@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 23:05:28 by idomagal         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:34:21 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,15 @@ int	main(int argc, char **argv)
 	void	*mlx;
 	void	*win;
 
-	(void)argc;
+	if (check_args(argc, argv))
+		return (1);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	if (!mlx || !win)
 		return (ft_log("Failed to initialize MLX or create window", \
 			NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
-	cub3d.win_width = RENDER_WIDTH;
-	cub3d.win_height = RENDER_HEIGHT;
-	cub3d.mlx = mlx;
-	cub3d.win = win;
+	ft_assign_mlx(&cub3d, mlx, win);
 	mlx_mouse_hide(cub3d.mlx, cub3d.win);
 	if (ft_init_cub3d(&cub3d, argv) == 1)
 		return (ft_exit(&cub3d), 1);

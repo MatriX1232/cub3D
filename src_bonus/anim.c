@@ -59,8 +59,8 @@ void	finish_shooting(t_cub3d *cub3d, t_anim *anim)
 	int	x;
 	int	y;
 
-	x = (int)((WIN_WIDTH / 2) - 150);
-	y = WIN_HEIGHT - 300;
+	x = (int)((RENDER_WIDTH / 2) - 150);
+	y = RENDER_HEIGHT - 300;
 	anim->frame = 0;
 	anim->finished = true;
 	cub3d->gun_shooting = false;

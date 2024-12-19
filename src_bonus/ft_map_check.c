@@ -16,14 +16,18 @@
 static int	ft_check_neighbour(t_map *map, int x, int y)
 {
 	if (x - 1 < 0 || (map->grid[y][x - 1] != '0' && \
-		map->grid[y][x - 1] != '1') ||
+		map->grid[y][x - 1] != '1' && \
+		map->grid[y][x - 1] != '2') ||
 		y - 1 < 0 || (map->grid[y - 1][x] != '0' && \
-		map->grid[y - 1][x] != '1') || \
+		map->grid[y - 1][x] != '1' && \
+		map->grid[y - 1][x] != '2') || \
 		x + 1 >= (int)ft_strlen(map->grid[y]) || \
 		(map->grid[y][x + 1] != '0' && \
-		map->grid[y][x + 1] != '1') || \
+		map->grid[y][x + 1] != '1' && \
+		map->grid[y][x + 1] != '2') || \
 		y + 1 >= map->height || (map->grid[y + 1][x] != '0' && \
-		map->grid[y + 1][x] != '1'))
+		map->grid[y + 1][x] != '1' && \
+		map->grid[y + 1][x] != '2'))
 	{
 		return (1);
 	}
@@ -41,7 +45,7 @@ int	ft_check_map_closed(t_map *map)
 		x = 0;
 		while (map->grid[y][x])
 		{
-			if (map->grid[y][x] == '0')
+			if (map->grid[y][x] == '0' || map->grid[y][x] == '2')
 			{
 				if (ft_check_neighbour(map, x, y) != 0)
 				{

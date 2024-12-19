@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splash_screen.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 22:40:37 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/04 12:05:56 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/11/21 20:22:14 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/12/04 12:08:14 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/libs.h"
+#include <sys/time.h>
 
-int	splash_screen(t_cub3d *cub3d)
+unsigned long	rgb_to_hex(int r, int g, int b)
 {
-	t_sprite	*splash;
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+}
 
-	splash = xpm_load_image(cub3d->mlx, "textures/splash_screen.xpm", 0);
-	if (!splash)
-		return (ft_log("Cannot load splash screen", NULL, 3), -1);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, splash->img, 0, 0);
-	sleep(1);
-	ft_free_sprite(cub3d, splash);
-	return (0);
+int	ft_2d_len(void **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
+
+long	get_timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

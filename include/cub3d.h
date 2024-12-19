@@ -130,7 +130,7 @@ long			get_timestamp(void);
 
 //      FT_FREE.C
 void			ft_free_all(t_cub3d *cub3d);
-void			ft_free_sptite(t_cub3d *cub3d, t_sprite *sprite);
+void			ft_free_sprite(t_cub3d *cub3d, t_sprite *sprite);
 void			ft_free_2d_array(char **array);
 void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);
@@ -154,11 +154,11 @@ void			change_sprite_transparency(t_sprite *sprite,
 					unsigned char transparency);
 
 // HUD.C
-void			ft_render_hud(t_cub3d *cub3d, int frame_time);
+void			ft_render_hud(t_cub3d *cub3d, double frame_time);
 void			ft_render_health(t_cub3d *cub3d);
 void			ft_render_ammo(t_cub3d *cub3d);
 void			ft_render_weapon(t_cub3d *cub3d);
-void			ft_render_framerate(t_cub3d *cub3d, int frame_time);
+void			ft_render_framerate(t_cub3d *cub3d, double frame_time);
 
 // FONT_RENDERER.C
 t_font			**load_font(t_cub3d *cub3d, char *path, int font_size);

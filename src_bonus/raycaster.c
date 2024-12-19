@@ -45,6 +45,7 @@ int	raycaster(t_cub3d *cub3d)
 		draw_ceil_floor(cub3d, int_vars);
 		int_vars[0]++;
 	}
+	ft_draw_minimap(cub3d, cub3d->player->posx, cub3d->player->posy);
 	cub3d->frame++;
 	return (0);
 }

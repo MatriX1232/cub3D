@@ -46,20 +46,22 @@ static double	calculate_frame_time(t_cub3d *cub3d)
 int	main_loop(t_cub3d *cub3d)
 {
 	double	frame_time;
-	int		fps;
-	char	*fps_str;
+	int		wp_index;
 
 	frame_time = calculate_frame_time(cub3d);
-	fps = (int)(1.0 / frame_time);
-	if (fps < 0)
-		fps = 0;
-	fps_str = ft_itoa(fps);
 	handle_input(cub3d);
+	update_doors(cub3d);
 	raycaster(cub3d);
+	wp_index = cub3d->player->current_weapon->index - 1;
+	if (cub3d->gun_shooting)
+		update_animation(cub3d, cub3d->anims[wp_index]);
+	draw_2_buffer(cub3d->buffer, \
+		cub3d->anims[wp_index]->sprites[cub3d->anims[wp_index]->frame], \
+		(int)((RENDER_WIDTH / 2) - 150), RENDER_HEIGHT - 300);
+	ft_render_hud(cub3d, frame_time);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);
-	mlx_string_put(cub3d->mlx, cub3d->win, 0, 10, 0x00FF0000, "FPS:");
-	mlx_string_put(cub3d->mlx, cub3d->win, 30, 10, 0x00FF0000, fps_str);
-	free(fps_str);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer_hud->img, 0, \
+		RENDER_HEIGHT - 1);
 	return (0);
 }
 
@@ -90,8 +92,8 @@ int	main(int argc, char **argv)
 		return (ft_log("Failed to initialize MLX or create window", \
 			NULL, 3), 1);
 	ft_log("MLX and WIN initialized", NULL, 1);
-	cub3d.win_width = WIN_WIDTH;
-	cub3d.win_height = WIN_HEIGHT;
+	cub3d.win_width = RENDER_WIDTH;
+	cub3d.win_height = RENDER_HEIGHT;
 	cub3d.mlx = mlx;
 	cub3d.win = win;
 	mlx_mouse_hide(cub3d.mlx, cub3d.win);

@@ -130,7 +130,7 @@ long			get_timestamp(void);
 
 //      FT_FREE.C
 void			ft_free_all(t_cub3d *cub3d);
-void			ft_free_sptite(t_cub3d *cub3d, t_sprite *sprite);
+void			ft_free_sprite(t_cub3d *cub3d, t_sprite *sprite);
 void			ft_free_2d_array(char **array);
 void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);

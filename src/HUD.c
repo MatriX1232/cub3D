@@ -27,17 +27,16 @@ fc-cache -fv
 fc-list | grep "Tiny5"
 */
 
-void	ft_render_hud(t_cub3d *cub3d, int frame_time)
+void	ft_render_hud(t_cub3d *cub3d, double frame_time)
 {
 	draw_2_buffer(cub3d->buffer_hud, cub3d->hud, 0, 0);
 	ft_render_health(cub3d);
 	ft_render_ammo(cub3d);
 	ft_render_weapon(cub3d);
 	ft_render_framerate(cub3d, frame_time);
-	(void)frame_time;
 }
 
-void	ft_render_framerate(t_cub3d *cub3d, int frame_time)
+void	ft_render_framerate(t_cub3d *cub3d, double frame_time)
 {
 	int		fps;
 	char	*fps_str;

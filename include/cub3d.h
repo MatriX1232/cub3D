@@ -154,11 +154,11 @@ void			change_sprite_transparency(t_sprite *sprite,
 					unsigned char transparency);
 
 // HUD.C
-void			ft_render_hud(t_cub3d *cub3d, int frame_time);
+void			ft_render_hud(t_cub3d *cub3d, double frame_time);
 void			ft_render_health(t_cub3d *cub3d);
 void			ft_render_ammo(t_cub3d *cub3d);
 void			ft_render_weapon(t_cub3d *cub3d);
-void			ft_render_framerate(t_cub3d *cub3d, int frame_time);
+void			ft_render_framerate(t_cub3d *cub3d, double frame_time);
 
 // FONT_RENDERER.C
 t_font			**load_font(t_cub3d *cub3d, char *path, int font_size);

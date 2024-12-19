@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:09:19 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 20:45:47 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:06:10 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	ft_check_map_closed(t_map *map)
 			}
 			x++;
 		}
-		printf("\n");
 		y++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:48:53 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 22:50:18 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:02:13 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level)
 	ed = 0;
 	ret->img = mlx_xpm_file_to_image(mlx, path, &(ret->width), &(ret->height));
 	if (ret->img == NULL)
-		ft_log("Image failed to load", path, 3);
+		return (ft_log("Image failed to load", path, 3), free(ret), NULL);
 	ret->addr = mlx_get_data_addr(ret->img, &bpp, &ll, &ed);
 	ret->path = path;
 	ret->bits_per_pixel = bpp;

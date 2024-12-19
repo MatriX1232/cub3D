@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 19:11:33 by root             ###   ########.fr       */
+/*   Updated: 2024/12/19 20:43:39 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int				ft_get_map_height(char *path);
 void			ft_handle_split(t_map *map, char **split, int *i,
 					t_cub3d *cub3d);
 int				ft_check_map_closed(t_map *map);
+int				ft_check_if_map_valid(t_map *map);
 
 //      GNL.C
 char			*get_next_line(int fd);
@@ -134,6 +135,7 @@ void			ft_free_sprite(t_cub3d *cub3d, t_sprite *sprite);
 void			ft_free_2d_array(char **array);
 void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);
+void			ft_free_map(t_map *map);
 
 // INPUT.C
 void			handle_input(t_cub3d *cub3d);

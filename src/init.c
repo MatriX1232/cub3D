@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:44:12 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 18:39:13 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/19 20:35:27 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 	cub3d->map = ft_load_map(cub3d, argv[1]);
 	if (!cub3d->map)
 		return (ft_log("Map failed to load", NULL, 3), 1);
+	if (ft_check_if_map_valid(cub3d->map))
+		return (ft_log("Map is invalid", NULL, 3), 1);
 	cub3d->player->current_weapon = &cub3d->weapons[1];
 	cub3d->player->pitch = 100;
 	cub3d->player->hp = 100;

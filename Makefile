@@ -4,7 +4,6 @@ MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
 INCLUDES = -I/usr/include/
 LDFLAGS = -lXft
-OPTIMIZATION = -msse4.2 -mavx -mavx2 -mfma -mtune=native -funroll-loops -finline-functions -flto
 
 NAME = cub3D
 
@@ -98,14 +97,14 @@ all: $(NAME)
 
 %.o: %.c
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s\r$(_END)" $@
-	@$(CC) $(CFLAGS) $(OPTIMIZATION) $(MLXFLAGSO) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLXFLAGSO) $(INCLUDES) -c $< -o $@
 
 $(NAME): compile_dep $(OBJS)
-	@$(CC) $(CFLAGS) $(OPTIMIZATION) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LDFLAGS) $(LIBFT)/libft.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(DEPS) $(MLXFLAGSN) $(LDFLAGS) $(LIBFT)/libft.a
 	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
 
 bonus: compile_dep $(BONUS_OBJS)
-	@$(CC) $(CFLAGS) $(OPTIMIZATION) -o $(NAME) $(BONUS_OBJS) $(DEPS) $(MLXFLAGSN) $(LDFLAGS) $(LIBFT)/libft.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(BONUS_OBJS) $(DEPS) $(MLXFLAGSN) $(LDFLAGS) $(LIBFT)/libft.a
 	@printf "$(_GREEN)Build complete: $(_ITALIC)$(_BOLD)$(_PURPLE)$(NAME)$(_END)\n"
 
 bonus_clean:

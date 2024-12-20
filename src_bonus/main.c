@@ -50,6 +50,7 @@ int	main_loop(t_cub3d *cub3d)
 
 	frame_time = calculate_frame_time(cub3d);
 	wp_index = cub3d->player->current_weapon->index - 1;
+	cub3d->player->move_speed = MOVE_SPEED * cub3d->delta_time;
 	handle_input(cub3d);
 	update_doors(cub3d);
 	raycaster(cub3d);

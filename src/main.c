@@ -54,6 +54,7 @@ int	main_loop(t_cub3d *cub3d)
 	if (fps < 0)
 		fps = 0;
 	fps_str = ft_itoa(fps);
+	cub3d->player->move_speed = MOVE_SPEED * cub3d->delta_time;
 	handle_input(cub3d);
 	raycaster(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->buffer->img, 0, 0);

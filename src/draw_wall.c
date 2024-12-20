@@ -15,24 +15,19 @@
 
 void	find_tex(t_cub3d *cub3d, t_ray *ray)
 {
-	if (cub3d->map->grid[ray->mapy][ray->mapx] == '2')
-		cub3d->c_tex = cub3d->sprites[8];
+	if (ray->side == 0)
+	{
+		if (ray->raydirx > 0)
+			cub3d->c_tex = cub3d->map->sprite_ea;
+		else
+			cub3d->c_tex = cub3d->map->sprite_we;
+	}
 	else
 	{
-		if (ray->side == 0)
-		{
-			if (ray->raydirx > 0)
-				cub3d->c_tex = cub3d->map->sprite_ea;
-			else
-				cub3d->c_tex = cub3d->map->sprite_we;
-		}
+		if (ray->raydiry > 0)
+			cub3d->c_tex = cub3d->map->sprite_so;
 		else
-		{
-			if (ray->raydiry > 0)
-				cub3d->c_tex = cub3d->map->sprite_so;
-			else
-				cub3d->c_tex = cub3d->map->sprite_no;
-		}
+			cub3d->c_tex = cub3d->map->sprite_no;
 	}
 }
 

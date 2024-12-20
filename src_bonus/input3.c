@@ -42,7 +42,7 @@ int	ft_key_press(int keycode, t_cub3d *cub3d)
 	else if (keycode == XK_Right)
 		cub3d->keys.right = 1;
 	else if (keycode == XK_Shift_L)
-		cub3d->player->move_speed += 0.02;
+		cub3d->player->is_sprint = 1;
 	else if (keycode == XK_Up)
 		cub3d->keys.up = 1;
 	else if (keycode == XK_Down)
@@ -68,7 +68,7 @@ int	ft_key_release(int keycode, t_cub3d *cub3d)
 	else if (keycode == XK_Right)
 		cub3d->keys.right = 0;
 	else if (keycode == XK_Shift_L)
-		cub3d->player->move_speed = MOVE_SPEED;
+		cub3d->player->is_sprint = 0;
 	else if (keycode == XK_Up)
 		cub3d->keys.up = 0;
 	else if (keycode == XK_Down)

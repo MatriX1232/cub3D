@@ -97,6 +97,7 @@ typedef struct s_player
 	double		pitch;
 	double		move_speed;
 	t_weapon	*current_weapon;
+	int			is_sprint;
 	int			hp;
 	int			max_hp;
 }				t_player;
@@ -151,7 +152,7 @@ typedef struct s_cub3d
 	t_keys		keys;
 	t_weapon	weapons[5];
 	long		frame;
-	short		delta_time;
+	double	delta_time;
 	long		prev_time;
 	int			gun_shooting;
 	long		prev_shoot;

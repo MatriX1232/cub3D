@@ -21,7 +21,7 @@ void	rotate_left(t_cub3d *cub3d)
 
 	old_dir_x = cub3d->player->dirx;
 	old_plane_x = cub3d->player->planex;
-	rot_speed = ROT_SPEED;
+	rot_speed = ROT_SPEED * cub3d->delta_time;
 	cub3d->player->dirx = cub3d->player->dirx * cos(-rot_speed) \
 		- cub3d->player->diry * sin(-rot_speed);
 	cub3d->player->diry = old_dir_x * sin(-rot_speed) + \
@@ -40,7 +40,7 @@ void	rotate_right(t_cub3d *cub3d)
 
 	old_dir_x = cub3d->player->dirx;
 	old_plane_x = cub3d->player->planex;
-	rot_speed = ROT_SPEED;
+	rot_speed = ROT_SPEED * cub3d->delta_time;
 	cub3d->player->dirx = cub3d->player->dirx * cos(rot_speed) - \
 		cub3d->player->diry * sin(rot_speed);
 	cub3d->player->diry = old_dir_x * sin(rot_speed) + \

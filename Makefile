@@ -39,7 +39,8 @@ SRCS = \
 	src/draw_ceil_floor.c \
 	src/draw_wall.c \
 	src/ray_utils.c \
-	src/ft_map_check.c
+	src/ft_map_check.c \
+	src/ft_map_keys.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -76,7 +77,8 @@ BONUS_SRCS = \
 	src_bonus/draw_ceil_floor.c \
 	src_bonus/draw_wall.c \
 	src_bonus/ray_utils.c \
-	src_bonus/ft_map_check.c
+	src_bonus/ft_map_check.c \
+	src_bonus/ft_map_keys.c
 
 BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
 

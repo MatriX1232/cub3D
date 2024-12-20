@@ -55,7 +55,7 @@ int	check_args(int argc, char **argv)
 	if (len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", len) != 0)
 		return (ft_log("Invalid file extension. Expected '.cub'.", \
 			NULL, 2), 1);
-	else if (access(argv[1], F_OK) != 0)
+	else if (open(argv[1], O_RDONLY) < 3)
 		return (ft_log("File does not exist.", NULL, 2), 1);
 	else if (argc >= 3)
 		return (ft_log("Too many arguments provided.", NULL, 2), 1);

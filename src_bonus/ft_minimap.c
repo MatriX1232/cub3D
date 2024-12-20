@@ -63,15 +63,14 @@ void	ft_draw_minimap(t_cub3d *cub3d, int px, int py)
 		y = 0;
 		while (y < cub3d->map->height)
 		{
-			if (!cub3d->map->grid[y] || !cub3d->map->grid[y][x])
-				y++;
-			else
+			if (cub3d->map->grid[y] && x < \
+				(int)ft_strlen(cub3d->map->grid[y]) && cub3d->map->grid[y][x])
 			{
 				custom_switch(cub3d, x, y);
 				if (x == px && y == py)
 					ft_draw_scale(cub3d, x, y, 0xFF0000);
-				y++;
 			}
+			y++;
 		}
 		x++;
 	}

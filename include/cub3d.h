@@ -41,7 +41,7 @@ int				raycaster(t_cub3d *cub3d);
 int				get_pixel_color(t_sprite *sprite, int x, int y);
 
 //      DRAW_WALL.C
-int				find_texnum(t_cub3d *cub3d, t_ray *ray);
+void			find_tex(t_cub3d *cub3d, t_ray *ray);
 double			get_wallx(t_ray *ray, t_cub3d *cub3d);
 void			draw_wall(t_cub3d *cub3d, t_ray *ray, int *int_vars,
 					double wallx);

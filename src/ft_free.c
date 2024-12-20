@@ -38,6 +38,8 @@ void	ft_free_sprites(t_cub3d *cub3d)
 		ft_free_sprite(cub3d, cub3d->buffer);
 	if (cub3d->buffer_hud)
 		ft_free_sprite(cub3d, cub3d->buffer_hud);
+	if (cub3d->hud)
+		ft_free_sprite(cub3d, cub3d->hud);
 	ft_log("Sprites freed", NULL, 1);
 }
 

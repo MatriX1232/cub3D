@@ -144,6 +144,7 @@ typedef struct s_cub3d
 	t_sprite	*hud;
 	t_anim		**anims;
 	t_sprite	*buffer;
+	t_sprite	*c_tex;
 	t_sprite	*buffer_hud;
 	t_map		*map;
 	t_player	*player;

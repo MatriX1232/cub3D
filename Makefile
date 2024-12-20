@@ -115,6 +115,11 @@ bonus_fclean: bonus_clean
 	@rm -f $(NAME)
 	@printf "$(_CYAN)Removed executable: $(_PURPLE)$(NAME)$(_END)\n"
 
+re_bonus:
+	@printf "$(_YELLOW)Re-making project$(_END)\n"
+	@+make bonus_fclean --no-print-directory
+	@+make bonus --no-print-directory
+
 compile_dep: $(MLX) $(LIBFT)
 	@printf "$(_CYAN)Compiling : $(_YELLOW)%-$(PADDING).$(PADDING)s$(_END)\n" "Libft"
 	@+make -C $(LIBFT) --no-print-directory

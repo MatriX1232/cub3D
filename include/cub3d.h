@@ -26,9 +26,8 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_SPACE 32
-# define STEP_SPEED 0.05
-# define MOVE_SPEED 0.02
-# define ROT_SPEED 0.02
+# define MOVE_SPEED 5
+# define ROT_SPEED 2
 # define FLOOR 6
 # define CEILING 7
 

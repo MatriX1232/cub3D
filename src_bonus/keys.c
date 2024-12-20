@@ -26,4 +26,5 @@ void	initialize_keys(t_cub3d *cub3d)
 	cub3d->keys.up = 0;
 	cub3d->keys.down = 0;
 	cub3d->player->move_speed = MOVE_SPEED;
+	cub3d->player->is_sprint = 0;
 }

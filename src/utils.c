@@ -49,12 +49,14 @@ int	check_args(int argc, char **argv)
 {
 	int	len;
 
-	len = (int)ft_strlen(argv[1]);
 	if (argc == 1)
 		return (ft_log("No arguments provided.", NULL, 2), 1);
+	len = (int)ft_strlen(argv[1]);
 	if (len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", len) != 0)
 		return (ft_log("Invalid file extension. Expected '.cub'.", \
 			NULL, 2), 1);
+	else if (access(argv[1], F_OK) != 0)
+		return (ft_log("File does not exist.", NULL, 2), 1);
 	else if (argc >= 3)
 		return (ft_log("Too many arguments provided.", NULL, 2), 1);
 	return (0);

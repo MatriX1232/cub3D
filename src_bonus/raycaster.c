@@ -39,7 +39,7 @@ int	raycaster(t_cub3d *cub3d)
 		if (ray.hit == 0)
 			continue ;
 		perpwalldist(&ray);
-		int_vars[1] = find_texnum(cub3d, &ray);
+		find_tex(cub3d, &ray);
 		wallx = get_wallx(&ray, cub3d);
 		draw_wall(cub3d, &ray, int_vars, wallx);
 		draw_ceil_floor(cub3d, int_vars);

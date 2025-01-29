@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 23:33:46 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:37:47 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_SPACE 32
-# define MOVE_SPEED 5
+# define MOVE_SPEED 3
 # define ROT_SPEED 2
 # define FLOOR 6
 # define CEILING 7
@@ -120,6 +120,9 @@ int				ft_check_map_closed(t_map *map);
 int				ft_check_if_map_valid(t_map *map);
 void			ft_replace_spaces(t_map *map);
 
+//		FT_MAP_KEYS.C
+int				ft_check_double_keys(char *path);
+
 //      GNL.C
 char			*get_next_line(int fd);
 
@@ -137,6 +140,7 @@ void			ft_free_2d_array(char **array);
 void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);
 void			ft_free_map(t_map *map);
+void			ft_free_without_map(t_cub3d *cub3d);
 
 // INPUT.C
 void			handle_input(t_cub3d *cub3d);

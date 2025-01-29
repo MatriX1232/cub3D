@@ -63,17 +63,21 @@ void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index)
 	else if (index == 1)
 		map->sprite_so = xpm_load_image(cub3d->mlx, split[1], 1);
 	else if (index == 2)
-		map->sprite_we = xpm_load_image(cub3d->mlx, split[1], 0);
+		map->sprite_we = xpm_load_image(cub3d->mlx, split[1], 1);
 	else if (index == 3)
-		map->sprite_ea = xpm_load_image(cub3d->mlx, split[1], 0);
+		map->sprite_ea = xpm_load_image(cub3d->mlx, split[1], 1);
 }
 
 void	ft_load_color(t_map *map, char **split, int index)
 {
+	char **split_rgb;
+
+	split_rgb = ft_split(split[1], ',');
 	if (index == 4)
-		map->floor = (int)rgb_to_hex(ft_atoi(split[0]),
-				ft_atoi(split[1]), ft_atoi(split[2]));
+		map->floor = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
+				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));
 	else if (index == 5)
-		map->ceiling = (int)rgb_to_hex(ft_atoi(split[0]),
-				ft_atoi(split[1]), ft_atoi(split[2]));
+		map->ceiling = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
+				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));
+	ft_free_2d_array(split_rgb);
 }

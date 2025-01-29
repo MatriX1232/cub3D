@@ -53,10 +53,28 @@ int	ft_get_map_height(char *path)
 	return (height);
 }
 
-void	ft_handle_split(t_map *map, char **split, int *i, t_cub3d *cub3d)
+int	ft_handle_split(t_map *map, char **split, t_cub3d *cub3d)
 {
-	if (*i < 4)
-		ft_load_texture(cub3d, map, split, *i);
-	else if (*i < 6)
-		ft_load_color(map, split, *i);
+	int	index;
+
+	index = -1;
+	if (ft_strncmp("NO", split[0], 3) == 0)
+		index = 0;
+	if (ft_strncmp("SO", split[0], 3) == 0)
+		index = 1;
+	if (ft_strncmp("WE", split[0], 3) == 0)
+		index = 2;
+	if (ft_strncmp("EA", split[0], 3) == 0)
+		index = 3;
+	if (ft_strncmp("F", split[0], 2) == 0)
+		index = 5;
+	if (ft_strncmp("C", split[0], 2) == 0)
+		index = 6;
+	if (index == -1)
+		return (1);
+	if (index < 4)
+		ft_load_texture(cub3d, map, split, index);
+	else
+		ft_load_color(map, split, index);
+	return (0);
 }

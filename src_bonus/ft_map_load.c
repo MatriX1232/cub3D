@@ -13,41 +13,33 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-static char	**ft_handle_split_sep(char **split, char *line, int *i)
-{
-	if (*i < 6)
-	{
-		if (*i < 4)
-			split = ft_split(line, ' ');
-		else
-			split = ft_split(line, ',');
-	}
-	return (split);
-}
 
-static void	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
+static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
 	char		**split;
 	char		*tmp;
+	int			err;
 
+	err = 0;
 	tmp = ft_strtrim(line, "\n");
 	free(line);
 	line = tmp;
 	if (ft_strlen(line) == 0)
 	{
 		free(line);
-		return ;
+		return (1);
 	}
 	split = NULL;
-	split = ft_handle_split_sep(split, line, i);
+	split = ft_split(line, ' ');
 	if (*i < 6)
-		ft_handle_split(map, split, i, cub3d);
+		err = ft_handle_split(map, split, cub3d);
 	else
 		ft_process_grid(cub3d, map, line, *i - 6);
 	if (*i < 6)
 		ft_free_2d_array(split);
 	free(line);
 	*i += 1;
+	return (err);
 }
 
 static t_map	*ft_init_map(t_map *map)
@@ -75,6 +67,7 @@ static t_map	*ft_init_grid(t_map *map, char *path)
 	j = 0;
 	while (j < map->height)
 		map->grid[j++] = NULL;
+	map->width = 0;
 	return (map);
 }
 
@@ -92,13 +85,13 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 		return (ft_log("Cannot open file", path, 3), NULL);
 	map = ft_init_grid(map, path);
 	i = 0;
-	map->width = 0;
 	cub3d->player = map->player;
 	ft_log("Loading map textures...", NULL, 1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		ft_extract_info(cub3d, map, line, &i);
+		if (ft_extract_info(cub3d, map, line, &i) == 1)
+			return (ft_log("Invalid map data", NULL, 3), close(fd), NULL);
 		line = get_next_line(fd);
 	}
 	map->grid[i - 6] = NULL;

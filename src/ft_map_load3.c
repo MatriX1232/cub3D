@@ -73,10 +73,10 @@ void	ft_load_color(t_map *map, char **split, int index)
 	char **split_rgb;
 
 	split_rgb = ft_split(split[1], ',');
-	if (index == 4)
+	if (index == 5)
 		map->floor = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
 				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));
-	else if (index == 5)
+	else if (index == 6)
 		map->ceiling = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
 				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));
 	ft_free_2d_array(split_rgb);

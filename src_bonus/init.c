@@ -30,7 +30,7 @@ void	ft_set_player_state(t_cub3d *cub3d)
 	cub3d->player->hp = 100;
 	cub3d->characters = load_font(cub3d, "textures/font/", 30);
 	if (!cub3d->characters)
-		return (ft_log("Failed to load font characters", NULL, 3), 1);
+		ft_log("Failed to load font characters", NULL, 3);
 }
 
 int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
@@ -55,8 +55,6 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 		return (ft_log("Anims/Player failed to load", NULL, 3), 1);
 	if (ft_check_if_map_valid(cub3d->map))
 		return (ft_log("Map is invalid", NULL, 3), 1);
-	if (ft_check_double_keys(argv[1]))
-		return (ft_log("Invalid keys found", NULL, 3), 1);
 	ft_set_player_state(cub3d);
 	return (0);
 }

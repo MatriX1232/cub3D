@@ -13,7 +13,6 @@
 #include "../include/cub3d.h"
 #include "../include/libs.h"
 
-
 static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
 	char		**split;
@@ -32,11 +31,12 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	split = NULL;
 	split = ft_split(line, ' ');
 	if (*i < 6)
+	{
 		err = ft_handle_split(map, split, cub3d);
+		ft_free_2d_array(split);
+	}
 	else
 		ft_process_grid(cub3d, map, line, *i - 6);
-	if (*i < 6)
-		ft_free_2d_array(split);
 	free(line);
 	*i += 1;
 	return (err);
@@ -47,6 +47,12 @@ static t_map	*ft_init_map(t_map *map)
 	map = (t_map *) malloc(1 * sizeof(t_map));
 	if (!map)
 		return (ft_log("Cannot allocate memory for map", NULL, 3), NULL);
+	map->ceiling = -1;
+	map->floor = -1;
+	map->sprite_no = NULL;
+	map->sprite_so = NULL;
+	map->sprite_we = NULL;
+	map->sprite_ea = NULL;
 	map->player = (t_player *) malloc(1 * sizeof(t_player));
 	if (!map->player)
 		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);

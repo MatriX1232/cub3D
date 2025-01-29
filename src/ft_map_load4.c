@@ -58,17 +58,17 @@ int	ft_handle_split(t_map *map, char **split, t_cub3d *cub3d)
 	int	index;
 
 	index = -1;
-	if (ft_strncmp("NO", split[0], 3) == 0)
+	if (ft_strncmp("NO", split[0], 3) == 0 && map->sprite_no == NULL)
 		index = 0;
-	if (ft_strncmp("SO", split[0], 3) == 0)
+	if (ft_strncmp("SO", split[0], 3) == 0 && map->sprite_so == NULL)
 		index = 1;
-	if (ft_strncmp("WE", split[0], 3) == 0)
+	if (ft_strncmp("WE", split[0], 3) == 0 && map->sprite_we == NULL)
 		index = 2;
-	if (ft_strncmp("EA", split[0], 3) == 0)
+	if (ft_strncmp("EA", split[0], 3) == 0 && map->sprite_ea == NULL)
 		index = 3;
-	if (ft_strncmp("F", split[0], 2) == 0)
+	if (ft_strncmp("F", split[0], 2) == 0 && map->floor == -1)
 		index = 5;
-	if (ft_strncmp("C", split[0], 2) == 0)
+	if (ft_strncmp("C", split[0], 2) == 0 && map->ceiling == -1)
 		index = 6;
 	if (index == -1)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:26:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/20 15:37:47 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:50:03 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);
 void			ft_free_map(t_map *map);
 void			ft_free_without_map(t_cub3d *cub3d);
+void			ft_free_weapons(t_cub3d *cub3d);
 
 // INPUT.C
 void			handle_input(t_cub3d *cub3d);

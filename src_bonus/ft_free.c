@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 18:58:49 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:50:20 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ void	ft_free_all(t_cub3d *cub3d)
 	ft_free_sprites(cub3d);
 	free(cub3d->map);
 	free(cub3d->player);
+	ft_free_font(cub3d);
+	ft_free_animations(cub3d);
+	ft_free_weapons(cub3d);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);
 	mlx_destroy_display(cub3d->mlx);
 	free(cub3d->mlx);

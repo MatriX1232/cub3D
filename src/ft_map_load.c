@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/19 23:27:55 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:29:31 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	split = NULL;
 	split = ft_split(line, ' ');
 	if (*i < 6)
-	{
 		err = ft_handle_split(map, split, cub3d);
-		ft_free_2d_array(split);
-	}
 	else
 		ft_process_grid(cub3d, map, line, *i - 6);
 	free(line);
 	*i += 1;
+	ft_free_2d_array(split);
 	return (err);
 }
 

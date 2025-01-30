@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/01/30 17:56:29 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:56:16 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 		err = ft_handle_split(map, split, cub3d);
 	else
 		ft_process_grid(cub3d, map, line, *i - 6);
-	// if (*i < 6)
-	// 	ft_free_2d_array(split);
 	ft_free_2d_array(split);
 	free(line);
 	*i += 1;

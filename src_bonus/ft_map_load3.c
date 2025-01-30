@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:09:07 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/17 18:58:06 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:57:02 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index)
 
 void	ft_load_color(t_map *map, char **split, int index)
 {
-	char **split_rgb;
+	char	**split_rgb;
 
 	split_rgb = ft_split(split[1], ',');
 	if (index == 5)

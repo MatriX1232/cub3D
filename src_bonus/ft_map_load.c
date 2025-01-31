@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/01/30 19:56:16 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:39:52 by idomagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 {
 	char		**split;
 	char		*tmp;
-	int			err;
 
-	err = 0;
 	tmp = ft_strtrim(line, "\n");
 	free(line);
 	line = tmp;
 	split = NULL;
 	split = ft_split(line, ' ');
 	if (cub3d->parsed_elements < 6 && ft_strlen(line) > 0)
-		err = ft_handle_split(map, split, cub3d);
+		ft_handle_split(map, split, cub3d);
 	else
 		ft_process_grid(cub3d, map, line, *i - cub3d->parsed_elements);
 	free(line);
 	*i += 1;
 	ft_free_2d_array(split);
-	return (err);
+	return (0);
 }
 
 static t_map	*ft_init_map(t_cub3d *cub3d, t_map *map)
@@ -98,8 +96,7 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (ft_extract_info(cub3d, map, line, &i) == 1)
-			return (ft_log("Invalid map data", NULL, 3), close(fd), NULL);
+		ft_extract_info(cub3d, map, line, &i);
 		line = get_next_line(fd);
 	}
 	map->grid[i - 6] = NULL;

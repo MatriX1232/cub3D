@@ -13,6 +13,7 @@
 #include "../include/colors.h"
 #include "../include/structs.h"
 #include "../include/cub3d.h"
+#include "../include/libs.h"
 
 void	ft_print_img_info(t_sprite *img)
 {
@@ -33,12 +34,11 @@ t_sprite	*xpm_load_image(void *mlx, char *path, int sub_level)
 	int			ll;
 	int			ed;
 
+	if (path == NULL)
+		return (ft_log("Texture path is empty", NULL, 3), NULL);
 	ret = (t_sprite *) malloc(1 * sizeof(t_sprite));
 	if (!ret)
-	{
-		ft_log("Cannot allocate memory for sprite: ", path, 3);
-		return (NULL);
-	}
+		return (ft_log("Cannot allocate memory for sprite: ", path, 3), NULL);
 	bpp = 0;
 	ll = 0;
 	ed = 0;

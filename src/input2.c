@@ -18,7 +18,7 @@ void	move_forward(t_cub3d *cub3d)
 	double	move_step_x;
 	double	move_step_y;
 	double	d_vars[3];
-	int			i_vars[2];
+	int		i_vars[2];
 
 	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
@@ -46,7 +46,7 @@ void	move_backward(t_cub3d *cub3d)
 	double	move_step_x;
 	double	move_step_y;
 	double	d_vars[3];
-	int			i_vars[2];
+	int		i_vars[2];
 
 	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
@@ -74,7 +74,7 @@ void	move_left(t_cub3d *cub3d)
 	double	move_step_x;
 	double	move_step_y;
 	double	d_vars[3];
-	int			i_vars[2];
+	int		i_vars[2];
 
 	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
@@ -102,7 +102,7 @@ void	move_right(t_cub3d *cub3d)
 	double	move_step_x;
 	double	move_step_y;
 	double	d_vars[3];
-	int			i_vars[2];
+	int		i_vars[2];
 
 	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)

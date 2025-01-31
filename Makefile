@@ -31,7 +31,6 @@ SRCS = \
 	src/input.c \
 	src/input2.c \
 	src/input3.c \
-	src/splash_screen.c \
 	src/door.c \
 	src/door2.c \
 	src/mouse.c \

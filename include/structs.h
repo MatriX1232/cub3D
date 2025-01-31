@@ -158,6 +158,7 @@ typedef struct s_cub3d
 	long		prev_shoot;
 	int			door_count;
 	t_door		doors[MAX_DOORS];
+	int			parsed_elements;
 }				t_cub3d;
 
 #endif

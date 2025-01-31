@@ -23,24 +23,19 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	tmp = ft_strtrim(line, "\n");
 	free(line);
 	line = tmp;
-	if (ft_strlen(line) == 0)
-	{
-		free(line);
-		return (1);
-	}
 	split = NULL;
 	split = ft_split(line, ' ');
-	if (*i < 6)
+	if (cub3d->parsed_elements < 6 && ft_strlen(line) > 0)
 		err = ft_handle_split(map, split, cub3d);
 	else
-		ft_process_grid(cub3d, map, line, *i - 6);
-	ft_free_2d_array(split);
+		ft_process_grid(cub3d, map, line, *i - cub3d->parsed_elements);
 	free(line);
 	*i += 1;
+	ft_free_2d_array(split);
 	return (err);
 }
 
-static t_map	*ft_init_map(t_map *map)
+static t_map	*ft_init_map(t_cub3d *cub3d, t_map *map)
 {
 	map = (t_map *) malloc(1 * sizeof(t_map));
 	if (!map)
@@ -53,7 +48,13 @@ static t_map	*ft_init_map(t_map *map)
 	map->sprite_ea = NULL;
 	map->player = (t_player *) malloc(1 * sizeof(t_player));
 	if (!map->player)
+	{
+		free(map);
 		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
+	}
+	cub3d->parsed_elements = 0;
+	cub3d->map = map;
+	cub3d->player = map->player;
 	return (map);
 }
 
@@ -61,6 +62,8 @@ static t_map	*ft_init_grid(t_map *map, char *path)
 {
 	int	j;
 
+	if (!map)
+		return (NULL);
 	map->height = ft_get_map_height(path) - 6;
 	if (map->height < 0 || \
 		(unsigned long)map->height > (9223372036854775807 / sizeof(char *) - 1))
@@ -83,13 +86,14 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	int		i;
 
 	map = NULL;
-	map = ft_init_map(map);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ft_log("Cannot open file", path, 3), NULL);
+	map = ft_init_map(cub3d, map);
 	map = ft_init_grid(map, path);
+	if (!map)
+		return (close(fd), NULL);
 	i = 0;
-	cub3d->player = map->player;
 	ft_log("Loading map textures...", NULL, 1);
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -100,6 +104,5 @@ t_map	*ft_load_map(t_cub3d *cub3d, char *path)
 	}
 	map->grid[i - 6] = NULL;
 	close(fd);
-	ft_log("Map loaded successfully", path, 0);
-	return (map);
+	return (ft_log("Map loaded successfully", path, 0), map);
 }

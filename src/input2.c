@@ -17,66 +17,110 @@ void	move_forward(t_cub3d *cub3d)
 {
 	double	move_step_x;
 	double	move_step_y;
+	double	d_vars[3];
+	int			i_vars[2];
 
+	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
-		cub3d->player->move_speed *= 1.5;
-	move_step_x = cub3d->player->dirx * cub3d->player->move_speed;
-	move_step_y = cub3d->player->diry * cub3d->player->move_speed;
-	if (cub3d->map->grid[(int)(cub3d->player->posy)]
-		[(int)(cub3d->player->posx + move_step_x)] == '0')
-		cub3d->player->posx += move_step_x;
-	if (cub3d->map->grid[(int)(cub3d->player->posy + move_step_y)]
-		[(int)(cub3d->player->posx)] == '0')
-		cub3d->player->posy += move_step_y;
+		d_vars[0] *= 1.5;
+	move_step_x = cub3d->player->dirx * d_vars[0];
+	move_step_y = cub3d->player->diry * d_vars[0];
+	d_vars[1] = cub3d->player->posx + move_step_x;
+	i_vars[0] = (int)d_vars[1];
+	i_vars[1] = (int)cub3d->player->posy;
+	if (i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posx = d_vars[1];
+	d_vars[2] = cub3d->player->posy + move_step_y;
+	i_vars[0] = (int)cub3d->player->posx;
+	i_vars[1] = (int)d_vars[2];
+	if (i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posy = d_vars[2];
 }
 
 void	move_backward(t_cub3d *cub3d)
 {
 	double	move_step_x;
 	double	move_step_y;
+	double	d_vars[3];
+	int			i_vars[2];
 
+	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
-		cub3d->player->move_speed *= 1.5;
-	move_step_x = -cub3d->player->dirx * cub3d->player->move_speed;
-	move_step_y = -cub3d->player->diry * cub3d->player->move_speed;
-	if (cub3d->map->grid[(int)(cub3d->player->posy)]
-		[(int)(cub3d->player->posx + move_step_x)] == '0')
-		cub3d->player->posx += move_step_x;
-	if (cub3d->map->grid[(int)(cub3d->player->posy + move_step_y)]
-		[(int)(cub3d->player->posx)] == '0')
-		cub3d->player->posy += move_step_y;
+		d_vars[0] *= 1.5;
+	move_step_x = -cub3d->player->dirx * d_vars[0];
+	move_step_y = -cub3d->player->diry * d_vars[0];
+	d_vars[1] = cub3d->player->posx + move_step_x;
+	i_vars[0] = (int)d_vars[1];
+	i_vars[1] = (int)cub3d->player->posy;
+	if (i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posx = d_vars[1];
+	d_vars[2] = cub3d->player->posy + move_step_y;
+	i_vars[0] = (int)cub3d->player->posx;
+	i_vars[1] = (int)d_vars[2];
+	if (i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posy = d_vars[2];
 }
 
 void	move_left(t_cub3d *cub3d)
 {
 	double	move_step_x;
 	double	move_step_y;
+	double	d_vars[3];
+	int			i_vars[2];
 
+	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
-		cub3d->player->move_speed *= 1.5;
-	move_step_x = -cub3d->player->planex * cub3d->player->move_speed;
-	move_step_y = -cub3d->player->planey * cub3d->player->move_speed;
-	if (cub3d->map->grid[(int)(cub3d->player->posy)]
-		[(int)(cub3d->player->posx + move_step_x)] == '0')
-		cub3d->player->posx += move_step_x;
-	if (cub3d->map->grid[(int)(cub3d->player->posy + move_step_y)]
-		[(int)(cub3d->player->posx)] == '0')
-		cub3d->player->posy += move_step_y;
+		d_vars[0] *= 1.5;
+	move_step_x = -cub3d->player->planex * d_vars[0];
+	move_step_y = -cub3d->player->planey * d_vars[0];
+	d_vars[1] = cub3d->player->posx + move_step_x;
+	i_vars[0] = (int)d_vars[1];
+	i_vars[1] = (int)cub3d->player->posy;
+	if (i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posx = d_vars[1];
+	d_vars[2] = cub3d->player->posy + move_step_y;
+	i_vars[0] = (int)cub3d->player->posx;
+	i_vars[1] = (int)d_vars[2];
+	if (i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posy = d_vars[2];
 }
 
 void	move_right(t_cub3d *cub3d)
 {
 	double	move_step_x;
 	double	move_step_y;
+	double	d_vars[3];
+	int			i_vars[2];
 
+	d_vars[0] = cub3d->player->move_speed;
 	if (cub3d->player->is_sprint)
-		cub3d->player->move_speed *= 1.5;
-	move_step_x = cub3d->player->planex * cub3d->player->move_speed;
-	move_step_y = cub3d->player->planey * cub3d->player->move_speed;
-	if (cub3d->map->grid[(int)(cub3d->player->posy)]
-		[(int)(cub3d->player->posx + move_step_x)] == '0')
-		cub3d->player->posx += move_step_x;
-	if (cub3d->map->grid[(int)(cub3d->player->posy + move_step_y)]
-		[(int)(cub3d->player->posx)] == '0')
-		cub3d->player->posy += move_step_y;
+		d_vars[0] *= 1.5;
+	move_step_x = cub3d->player->planex * d_vars[0];
+	move_step_y = cub3d->player->planey * d_vars[0];
+	d_vars[1] = cub3d->player->posx + move_step_x;
+	i_vars[0] = (int)d_vars[1];
+	i_vars[1] = (int)cub3d->player->posy;
+	if (i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posx = d_vars[1];
+	d_vars[2] = cub3d->player->posy + move_step_y;
+	i_vars[0] = (int)cub3d->player->posx;
+	i_vars[1] = (int)d_vars[2];
+	if (i_vars[1] >= 0 && i_vars[1] < cub3d->map->height
+		&& i_vars[0] >= 0 && i_vars[0] < cub3d->map->width
+		&& cub3d->map->grid[i_vars[1]][i_vars[0]] == '0')
+		cub3d->player->posy = d_vars[2];
 }

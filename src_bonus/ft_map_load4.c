@@ -76,5 +76,6 @@ int	ft_handle_split(t_map *map, char **split, t_cub3d *cub3d)
 		ft_load_texture(cub3d, map, split, index);
 	else
 		ft_load_color(map, split, index);
+	cub3d->parsed_elements++;
 	return (0);
 }

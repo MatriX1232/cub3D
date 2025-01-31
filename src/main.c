@@ -24,20 +24,9 @@ static double	calculate_frame_time(t_cub3d *cub3d)
 {
 	double	current_time;
 	double	frame_time;
-	double	min_frame_time;
 
 	current_time = get_timestamp();
 	frame_time = (current_time - cub3d->prev_time) / 1000.0;
-	if (FRAME_RATE > 0)
-	{
-		min_frame_time = 1.0 / FRAME_RATE;
-		if (frame_time < min_frame_time)
-		{
-			usleep((useconds_t)((min_frame_time - frame_time) * 1000000));
-			current_time = get_timestamp();
-			frame_time = (current_time - cub3d->prev_time) / 1000.0;
-		}
-	}
 	cub3d->prev_time = current_time;
 	cub3d->delta_time = frame_time;
 	return (frame_time);

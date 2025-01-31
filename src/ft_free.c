@@ -69,13 +69,13 @@ void	ft_free_animations(t_cub3d *cub3d)
 
 void	ft_free_all(t_cub3d *cub3d)
 {
-	if (cub3d->map->sprite_no != NULL)
+	if (cub3d->map->sprite_no)
 		ft_free_sprite(cub3d, cub3d->map->sprite_no);
-	if (cub3d->map->sprite_so != NULL)
+	if (cub3d->map->sprite_so)
 		ft_free_sprite(cub3d, cub3d->map->sprite_so);
-	if (cub3d->map->sprite_we != NULL)
+	if (cub3d->map->sprite_we)
 		ft_free_sprite(cub3d, cub3d->map->sprite_we);
-	if (cub3d->map->sprite_ea != NULL)
+	if (cub3d->map->sprite_ea)
 		ft_free_sprite(cub3d, cub3d->map->sprite_ea);
 	ft_free_2d_array(cub3d->map->grid);
 	ft_free_sprites(cub3d);

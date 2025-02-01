@@ -28,10 +28,6 @@ static int	ft_check_neighbour(t_map *map, int x, int y)
 		return (1);
 	}
 	return (0);
-	{
-		return (1);
-	}
-	return (0);
 }
 
 int	ft_check_if_map_valid(t_map *map)
@@ -48,6 +44,11 @@ int	ft_check_if_map_valid(t_map *map)
 		!map->sprite_ea || !map->sprite_we)
 	{
 		ft_log("One or more textures failed to load.", NULL, 3);
+		return (1);
+	}
+	if (map->floor == -1 || map->ceiling == -1)
+	{
+		ft_log("One or more colors failed to load.", NULL, 3);
 		return (1);
 	}
 	return (0);

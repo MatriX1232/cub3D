@@ -40,6 +40,8 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 	ft_replace_spaces(cub3d->map);
 	if (ft_check_if_map_valid(cub3d->map))
 		return (ft_log("Map is invalid", NULL, 3), 1);
+	if (cub3d->player->amount != 1)
+		return (ft_log("Map must contain exactly one player", NULL, 3), 1);
 	cub3d->player->current_weapon = &cub3d->weapons[1];
 	cub3d->player->pitch = 100;
 	cub3d->player->hp = 100;

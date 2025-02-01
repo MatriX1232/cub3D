@@ -33,6 +33,7 @@ void	ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y)
 			else if (line[x] == 'E' || line[x] == 'W')
 				ft_east_west(player, line[x]);
 			ft_set_player_position(player, x, y, map->grid);
+			cub3d->player->amount++;
 		}
 		x++;
 	}

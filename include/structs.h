@@ -100,6 +100,7 @@ typedef struct s_player
 	int			is_sprint;
 	int			hp;
 	int			max_hp;
+	int			amount;
 }				t_player;
 
 typedef struct s_map

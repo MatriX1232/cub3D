@@ -30,8 +30,13 @@ static int	ft_check_neighbour(t_map *map, int x, int y)
 	return (0);
 }
 
-int	ft_check_if_map_valid(t_map *map)
+int	ft_check_if_map_valid(t_cub3d *cub3d, t_map *map)
 {
+	if (cub3d->checked_elements != cub3d->parsed_elements)
+	{
+		ft_log("Incorrect number of elements.", NULL, 3);
+		return (1);
+	}
 	if (!map)
 		return (ft_log("Map structure is NULL.", NULL, 3), 1);
 	if (!map->grid)

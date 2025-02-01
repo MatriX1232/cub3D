@@ -70,12 +70,12 @@ int	ft_handle_split(t_map *map, char **split, t_cub3d *cub3d)
 		index = 5;
 	if (ft_strncmp("C", split[0], 2) == 0 && map->ceiling == -1)
 		index = 6;
+	cub3d->checked_elements++;
 	if (index == -1)
 		return (1);
 	if (index < 4)
 		ft_load_texture(cub3d, map, split, index);
 	else
-		ft_load_color(map, split, index);
-	cub3d->parsed_elements++;
+		ft_load_color(cub3d, map, split, index);
 	return (0);
 }

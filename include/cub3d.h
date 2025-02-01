@@ -113,11 +113,12 @@ void			ft_set_player_position(t_player *player, int x, int y,
 					char **grid);
 void			ft_load_texture(t_cub3d *cub3d, t_map *map, char **split,
 					int index);
-void			ft_load_color(t_map *map, char **split, int index);
+void			ft_load_color(t_cub3d *cub3d,
+					t_map *map, char **split, int index);
 int				ft_get_map_height(char *path);
 int				ft_handle_split(t_map *map, char **split, t_cub3d *cub3d);
 int				ft_check_map_closed(t_map *map);
-int				ft_check_if_map_valid(t_map *map);
+int				ft_check_if_map_valid(t_cub3d *cub3d, t_map *map);
 void			ft_replace_spaces(t_map *map);
 
 //		FT_MAP_KEYS.C

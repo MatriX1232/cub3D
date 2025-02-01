@@ -26,7 +26,7 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	if (cub3d->parsed_elements < 6 && ft_strlen(line) > 0)
 		ft_handle_split(map, split, cub3d);
 	else
-		ft_process_grid(cub3d, map, line, *i - 6);
+		ft_process_grid(cub3d, map, line, *i - cub3d->checked_elements);
 	free(line);
 	*i += 1;
 	ft_free_2d_array(split);
@@ -51,7 +51,6 @@ static t_map	*ft_init_map(t_cub3d *cub3d, t_map *map)
 		free(map);
 		return (ft_log("Cannot allocate memory for player", NULL, 3), NULL);
 	}
-	cub3d->parsed_elements = 0;
 	cub3d->map = map;
 	cub3d->player = map->player;
 	cub3d->player->amount = 0;

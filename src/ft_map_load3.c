@@ -66,9 +66,10 @@ void	ft_load_texture(t_cub3d *cub3d, t_map *map, char **split, int index)
 		map->sprite_we = xpm_load_image(cub3d->mlx, split[1], 1);
 	else if (index == 3)
 		map->sprite_ea = xpm_load_image(cub3d->mlx, split[1], 1);
+	cub3d->parsed_elements++;
 }
 
-void	ft_load_color(t_map *map, char **split, int index)
+void	ft_load_color(t_cub3d *cub3d, t_map *map, char **split, int index)
 {
 	char	**split_rgb;
 
@@ -80,4 +81,5 @@ void	ft_load_color(t_map *map, char **split, int index)
 		map->ceiling = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
 				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));
 	ft_free_2d_array(split_rgb);
+	cub3d->parsed_elements++;
 }

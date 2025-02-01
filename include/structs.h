@@ -160,6 +160,7 @@ typedef struct s_cub3d
 	int			door_count;
 	t_door		doors[MAX_DOORS];
 	int			parsed_elements;
+	int			checked_elements;
 }				t_cub3d;
 
 #endif

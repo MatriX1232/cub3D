@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:44:12 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/20 15:50:56 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:43:38 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	ft_init_cub3d(t_cub3d *cub3d, char **argv)
 		return (ft_log("Failed to create buffer", NULL, 3), 1);
 	splash_screen(cub3d);
 	ft_replace_spaces(cub3d->map);
+	init_door_system(cub3d);
+	cub3d->anims = ft_load_anims(cub3d);
 	if (ft_check_if_map_valid(cub3d, cub3d->map))
 		return (ft_log("Map is invalid", NULL, 3), 1);
 	if (cub3d->player->amount != 1)

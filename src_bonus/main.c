@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:32:15 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/20 00:00:35 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:32:15 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	main_loop(t_cub3d *cub3d)
 	raycaster(cub3d);
 	if (cub3d->gun_shooting)
 		update_animation(cub3d, cub3d->anims[wp_index]);
+	if (!cub3d->anims)
+		ft_log("NO anim index 1\n", NULL, 2);
 	draw_2_buffer(cub3d->buffer, \
 		cub3d->anims[wp_index]->sprites[cub3d->anims[wp_index]->frame], \
 		(int)((RENDER_WIDTH / 2) - 150), RENDER_HEIGHT - 300);

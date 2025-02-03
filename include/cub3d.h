@@ -106,7 +106,7 @@ void			ft_log_sub(char *str, char *str_optional, int level,
 
 //      FT_MAP_LOAD.C
 t_map			*ft_load_map(t_cub3d *cub3d, char *path);
-void			ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y);
+void			ft_process_grid(t_cub3d *cub3d, t_map *map, char *line);
 void			ft_north_south(t_player *player, char direction);
 void			ft_east_west(t_player *player, char direction);
 void			ft_set_player_position(t_player *player, int x, int y,

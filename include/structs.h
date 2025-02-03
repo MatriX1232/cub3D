@@ -115,6 +115,7 @@ typedef struct s_map
 	int			floor;
 	int			ceiling;
 	t_player	*player;
+	int			y;
 }				t_map;
 
 typedef struct s_ray

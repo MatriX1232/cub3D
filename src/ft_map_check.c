@@ -15,6 +15,11 @@
 
 static int	ft_check_neighbour(t_map *map, int x, int y)
 {
+	if (map->grid[y + 1][x + 1] == '\0' || map->grid[y - 1] == NULL || \
+		map->grid[y][x + 1] == '\0')
+	{
+		return (1);
+	}
 	if (x - 1 < 0 || (map->grid[y][x - 1] != '0' && \
 		map->grid[y][x - 1] != '1' && map->grid[y][x - 1] != ' ') ||
 		y - 1 < 0 || (map->grid[y - 1][x] != '0' && \

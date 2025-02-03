@@ -34,7 +34,7 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	else if (ft_strlen(line) > 0 && ft_2d_len((void**)split) == 1 && ft_check_01nswe(line))
 	{
 		cub3d->checking_map = 1;
-		ft_process_grid(cub3d, map, line, *i - cub3d->checked_elements);
+		ft_process_grid(cub3d, map, line);
 	}
 	free(line);
 	*i += 1;
@@ -65,6 +65,7 @@ static t_map	*ft_init_map(t_cub3d *cub3d, t_map *map)
 	cub3d->player->amount = 0;
 	cub3d->checking_map = 0;
 	cub3d->map_error = 0;
+	map->y = 0;
 	return (map);
 }
 

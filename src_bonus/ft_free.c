@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:49:30 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/02/01 22:06:35 by root             ###   ########.fr       */
+/*   Updated: 2025/02/03 11:28:37 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_free_animations(t_cub3d *cub3d)
 	ft_log("Animations freed", NULL, 1);
 }
 
-void	ft_free_all(t_cub3d *cub3d)
+void	ft_free_map_sprites(t_cub3d *cub3d)
 {
 	if (cub3d->map)
 	{
@@ -83,6 +83,11 @@ void	ft_free_all(t_cub3d *cub3d)
 			ft_free_2d_array(cub3d->map->grid);
 		free(cub3d->map);
 	}
+}
+
+void	ft_free_all(t_cub3d *cub3d)
+{
+	ft_free_map_sprites(cub3d);
 	ft_free_sprites(cub3d);
 	if (cub3d->player)
 		free(cub3d->player);

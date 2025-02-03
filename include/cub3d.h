@@ -142,7 +142,7 @@ void			ft_free_sprite(t_cub3d *cub3d, t_sprite *sprite);
 void			ft_free_2d_array(char **array);
 void			ft_free_animations(t_cub3d *cub3d);
 void			ft_free_font(t_cub3d *cub3d);
-void			ft_free_map(t_map *map);
+void			ft_free_map(t_map *map, t_cub3d *cub3d);
 void			ft_free_without_map(t_cub3d *cub3d);
 void			ft_free_weapons(t_cub3d *cub3d);
 

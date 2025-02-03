@@ -23,10 +23,19 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	line = tmp;
 	split = NULL;
 	split = ft_split(line, ' ');
-	if (cub3d->parsed_elements < 6 && ft_strlen(line) > 0)
+	if(ft_strlen(line) > 0 && cub3d->parsed_elements < 6 && ft_2d_len((void**)split) != 2)
+		cub3d->map_error = 1;
+	else if (ft_strlen(line) > 0 && cub3d->parsed_elements == 6 && ft_2d_len((void**)split) != 1)
+		cub3d->map_error = 1;
+	else if (cub3d->checking_map == 1 && (ft_strlen(line) == 0 || ft_2d_len((void**)split) != 1 || !ft_check_01nswe(line)))
+		cub3d->map_error = 1;
+	else if (ft_strlen(line) > 0 && cub3d->parsed_elements < 6 && ft_2d_len((void**)split) == 2)
 		ft_handle_split(map, split, cub3d);
-	else
+	else if (ft_strlen(line) > 0 && ft_2d_len((void**)split) == 1 && ft_check_012nswe(line))
+	{
+		cub3d->checking_map = 1;
 		ft_process_grid(cub3d, map, line, *i - cub3d->checked_elements);
+	}
 	free(line);
 	*i += 1;
 	ft_free_2d_array(split);
@@ -54,6 +63,8 @@ static t_map	*ft_init_map(t_cub3d *cub3d, t_map *map)
 	cub3d->map = map;
 	cub3d->player = map->player;
 	cub3d->player->amount = 0;
+	cub3d->checking_map = 0;
+	cub3d->map_error = 0;
 	return (map);
 }
 

@@ -47,15 +47,11 @@ int	ft_check_if_map_valid(t_cub3d *cub3d, t_map *map)
 		return (ft_log("Map width is invalid.", NULL, 3), 1);
 	if (!map->sprite_no || !map->sprite_no || \
 		!map->sprite_ea || !map->sprite_we)
-	{
-		ft_log("One or more textures failed to load.", NULL, 3);
-		return (1);
-	}
+		return (ft_log("One or more textures failed to load.", NULL, 3), 1);
 	if (map->floor == -1 || map->ceiling == -1)
-	{
-		ft_log("One or more colors failed to load.", NULL, 3);
-		return (1);
-	}
+		return (ft_log("One or more colors failed to load.", NULL, 3), 1);
+	if (cub3d->map_error)
+		return (ft_log("Something is wrong with the map bruh", NULL, 3), 1);
 	return (0);
 }
 

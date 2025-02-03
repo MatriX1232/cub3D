@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msolinsk <msolinsk@student@42Warsaw.pl>    +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:08:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/12/15 18:17:49 by msolinsk         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:29:28 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,25 @@ void	ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y)
 	}
 	if ((int)ft_strlen(line) > map->width)
 		map->width = ft_strlen(line);
+}
+
+bool	ft_check_012nswe(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '0' \
+			&& line[i] != '1' \
+			&& line[i] != '2' \
+			&& line[i] != 'N' \
+			&& line[i] != 'S' \
+			&& line[i] != 'W' \
+			&& line[i] != 'E' \
+			&& line[i] != ' ')
+			return (false);
+		i++;
+	}
+	return (true);
 }

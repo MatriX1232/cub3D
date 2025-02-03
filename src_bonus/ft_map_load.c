@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_load.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idomagal <idomagal@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:38:21 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/01/31 11:39:52 by idomagal         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:54:03 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	ft_extract_info(t_cub3d *cub3d, t_map *map, char *line, int *i)
 	line = tmp;
 	split = NULL;
 	split = ft_split(line, ' ');
+	ft_error_checker(cub3d, map, line, split);
 	free(line);
 	*i += 1;
 	ft_free_2d_array(split);

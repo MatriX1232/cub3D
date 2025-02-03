@@ -122,6 +122,8 @@ int				ft_check_if_map_valid(t_cub3d *cub3d, t_map *map);
 void			ft_replace_spaces(t_map *map);
 bool			ft_check_012nswe(char *line);
 bool			ft_check_01nswe(char *line);
+void			ft_error_checker(t_cub3d *cub3d, t_map *map, char *line,
+					char **split);
 
 //		FT_MAP_KEYS.C
 int				ft_check_double_keys(char *path);

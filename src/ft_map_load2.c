@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:08:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/02/03 12:33:35 by root             ###   ########.fr       */
+/*   Updated: 2025/02/03 12:42:07 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y)
 		map->width = ft_strlen(line);
 }
 
-bool	ft_check_012nswe(char *line)
+bool	ft_check_01nswe(char *line)
 {
 	int	i;
 
@@ -50,7 +50,6 @@ bool	ft_check_012nswe(char *line)
 	{
 		if (line[i] != '0' \
 			&& line[i] != '1' \
-			&& line[i] != '2' \
 			&& line[i] != 'N' \
 			&& line[i] != 'S' \
 			&& line[i] != 'W' \

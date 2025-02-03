@@ -124,6 +124,8 @@ bool			ft_check_012nswe(char *line);
 bool			ft_check_01nswe(char *line);
 void			ft_error_checker(t_cub3d *cub3d, t_map *map, char *line,
 					char **split);
+bool			ft_2d_is_number(char **str);
+bool			ft_is_number(char *str);
 
 //		FT_MAP_KEYS.C
 int				ft_check_double_keys(char *path);

@@ -85,3 +85,31 @@ int	ft_check_map_closed(t_map *map)
 	}
 	return (0);
 }
+
+bool ft_is_number(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool ft_2d_is_number(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_is_number(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}

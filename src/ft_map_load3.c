@@ -74,6 +74,17 @@ void	ft_load_color(t_cub3d *cub3d, t_map *map, char **split, int index)
 	char	**split_rgb;
 
 	split_rgb = ft_split(split[1], ',');
+	if (!split_rgb)
+	{
+		cub3d->map_error = 1;
+		return ;
+	}
+	if (ft_2d_is_number(split_rgb) == false)
+	{
+		ft_free_2d_array(split_rgb);
+		cub3d->map_error = 1;
+		return ;
+	}
 	if (index == 5)
 		map->floor = (int)rgb_to_hex(ft_atoi(split_rgb[0]),
 				ft_atoi(split_rgb[1]), ft_atoi(split_rgb[2]));

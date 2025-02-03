@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:08:14 by msolinsk          #+#    #+#             */
-/*   Updated: 2025/02/03 12:29:23 by root             ###   ########.fr       */
+/*   Updated: 2025/02/03 12:33:35 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,6 @@ void	ft_process_grid(t_cub3d *cub3d, t_map *map, char *line, int y)
 	}
 	if ((int)ft_strlen(line) > map->width)
 		map->width = ft_strlen(line);
-}
-
-void	ft_process_map(t_cub3d *cub3d, t_map *map, char *line)
-{
-	int		y;
-	char	**tmp;
-
-	y = 0;
-	map->grid = (char **)malloc(sizeof(char *) * (map->height + 1));
-	if (!map->grid)
-		ft_log("Cannot allocate memory for map grid", NULL, 3);
-	while (y < map->height)
-	{
-		if (y == 0)
-			ft_process_grid(cub3d, map, line, y);
-		else
-		{
-			tmp = map->grid;
-			map->grid = ft_memcpy(map->grid, tmp, sizeof(char *) * y);
-			free(tmp);
-			ft_process_grid(cub3d, map, line, y);
-		}
-		y++;
-	}
-	map->grid[y] = NULL;
 }
 
 bool	ft_check_012nswe(char *line)

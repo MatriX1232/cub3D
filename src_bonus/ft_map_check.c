@@ -90,9 +90,9 @@ int	ft_check_map_closed(t_map *map)
 	return (0);
 }
 
-bool ft_is_number(char *str)
+bool	ft_is_number(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -104,9 +104,9 @@ bool ft_is_number(char *str)
 	return (true);
 }
 
-bool ft_2d_is_number(char **str)
+bool	ft_2d_is_number(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

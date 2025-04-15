@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude/ -g
+CFLAGS = -Wall -Wextra -Werror -Iinclude/ -O3 -march=native -mtune=native -flto -funroll-loops -falign-functions=64
 MLXFLAGSO = -I/usr/include -Imlx_linux -O3
 MLXFLAGSN = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -D LINUX -no-pie
 INCLUDES = -I/usr/include/

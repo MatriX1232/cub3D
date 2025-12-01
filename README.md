@@ -46,7 +46,7 @@ Follow these instructions to get the game up and running on your local machine.
 
     ```bash
     make
-    ```
+    ```version: '3.8'
 
     This will create an executable file named `cub3D`.
 
@@ -106,25 +106,9 @@ Once the game is running, use the following keys to control the player:
 
 (Space reserved for screenshots of the game in action)
 
-## 🤝 Contributing
-
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and commit them with descriptive messages.
-4.  Push your changes to your fork.
-5.  Submit a pull request.
-
 ## 📝 License
 
 This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details.
-
-## 📬 Contact
-
-If you have any questions or suggestions, feel free to contact me at [your_email@example.com](mailto:your_email@example.com).
-
-## 💖 Thanks
 
 Thanks for checking out this project! I hope you find it interesting and/or useful.
 

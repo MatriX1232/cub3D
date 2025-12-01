@@ -79,34 +79,6 @@ Once the game is running, use the following keys to control the player:
 *   **Down Arrow:** Look down
 *   **Shift:** Sprint
 
-## 📂 Project Structure
-
-```
-├── include/
-│   ├── cub3d.h       # Main header file with game structures and function declarations
-│   ├── libs.h        # Includes standard libraries
-│   ├── structs.h     # Definitions of structures like t_sprite
-│   └── colors.h      # Color definitions
-├── mlx_linux/
-│   ├── mlx.h           # MinilibX header file
-│   ├── mlx_loop.c      # Implementation of the main event loop
-│   ├── mlx_new_window.c # Implementation of window creation
-│   ├── mlx_new_image.c  # Implementation of image creation
-│   ├── mlx_pixel_put.c  # Implementation of pixel drawing
-│   ├── mlx_key_hook.c   # Implementation of key press handling
-│   ├── mlx_mouse_hook.c # Implementation of mouse click handling
-│   └── mlx_hook.c       # Implementation of generic event hook
-├── src/
-│   ├── input.c         # Handles player input for rotation and looking up/down
-│   ├── input2.c        # Handles player input for movement
-│   ├── ft_draw.c       # Functions for drawing pixels and sprites onto images
-│   ├── ft_images.c      # Functions for loading and managing images (sprites)
-│   ├── ft_images2.c     # Utility functions for image scaling
-│   └── draw_ceil_floor.c # Functions for drawing the ceiling and floor
-├── Makefile          # Build instructions
-└── README.md         # This file
-```
-
 ## 📝 License
 
 This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details.

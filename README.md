@@ -1,5 +1,7 @@
-[<img src="https://img.youtube.com/vi/APOPm01BVrk/hqdefault.jpg" width="518" height="530"
-/>](https://github.com/MatriX1232/cub3D/blob/970308a585aad2a332cb9fd46777f5239aaf9dc0/Cub3D.mp4)
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5a240706-b07e-4cd8-be5e-ded9cf71fdad" alt="animated" />
+</p>
 
 # Cub3D: A 3D Maze Exploration Game 🕹️
 

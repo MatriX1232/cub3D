@@ -1,3 +1,6 @@
+[<img src="https://img.youtube.com/vi/APOPm01BVrk/hqdefault.jpg" width="518" height="530"
+/>](https://github.com/MatriX1232/cub3D/blob/970308a585aad2a332cb9fd46777f5239aaf9dc0/Cub3D.mp4)
+
 # Cub3D: A 3D Maze Exploration Game 🕹️
 
 This project is a 3D maze exploration game implemented using the MiniLibX graphics library. It allows players to navigate a maze, rendered in 3D, using keyboard input. The game features textured walls, ceilings, and floors, as well as basic player movement and perspective.
@@ -101,10 +104,6 @@ Once the game is running, use the following keys to control the player:
 ├── Makefile          # Build instructions
 └── README.md         # This file
 ```
-
-## 📸 Screenshots
-
-(Space reserved for screenshots of the game in action)
 
 ## 📝 License
 

@@ -51,8 +51,7 @@ Follow these instructions to get the game up and running on your local machine.
 
     ```bash
     make
-    ```version: '3.8'
-
+    ```
     This will create an executable file named `cub3D`.
 
 ### Running Locally
